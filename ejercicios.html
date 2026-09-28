@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ejercicios – Web07</title>
+    <meta
+      name="description"
+      content="Los 33 ejercicios de JavaScript y DOM de la materia, en un solo visor."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body class="lab">
+    <!-- ── NAVBAR ── -->
+    <header class="w7-nav">
+      <a href="index.html" class="w7-nav-brand">⚡ Web07</a>
+      <div class="w7-nav-center">
+        <span class="page-emoji">🧪</span>
+        <span>Ejercicios</span>
+      </div>
+      <nav class="w7-nav-links">
+        <a href="index.html" class="w7-nav-link">🏠 Inicio</a>
+        <a href="showcase.html" class="w7-nav-link w7-showcase">🚀 Showcase</a>
+      </nav>
+    </header>
+
+    <!-- ── HERO ── -->
+    <div class="lab-hero">
+      <div class="lab-hero-inner">
+        <div class="lab-badge">🧪 33 ejercicios</div>
+        <h1>Ejercicios</h1>
+        <p>
+          HTML y Bootstrap: 1 · JavaScript básico: 10 · Intro al DOM: 5 · Operaciones: 2 · Controles: 5 · Selects dinámicos: 1 · Checks y radios: 3 · Tablas dinámicas: 5 · Proyecto final: 1. Elige uno del menú o usa ← → para recorrerlos.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── MAIN ── -->
+    <div class="lab-wrap">
+      <!-- SIDEBAR: los botones se generan desde data-* -->
+      <nav class="lab-sidebar" id="sidebar">
+      <div class="sidebar-group-label">HTML y Bootstrap</div>
+        <button class="sidebar-btn" data-num="ej01" data-src="ej01.html" data-titulo="Mi HTML5">
+          <span class="num">01</span> Mi HTML5
+        </button>
+
+      <div class="sidebar-group-label">JavaScript básico</div>
+        <button class="sidebar-btn" data-num="ej02" data-src="ej02.html" data-titulo="Párrafo clic">
+          <span class="num">02</span> Párrafo clic
+        </button>
+        <button class="sidebar-btn" data-num="ej03" data-src="ej03.html" data-titulo="JS básico">
+          <span class="num">03</span> JS básico
+        </button>
+        <button class="sidebar-btn" data-num="ej04" data-src="ej04.html" data-titulo="Estilos CSS con JS">
+          <span class="num">04</span> Estilos CSS con JS
+        </button>
+        <button class="sidebar-btn" data-num="ej05" data-src="ej05.html" data-titulo="Formulario y envío">
+          <span class="num">05</span> Formulario y envío
+        </button>
+        <button class="sidebar-btn" data-num="ej06" data-src="ej06.html" data-titulo="Suma de campos">
+          <span class="num">06</span> Suma de campos
+        </button>
+        <button class="sidebar-btn" data-num="ej07" data-src="ej07.html" data-titulo="Suma con confirm">
+          <span class="num">07</span> Suma con confirm
+        </button>
+        <button class="sidebar-btn" data-num="ej08" data-src="ej08.html" data-titulo="Suma con prompt">
+          <span class="num">08</span> Suma con prompt
+        </button>
+        <button class="sidebar-btn" data-num="ej09" data-src="ej09.html" data-titulo="Formulario validado">
+          <span class="num">09</span> Formulario validado
+        </button>
+        <button class="sidebar-btn" data-num="ej10" data-src="ej10.html" data-titulo="Tipos de campo">
+          <span class="num">10</span> Tipos de campo
+        </button>
+        <button class="sidebar-btn" data-num="ej11" data-src="ej11.html" data-titulo="Matriz 3x3">
+          <span class="num">11</span> Matriz 3x3
+        </button>
+
+      <div class="sidebar-group-label">Intro al DOM</div>
+        <button class="sidebar-btn" data-num="ej12" data-src="ej12.html" data-titulo="Primer JS: saludo">
+          <span class="num">12</span> Primer JS: saludo
+        </button>
+        <button class="sidebar-btn" data-num="ej13" data-src="ej13.html" data-titulo="Modificar párrafo">
+          <span class="num">13</span> Modificar párrafo
+        </button>
+        <button class="sidebar-btn" data-num="ej14" data-src="ej14.html" data-titulo="Insertar aleatorios">
+          <span class="num">14</span> Insertar aleatorios
+        </button>
+        <button class="sidebar-btn" data-num="ej15" data-src="ej15.html" data-titulo="Quitar párrafo">
+          <span class="num">15</span> Quitar párrafo
+        </button>
+        <button class="sidebar-btn" data-num="ej16" data-src="ej16.html" data-titulo="Agregar párrafos">
+          <span class="num">16</span> Agregar párrafos
+        </button>
+
+      <div class="sidebar-group-label">Operaciones</div>
+        <button class="sidebar-btn" data-num="ej17" data-src="ej17.html" data-titulo="Operaciones con radio">
+          <span class="num">17</span> Operaciones con radio
+        </button>
+        <button class="sidebar-btn" data-num="ej18" data-src="ej18.html" data-titulo="Operaciones validadas">
+          <span class="num">18</span> Operaciones validadas
+        </button>
+
+      <div class="sidebar-group-label">Controles</div>
+        <button class="sidebar-btn" data-num="ej19" data-src="ej19.html" data-titulo="Radio con doble clic">
+          <span class="num">19</span> Radio con doble clic
+        </button>
+        <button class="sidebar-btn" data-num="ej20" data-src="ej20.html" data-titulo="Editar campos">
+          <span class="num">20</span> Editar campos
+        </button>
+        <button class="sidebar-btn" data-num="ej21" data-src="ej21.html" data-titulo="Formularios dinámicos">
+          <span class="num">21</span> Formularios dinámicos
+        </button>
+        <button class="sidebar-btn" data-num="ej22" data-src="ej22.html" data-titulo="Universidades">
+          <span class="num">22</span> Universidades
+        </button>
+        <button class="sidebar-btn" data-num="ej23" data-src="ej23.html" data-titulo="Opciones JS">
+          <span class="num">23</span> Opciones JS
+        </button>
+
+      <div class="sidebar-group-label">Selects dinámicos</div>
+        <button class="sidebar-btn" data-num="ej24" data-src="ej24.html" data-titulo="Tours de Bolivia">
+          <span class="num">24</span> Tours de Bolivia
+        </button>
+
+      <div class="sidebar-group-label">Checks y radios</div>
+        <button class="sidebar-btn" data-num="ej25" data-src="ej25.html" data-titulo="Checks: resumen">
+          <span class="num">25</span> Checks: resumen
+        </button>
+        <button class="sidebar-btn" data-num="ej26" data-src="ej26.html" data-titulo="Checks: limpiar">
+          <span class="num">26</span> Checks: limpiar
+        </button>
+        <button class="sidebar-btn" data-num="ej27" data-src="ej27.html" data-titulo="Checks: radios">
+          <span class="num">27</span> Checks: radios
+        </button>
+
+      <div class="sidebar-group-label">Tablas dinámicas</div>
+        <button class="sidebar-btn" data-num="ej28" data-src="ej28.html" data-titulo="Sumas de tabla">
+          <span class="num">28</span> Sumas de tabla
+        </button>
+        <button class="sidebar-btn" data-num="ej29" data-src="ej29.html" data-titulo="Tabla con colspan">
+          <span class="num">29</span> Tabla con colspan
+        </button>
+        <button class="sidebar-btn" data-num="ej30" data-src="ej30.html" data-titulo="Menú de opciones">
+          <span class="num">30</span> Menú de opciones
+        </button>
+        <button class="sidebar-btn" data-num="ej31" data-src="ej31.html" data-titulo="Tabla dinámica">
+          <span class="num">31</span> Tabla dinámica
+        </button>
+        <button class="sidebar-btn" data-num="ej32" data-src="ej32.html" data-titulo="Matriz dinámica">
+          <span class="num">32</span> Matriz dinámica
+        </button>
+
+      <div class="sidebar-group-label">Proyecto final</div>
+        <button class="sidebar-btn" data-num="ej33" data-src="ej33.html" data-titulo="Encuesta JS">
+          <span class="num">33</span> Encuesta JS
+        </button>
+      </nav>
+
+      <!-- FRAME -->
+      <div class="lab-frame-area">
+        <div class="frame-toolbar">
+          <span class="frame-title" id="frame-title">Mi HTML5</span>
+          <span class="frame-url" id="frame-url">ej01.html</span>
+          <span class="frame-url" id="frame-pos">01 / 33</span>
+          <button class="frame-open" id="btn-prev" type="button">← Anterior</button>
+          <button class="frame-open" id="btn-next" type="button">Siguiente →</button>
+          <a href="ej01.html" target="_blank" class="frame-open" id="frame-link">↗ Abrir</a>
+        </div>
+        <iframe id="demo-frame" src="ej01.html" title="Ejercicio"></iframe>
+      </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="w7-footer">
+      <span>© 2026 <strong>Tecnologías Web I</strong></span>
+      <nav class="w7-footer-links">
+        <a href="index.html">🏠 Inicio</a>
+        <a href="showcase.html">🚀 Showcase</a>
+      </nav>
+    </footer>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const botones = Array.prototype.slice.call(
+          document.querySelectorAll(".sidebar-btn"),
+        );
+        const frame = document.getElementById("demo-frame");
+        const titulo = document.getElementById("frame-title");
+        const url = document.getElementById("frame-url");
+        const pos = document.getElementById("frame-pos");
+        const link = document.getElementById("frame-link");
+        const prev = document.getElementById("btn-prev");
+        const next = document.getElementById("btn-next");
+
+        let actual = 0;
+
+        function mostrar(indice, moverHash) {
+          const i = Math.min(Math.max(indice, 0), botones.length - 1);
+          const btn = botones[i];
+          actual = i;
+
+          frame.src = btn.dataset.src;
+          titulo.textContent = btn.dataset.titulo;
+          url.textContent = btn.dataset.src;
+          pos.textContent = String(i + 1).padStart(2, "0") + " / " + botones.length;
+          link.href = btn.dataset.src;
+
+          botones.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          btn.scrollIntoView({ block: "nearest" });
+
+          prev.disabled = i === 0;
+          next.disabled = i === botones.length - 1;
+
+          if (moverHash && location.hash.slice(1) !== btn.dataset.num) {
+            history.replaceState(null, "", "#" + btn.dataset.num);
+          }
+        }
+
+        /* delegación: un solo listener para los 33 botones */
+        document.getElementById("sidebar").addEventListener("click", function (ev) {
+          const btn = ev.target.closest(".sidebar-btn");
+          if (btn) mostrar(botones.indexOf(btn), true);
+        });
+
+        prev.addEventListener("click", function () {
+          mostrar(actual - 1, true);
+        });
+        next.addEventListener("click", function () {
+          mostrar(actual + 1, true);
+        });
+
+        document.addEventListener("keydown", function (ev) {
+          /* ev.target puede ser document, que no tiene .matches */
+          var t = ev.target;
+          if (t && t.matches && t.matches("input, textarea, select")) return;
+          if (ev.key === "ArrowLeft") mostrar(actual - 1, true);
+          if (ev.key === "ArrowRight") mostrar(actual + 1, true);
+        });
+
+        /* Permite enlazar un ejercicio concreto: ejercicios.html#ej12 */
+        function desdeHash() {
+          const n = location.hash.slice(1);
+          const i = botones.findIndex((b) => b.dataset.num === n);
+          mostrar(i < 0 ? 0 : i, false);
+        }
+
+        window.addEventListener("hashchange", desdeHash);
+        desdeHash();
+      })();
+    </script>
+  </body>
+</html>

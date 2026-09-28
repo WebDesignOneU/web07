@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>31 · Tabla dinámica — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 31 de Web07: Tabla dinámica."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script type="text/javascript">
+      function load() {
+        document.querySelector("form[id='form_uno'] [id='cmdNuevo']").disabled = true;
+        document.querySelector("form[id='form_uno'] [id='numeroCampos']").focus();
+        document.querySelector("form[id='form_tres'] [id='cmdBajarDatos']").disabled = true;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var num_fila_nueva = 0;
+
+        function crearCampos() {
+          var formUno = document.getElementById("form_uno");
+          var numCampos = formUno.querySelector("[id='numeroCampos']").value;
+
+          if (numCampos === "") {
+            alert("Ingrese número de campos!");
+            load();
+          } else if (isNaN(numCampos)) {
+            alert("Error, debe ingresar un número");
+            load();
+          } else {
+            var objetoTexto = document.getElementById("idTextos");
+            for (var i = 0; i < numCampos; i++) {
+              var objItem = document.createElement("input");
+              objItem.type = "text";
+              objItem.id = "campo_" + i;
+              objItem.value = "";
+              var objLabel = document.createElement("label");
+              objLabel.appendChild(objItem);
+              objetoTexto.appendChild(objLabel);
+            }
+            formUno.querySelector("[id='cmdCampos']").disabled = true;
+            formUno.querySelector("[id='numeroCampos']").disabled = true;
+            formUno.querySelector("[id='cmdNuevo']").disabled = false;
+            document.querySelector(
+              "form[id='form_tres'] [id='cmdBajarDatos']"
+            ).disabled = false;
+            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+          }
+        }
+
+        function bajarDatos() {
+          var numCampos = document.querySelector(
+            "form[id='form_uno'] [id='numeroCampos']"
+          ).value;
+          var lleno = true;
+
+          for (var i = 0; i < numCampos; i++) {
+            var d = document.getElementById("campo_" + i);
+            if (d.value === "") lleno = false;
+          }
+
+          if (!lleno) {
+            alert("Todos los campos deben tener datos");
+            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+          } else {
+            var tabla = document.getElementById("idTabla");
+            var fila = document.createElement("tr");
+
+            for (var i = 0; i < numCampos; i++) {
+              var d = document.getElementById("campo_" + i);
+              var celda = document.createElement("td");
+              celda.textContent = d.value;
+              fila.appendChild(celda);
+            }
+
+            tabla.appendChild(fila);
+            num_fila_nueva++;
+
+            for (var i = 0; i < numCampos; i++) {
+              document.getElementById("campo_" + i).value = "";
+            }
+
+            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+          }
+        }
+
+        function nuevaTabla() {
+          var formUno = document.getElementById("form_uno");
+          var numeroCampos = formUno.querySelector("[id='numeroCampos']");
+          formUno.querySelector("[id='cmdCampos']").disabled = false;
+          numeroCampos.disabled = false;
+          numeroCampos.value = "";
+          numeroCampos.focus();
+          num_fila_nueva = 0;
+
+          // Eliminamos los espacios de texto
+          document.querySelectorAll("form[id='form_dos'] input").forEach(function (input) {
+            input.remove();
+          });
+          // Eliminamos la tabla
+          document.querySelectorAll("#idTabla tr").forEach(function (fila) {
+            fila.remove();
+          });
+          load();
+        }
+
+        document.getElementById("cmdCampos").addEventListener("click", function () {
+          crearCampos();
+        });
+
+        document.getElementById("cmdNuevo").addEventListener("click", function () {
+          nuevaTabla();
+        });
+
+        document.getElementById("cmdBajarDatos").addEventListener("click", function () {
+          bajarDatos();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="31" onload="load()">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej31" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">31</span>
+      <span class="ej-name">Tabla dinámica</span>
+    </header>
+
+    <form id="form_uno" action="" class="form-group">
+      <p>
+        Ingrese número de campos:
+        <input type="text" id="numeroCampos" value="" maxlength="3" size="3" />
+      </p>
+      <p>
+        <button id="cmdCampos" class="btn btn-primary">
+          Crear espacios de entrada
+        </button>
+        <button id="cmdNuevo" class="btn btn-primary">Nueva tabla</button>
+      </p>
+    </form>
+    <form id="form_dos" action="">
+      <div id="idTextos"></div>
+    </form>
+    <form id="form_tres" action="">
+      <p>
+        <button id="cmdBajarDatos" class="btn btn-primary">
+          Bajar datos a la tabla
+        </button>
+      </p>
+      <table id="idTabla"></table>
+    </form>
+  </body>
+</html>

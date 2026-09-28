@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>03 · JS básico — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 03 de Web07: JS básico."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Declaro la función mensaje
+        function mensaje() {
+          Swal.fire("Mensaje", "¡Eligió aquí!", "info");
+        }
+
+        function obtenerClic() {
+          document.querySelector("p").addEventListener("click", function () {
+            mensaje();
+          });
+        }
+
+        obtenerClic();
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="03">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej03" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">03</span>
+      <span class="ej-name">JS básico</span>
+    </header>
+
+    <div id="principal" class="row grow w-100">
+      <p>Hacer clic.</p>
+      <br />
+      <p>No puede hacer clic.</p>
+    </div>
+  </body>
+</html>

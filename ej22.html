@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>22 · Universidades — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 22 de Web07: Universidades."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var valueNuevo = document.querySelectorAll("#idUniv option").length;
+
+        function agregaOption() {
+          var objetoSelect = document.getElementById("idUniv");
+          var objetoOption = document.createElement("option");
+          objetoOption.value = valueNuevo;
+          objetoOption.text = "Universidad " + valueNuevo;
+          objetoSelect.appendChild(objetoOption);
+          Swal.fire("Mensaje", "Se agregó la opción: " + valueNuevo++, "info");
+        }
+
+        function opcionElegida(valor) {
+          Swal.fire("Mensaje", "Valor asignado=" + valor, "info");
+        }
+
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregaOption();
+        });
+
+        // Ejemplo de cómo llamar a opcionElegida() con un valor
+        document.getElementById("idUniv").addEventListener("change", function () {
+          opcionElegida(this.value);
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="22">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej22" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">22</span>
+      <span class="ej-name">Universidades</span>
+    </header>
+
+    <button id="btnAgregar" class="btn btn-primary">Agregar opcion</button>
+    <br />
+    <br />
+    <select id="idUniv" size="1">
+      <option value="0">Elija</option>
+      <option value="1">UMSA</option>
+      <option value="2">UCB</option>
+      <option value="3">EMI</option>
+      <option value="4">UNIVALLE</option>
+      <option value="5">UDABOL</option>
+    </select>
+  </body>
+</html>

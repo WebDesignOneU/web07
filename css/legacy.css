@@ -1,0 +1,36 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   legacy.css  ·  Web07 (Tecnologías Web I)
+   Capa 6/6 · ESTILOS LEGACY (ex estilos.css)
+   Aplicados sólo a <body class="legacy">, es decir a los 33 ejercicios
+   (ej01…ej33). Se importa desde styles.css porque todas las páginas de
+   ejercicios lo consumen. Los bordes de tabla viven en components.css,
+   en su sección de ejercicios.
+
+   OJO — un comentario CSS se cierra con la secuencia "estrella-diagonal".
+   Escribirla aquí dentro lo cerraría antes de tiempo y todo lo que
+   sigue se interpretaría como CSS. Evita documentar nombres de archivo
+   que contengan esa secuencia; escribe "página o prueba" con palabras.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EJERCICIOS
+   ══════════════════════════════════════════════════════════════════════════ */
+body.legacy .parrafo {
+  color: #0000ff;
+  background-color: #cccccc;
+}
+
+body.legacy .parrafonoclic {
+  /* comentario */
+  color: #ff0000;
+  background-color: #dddddd;
+}
+
+body.legacy a {
+  color: #00ffbf;
+  font-weight: bold;
+}
+
+body.legacy #principal {
+  background-color: #999999;
+}

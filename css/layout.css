@@ -1,0 +1,326 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   layout.css  ·  Web07 (Tecnologías Web I)
+   Capa 4/6 · LAYOUT (estructura)
+   Esqueleto compartido: navbar .w7-nav, footer .w7-footer y sus
+   breakpoints. Todo lo que reparte espacio, no lo que decora.
+   Origen: el navbar/footer del sitio, más la estructura de la portada
+   (ex index.css) y del laboratorio (ex paginas.css).
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── NAVBAR WEB07 ── */
+  .w7-nav {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--scrim-nav);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  height: 56px;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.w7-nav-brand {
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.w7-nav-center {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.w7-nav-center .page-emoji {
+  font-size: 1rem;
+}
+
+.w7-nav-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.w7-nav-link {
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.24s;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.w7-nav-link:hover {
+  color: var(--text);
+  background: rgb(var(--accent-rgb) / 0.1);
+  border-color: rgb(var(--accent-rgb) / 0.2);
+}
+
+.w7-nav-link.w7-showcase {
+  background: linear-gradient(135deg, var(--accent), var(--accent));
+  color: var(--on-accent) !important;
+  border: none;
+  font-weight: 600;
+}
+.w7-nav-link.w7-showcase:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 3px 14px rgb(var(--accent-rgb) / 0.4);
+}
+
+/* ── FOOTER WEB07 ── */
+  .w7-footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 48px;
+}
+.w7-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.w7-footer a:hover {
+  text-decoration: underline;
+}
+.w7-footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .w7-nav {
+    padding: 0 14px;
+  }
+  .w7-nav-center {
+    display: none;
+  }
+  .w7-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INICIO · estructura de la portada (ex index.css)
+   Sólo las cajas: aquí no viven colores de tarjeta ni estados de botón.
+   ══════════════════════════════════════════════════════════════════════════ */
+body.inicio .hero {
+  background: var(--grad-hero);
+  padding: 100px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+body.inicio .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 60% 50% at 20% 30%,
+      rgb(var(--accent-rgb) / 0.2) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 80% 70%,
+      rgb(var(--accent2-rgb) / 0.13) 0%,
+      transparent 70%
+    );
+}
+body.inicio .hero-sub {
+  color: var(--text-muted);
+  font-size: 1.12rem;
+  max-width: 580px;
+  margin: 0 auto 40px;
+}
+body.inicio .hero-cta {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+body.inicio .stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+body.inicio section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 24px;
+}
+
+body.inicio .blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+body.inicio .showcase-banner {
+  background: linear-gradient(
+    135deg,
+    rgb(var(--accent-rgb) / 0.15),
+    rgb(var(--accent2-rgb) / 0.08)
+  );
+  border: 1px solid rgb(var(--accent-rgb) / 0.3);
+  border-radius: 22px;
+  padding: 40px 48px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 24px;
+}
+
+body.inicio .quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+body.inicio footer {
+  border-top: 1px solid var(--border);
+  padding: 36px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  body.inicio .hero {
+    padding: 72px 16px 56px;
+  }
+  body.inicio section {
+    padding: 48px 16px;
+  }
+  body.inicio .showcase-banner {
+    padding: 28px 22px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LABORATORIO · estructura del visor de demos (ex paginas.css)
+   ══════════════════════════════════════════════════════════════════════════ */
+body.lab .lab-hero {
+  background: var(--grad-lab-hero);
+  padding: 48px 32px 36px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+body.lab .lab-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 55% 60% at 10% 50%,
+      rgb(var(--accent2-rgb) / 0.12) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 50% at 90% 30%,
+      rgb(var(--accent-rgb) / 0.12) 0%,
+      transparent 70%
+    );
+}
+body.lab .lab-hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+body.lab .lab-hero p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+body.lab .lab-wrap {
+  display: flex;
+  height: calc(100vh - 56px - 136px);
+  min-height: 500px;
+}
+
+body.lab .lab-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+body.lab .lab-frame-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+body.lab .frame-toolbar {
+  padding: 10px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body.lab #demo-frame {
+  flex: 1;
+  border: none;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+@media (max-width: 640px) {
+  body.lab .lab-wrap {
+    flex-direction: column;
+    height: auto;
+  }
+  body.lab .lab-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    height: auto;
+    padding: 8px;
+    gap: 4px;
+  }
+  body.lab #demo-frame {
+    height: 60vh;
+  }
+}

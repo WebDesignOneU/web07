@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>15 · Quitar párrafo — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 15 de Web07: Quitar párrafo."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function eliminarUltimoParrafo() {
+          var parrafos = document.querySelectorAll("p");
+          var ultimoParrafo = parrafos.length - 1;
+          if (ultimoParrafo >= 0) {
+            parrafos[ultimoParrafo].remove();
+          } else {
+            Swal.fire("Mensaje", "No existen más párrafos", "error");
+          }
+        }
+
+        document.getElementById("btnEliminar").addEventListener("click", function () {
+          eliminarUltimoParrafo();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="15">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej15" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">15</span>
+      <span class="ej-name">Quitar párrafo</span>
+    </header>
+
+    <button id="btnEliminar" class="btn btn-primary">
+      Elimina el ultimo parrafo
+    </button>
+    <p>Parrafo uno</p>
+    <p>Parrafo dos</p>
+    <p>Parrafo tres</p>
+    <p>Parrafo cuatro</p>
+    <p>Parrafo cinco</p>
+  </body>
+</html>

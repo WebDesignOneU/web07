@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>13 · Modificar párrafo — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 13 de Web07: Modificar párrafo."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var veces = 1;
+
+        function modificarParrafo() {
+          var nuevoParrafo = document.createElement("p");
+          nuevoParrafo.textContent =
+            "Este párrafo es nuevo. Es el cambio # " + veces++;
+          var anteriorParrafo = document.querySelector("p");
+          anteriorParrafo.replaceWith(nuevoParrafo);
+        }
+
+        document.getElementById("btnModificar").addEventListener("click", function () {
+          modificarParrafo();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="13">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej13" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">13</span>
+      <span class="ej-name">Modificar párrafo</span>
+    </header>
+
+    <button id="btnModificar" class="btn btn-primary">Modificar parrafo</button>
+    <p>Parrafo a ser modificado</p>
+  </body>
+</html>

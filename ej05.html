@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>05 · Formulario y envío — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 05 de Web07: Formulario y envío."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function cargar() {
+          var _valor = document.getElementById("txtDato").value;
+          Swal.fire("Mensaje", "Hola " + _valor, "info");
+        }
+
+        // Puedes llamar a la función cargar() cuando sea necesario
+        document
+          .getElementById("btnEnviar")
+          .addEventListener("click", function () {
+            cargar();
+          });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="05">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej05" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">05</span>
+      <span class="ej-name">Formulario y envío</span>
+    </header>
+
+    <div id="principal" class="row grow w-100">
+      <input
+        type="text"
+        id="txtDato"
+        class="form-control mb-3"
+        placeholder="Ingrese su dato"
+      />
+      <button id="btnEnviar" class="btn btn-primary">Enviar</button>
+    </div>
+  </body>
+</html>

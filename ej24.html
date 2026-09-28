@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>24 · Tours de Bolivia — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 24 de Web07: Tours de Bolivia."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var valueNuevo = 4;
+
+        function opcionElegida(opcion) {
+          var arrayDataLaPaz = [
+            ["0", "Elija lugar"],
+            ["1", "Yungas"],
+            ["2", "Copacabana"],
+            ["3", "Tiahuanaco"],
+            ["4", "El Lago sagrado"],
+            ["5", "San BuenaVentura"],
+          ];
+          var arrayDataPotosi = [
+            ["0", "Elija lugar"],
+            ["1", "Salar de Uyuni"],
+            ["2", "La casa de la Moneda"],
+            ["3", "Cerro Rico"],
+            ["4", "Lagunas Colorada"],
+          ];
+          var arrayDataSantaCruz = [
+            ["0", "Elija lugar"],
+            ["1", "Misiones Jesuitas"],
+            ["2", "El pantanal"],
+            ["3", "Samaipata"],
+            ["4", "Puerto Busch"],
+            ["5", "El Mutun"],
+          ];
+
+          var opciones = document.querySelectorAll('form[name="formLugar"] option');
+          opciones.forEach(function (op) {
+            op.remove();
+          });
+
+          var dataArray;
+          switch (opcion) {
+            case "1":
+              dataArray = arrayDataLaPaz;
+              break;
+            case "2":
+              dataArray = arrayDataPotosi;
+              break;
+            case "3":
+              dataArray = arrayDataSantaCruz;
+              break;
+          }
+
+          if (dataArray) {
+            dataArray.forEach(function (value) {
+              var objetoOption = document.createElement("option");
+              objetoOption.value = value[0];
+              objetoOption.text = value[1];
+              document.getElementById("idLugar").appendChild(objetoOption);
+            });
+          }
+        }
+
+        // Ejemplo de cómo llamar a la función opcionElegida
+        document.getElementById("idDepto").addEventListener("change", function () {
+          var opcion = this.value;
+          opcionElegida(opcion);
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="24">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej24" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">24</span>
+      <span class="ej-name">Tours de Bolivia</span>
+    </header>
+
+    <p>Visite BOLIVIA:</p>
+    <select id="idDepto" class="form-select form-select-lg" size="1">
+      <option value="0">Elija departamento</option>
+      <option value="1">La Paz</option>
+      <option value="2">Potosi</option>
+      <option value="3">Santa Cruz</option>
+    </select>
+    <br />
+    <form name="formLugar" class="form-select form-select-lg" action="">
+      <select id="idLugar" size="1"></select>
+    </form>
+  </body>
+</html>

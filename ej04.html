@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>04 · Estilos CSS con JS — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 04 de Web07: Estilos CSS con JS."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Declaro la función mensaje
+        function mensaje() {
+          Swal.fire("Mensaje", "¡Eligió aquí!", "info");
+        }
+
+        function obtenerClic() {
+          document.querySelectorAll("p.parrafo").forEach(function (parrafo) {
+            parrafo.addEventListener("click", function () {
+              mensaje();
+            });
+          });
+        }
+
+        obtenerClic();
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="04">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej04" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">04</span>
+      <span class="ej-name">Estilos CSS con JS</span>
+    </header>
+
+    <div id="principal" class="row grow w-100">
+      <p class="parrafo">Hacer clic.</p>
+      <p class="parrafonoclic">No puede hacer clic.</p>
+      <a href="ej02.html" target="_blank">Atrás</a>
+    </div>
+  </body>
+</html>

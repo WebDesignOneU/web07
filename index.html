@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web07 – Tecnologías Web I</title>
+    <meta
+      name="description"
+      content="Portal de ejemplos interactivos de Tecnologías Web I: calculadoras, formularios, JSON, Fetch API, SweetAlert2 y DOM."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body class="inicio">
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <a href="index.html" class="nav-brand">⚡ Web07</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menú">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="calculadora.html" class="nav-link">🧮 Calculadora</a>
+        <a href="formulario.html" class="nav-link">📋 Formulario</a>
+        <a href="demojson.html" class="nav-link">🗂️ JSON</a>
+        <a href="pokeclient.html" class="nav-link">🌐 PokéAPI</a>
+        <a href="swalconbs.html" class="nav-link">🔔 SweetAlert</a>
+        <a href="flexbox.html" class="nav-link">🔧 Flexbox</a>
+        <a href="ejercicios.html" class="nav-link">🧪 Ejercicios</a>
+        <a href="showcase.html" class="nav-link highlight">🚀 Showcase</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-badge">✦ Tecnologías Web I — 2026</div>
+      <h1>Ejemplos<br />Interactivos Web</h1>
+      <p class="hero-sub">
+        Colección de demos prácticos de JavaScript, Vanilla JS, Fetch API,
+        SweetAlert2 y manipulación del DOM, organizados por bloques temáticos.
+      </p>
+      <div class="hero-cta">
+        <a href="showcase.html" class="btn btn-primary"
+          >🚀 Ver Showcase Completo</a
+        >
+        <a href="#bloques" class="btn btn-outline">📂 Explorar archivos</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">7</span><span class="stat-label">Bloques</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">18+</span><span class="stat-label">Demos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span
+          ><span class="stat-label">jQuery / Zepto</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span
+          ><span class="stat-label">Vanilla JS</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SHOWCASE BANNER -->
+    <div class="showcase-banner">
+      <div class="banner-text">
+        <h3>🚀 Showcase Interactivo</h3>
+        <p>
+          Todos los ejemplos reunidos en una sola página con tutoriales
+          colapsables, syntax highlighting y demos en vivo.
+        </p>
+      </div>
+      <a href="showcase.html" class="btn btn-primary">Abrir Showcase →</a>
+    </div>
+
+    <!-- BLOQUES -->
+    <section id="bloques">
+      <h2 class="section-title">Bloques Temáticos</h2>
+      <p class="section-desc">
+        Haz clic en cualquier bloque para abrir el ejemplo individual.
+      </p>
+      <div class="blocks">
+        <a href="calculadora.html" class="block-card">
+          <div class="block-icon icon-purple">🧮</div>
+          <span class="block-tag tag-purple">Vanilla JS</span>
+          <div class="block-title">Calculadoras &amp; Operaciones</div>
+          <div class="block-desc">
+            Suma, resta, multiplicación y división. Operaciones con radio
+            buttons y generador de múltiplos con SweetAlert2.
+          </div>
+          <div class="block-arrow">→ abrir</div>
+        </a>
+
+        <a href="formulario.html" class="block-card">
+          <div class="block-icon icon-teal">📋</div>
+          <span class="block-tag tag-teal">Formularios</span>
+          <div class="block-title">Formularios &amp; Validación</div>
+          <div class="block-desc">
+            Login con validación (admin/123456), inscripción a seminario con
+            precio dinámico y confirmación via Swal.
+          </div>
+          <div class="block-arrow">→ abrir</div>
+        </a>
+
+        <a href="demojson.html" class="block-card">
+          <div class="block-icon icon-pink">🗂️</div>
+          <span class="block-tag tag-pink">JSON</span>
+          <div class="block-title">JSON &amp; Datos Dinámicos</div>
+          <div class="block-desc">
+            Catálogo de libros renderizado desde objetos JS, tours Bolivia con
+            selects encadenados y filtrado en tiempo real.
+          </div>
+          <div class="block-arrow">→ abrir</div>
+        </a>
+
+        <a href="pokeclient.html" class="block-card">
+          <div class="block-icon icon-orange">🌐</div>
+          <span class="block-tag tag-orange">Fetch API</span>
+          <div class="block-title">Fetch API &amp; Async/Await</div>
+          <div class="block-desc">
+            Pokédex real contra PokeAPI con async/await, manejo de errores con
+            Swal y demo contra JSONPlaceholder.
+          </div>
+          <div class="block-arrow">→ abrir</div>
+        </a>
+
+        <a href="swalconbs.html" class="block-card">
+          <div class="block-icon icon-blue">🔔</div>
+          <span class="block-tag tag-blue">SweetAlert2</span>
+          <div class="block-title">SweetAlert2 Galería</div>
+          <div class="block-desc">
+            Éxito, error, warning, confirmación con callbacks, timer auto-close,
+            input dialogs y notificaciones toast.
+          </div>
+          <div class="block-arrow">→ abrir</div>
+        </a>
+
+        <a href="flexbox.html" class="block-card">
+          <div class="block-icon icon-green">🔧</div>
+          <span class="block-tag tag-green">DOM &amp; CSS</span>
+          <div class="block-title">DOM &amp; Layout Flexbox</div>
+          <div class="block-desc">
+            Manipulación del DOM, tablas dinámicas, createElement, y
+            demostración de Flexbox responsivo.
+          </div>
+          <div class="block-arrow">→ abrir</div>
+        </a>
+
+        <a href="showcase.html#avanzado" class="block-card">
+          <div class="block-icon icon-purple">🧠</div>
+          <span class="block-tag tag-purple">JS Avanzado</span>
+          <div class="block-title">Arquitectura JS Avanzada</div>
+          <div class="block-desc">
+            Modelo (clases ES6, encapsulamiento), Red (fetch + async/await),
+            Procesamiento (filter·map·sort·reduce) y Resiliencia (retry,
+            timeout, AbortController) con bitácora en vivo.
+          </div>
+          <div class="block-arrow">→ abrir</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section class="sin-padding-top">
+      <h2 class="section-title">Accesos Rápidos</h2>
+      <p class="section-desc">Todos los archivos del proyecto web07.</p>
+      <div class="quick-grid">
+        <a href="calculadora.html" class="quick-link"
+          ><span>🧮</span> calculadora.html</a
+        >
+        <a href="calculadora2op.html" class="quick-link"
+          ><span>➕</span> calculadora2op.html</a
+        >
+        <a href="formulario.html" class="quick-link"
+          ><span>📋</span> formulario.html</a
+        >
+        <a href="seminario.html" class="quick-link"
+          ><span>🎓</span> seminario.html</a
+        >
+        <a href="demojson.html" class="quick-link"
+          ><span>🗂️</span> demojson.html</a
+        >
+        <a href="pokeclient.html" class="quick-link"
+          ><span>🐾</span> pokeclient.html</a
+        >
+        <a href="swalconbs.html" class="quick-link"
+          ><span>🔔</span> swalconbs.html</a
+        >
+        <a href="flexbox.html" class="quick-link"
+          ><span>📐</span> flexbox.html</a
+        >
+        <a href="demobootstrap.html" class="quick-link"
+          ><span>🅱️</span> demobootstrap.html</a
+        >
+        <a href="bootstapemb.html" class="quick-link"
+          ><span>📝</span> bootstapemb.html</a
+        >
+        <a href="otros.html" class="quick-link"><span>📄</span> otros.html</a>
+        <a href="ejercicios.html" class="quick-link"
+          ><span>🧪</span> ejercicios.html</a
+        >
+        <a href="showcase.html" class="quick-link"
+          ><span>🚀</span> showcase.html</a
+        >
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        © 2026 <strong>Tecnologías Web I</strong> — Vanilla JS · SweetAlert2 ·
+        CSS Grid/Flexbox
+      </p>
+      <p class="mt-sm">
+        Ver el <a href="showcase.html">Showcase completo →</a>
+      </p>
+    </footer>
+
+    <script src="js/app.js" data-page="index"></script>
+  </body>
+</html>

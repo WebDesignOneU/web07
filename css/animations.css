@@ -1,0 +1,93 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   animations.css  ·  Web07 (Tecnologías Web I)
+   Capa 3/6 · ANIMACIONES
+   Aquí viven los @keyframes y las reglas `animation` del sitio.
+
+   Regla de la casa: si una regla sólo anima (no colorea ni maqueta),
+   va en este archivo, aunque su elemento viva en layout o components.
+   Se importa después de base.css para que cualquier capa posterior pueda
+   sobrescribir una animación concreta con `animation: none`.
+
+   Origen: index.css (drift, float, fadeInUp) y paginas.css.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(10px, 15px);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INICIO · index.html
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* las partículas del hero se desplazan muy lento, en bucle alterno */
+body.inicio .hero::after {
+  animation: drift 12s ease-in-out infinite alternate;
+}
+
+/* las cifras de las estadísticas flotan, escalonadas */
+body.inicio .stat {
+  animation: float 3.5s ease-in-out infinite;
+}
+body.inicio .stat:nth-child(2) {
+  animation-delay: 0.5s;
+}
+body.inicio .stat:nth-child(3) {
+  animation-delay: 1s;
+}
+body.inicio .stat:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+/* entrada de elementos y de las tarjetas, con retardo escalonado.
+   El retardo va en --i para no repetir la misma animation 6 veces. */
+body.inicio .fade-in {
+  animation: fadeInUp 0.55s ease both;
+}
+body.inicio .blocks .block-card {
+  animation: fadeInUp 0.5s var(--i, 0s) ease both;
+}
+
+body.inicio .blocks .block-card:nth-child(1) {
+  --i: 0.05s;
+}
+body.inicio .blocks .block-card:nth-child(2) {
+  --i: 0.1s;
+}
+body.inicio .blocks .block-card:nth-child(3) {
+  --i: 0.15s;
+}
+body.inicio .blocks .block-card:nth-child(4) {
+  --i: 0.2s;
+}
+body.inicio .blocks .block-card:nth-child(5) {
+  --i: 0.25s;
+}
+body.inicio .blocks .block-card:nth-child(6) {
+  --i: 0.3s;
+}

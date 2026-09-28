@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>25 · Checks: resumen — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 25 de Web07: Checks: resumen."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        var value1 = 0;
+        function agregarCheckBox() {
+          var objetoCheck = document.getElementById("idCheck");
+          var objetoCheckItem = document.createElement("input");
+          objetoCheckItem.type = "checkbox";
+          objetoCheckItem.name = "Check" + value1;
+          objetoCheckItem.value = value1;
+          var objetoTextNodo = document.createElement("span");
+          objetoTextNodo.textContent = "Check " + value1++;
+          var objetoBr = document.createElement("br");
+          var objetoLabel = document.createElement("label");
+          objetoLabel.appendChild(objetoCheckItem);
+          objetoLabel.appendChild(objetoTextNodo);
+          objetoLabel.appendChild(objetoBr);
+          objetoCheck.appendChild(objetoLabel);
+        }
+
+        function contarChequeados() {
+          var cbx = document.querySelectorAll("form[name='formCheck'] input");
+          var sumaCbx = 0;
+          cbx.forEach(function (input) {
+            if (input.checked) sumaCbx++;
+          });
+          Swal.fire(
+            "Mensaje",
+            "Elegidos = " +
+              sumaCbx +
+              "\r" +
+              "No elegidos = " +
+              (cbx.length - sumaCbx),
+            "info"
+          );
+        }
+
+        document.getElementById("cmdAgregar").addEventListener("click", function () {
+          agregarCheckBox();
+        });
+
+        document.getElementById("cmdContarElegidos").addEventListener("click", function () {
+          contarChequeados();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="25">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej25" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">25</span>
+      <span class="ej-name">Checks: resumen</span>
+    </header>
+
+    <button id="cmdAgregar" class="btn btn-primary">Agregar CheckBox</button>
+    <button id="cmdContarElegidos" class="btn btn-primary">
+      Contar elegidos
+    </button>
+    <form name="formCheck">
+      <div id="idCheck" class="form-group"></div>
+    </form>
+  </body>
+</html>

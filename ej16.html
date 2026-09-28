@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>16 · Agregar párrafos — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 16 de Web07: Agregar párrafos."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var veces = 1;
+
+        function agregarParrafo() {
+          var texto = "Párrafo agregado " + veces++;
+          var parrafo = document.createElement("p");
+          parrafo.textContent = texto;
+          document.body.appendChild(parrafo);
+        }
+
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregarParrafo();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="16">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej16" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">16</span>
+      <span class="ej-name">Agregar párrafos</span>
+    </header>
+
+    <button id="btnAgregar" class="btn btn-primary">Agregar parrafo</button>
+    <p>Parrafo inicial existente</p>
+  </body>
+</html>

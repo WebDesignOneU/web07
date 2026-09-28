@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚀 Web07 Showcase – Tecnologías Web I</title>
+  <meta name="description"
+    content="Showcase de ejemplos JavaScript: calculadoras, formularios, JSON, Fetch API, SweetAlert2 y manipulación del DOM." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/showcase.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="showcase">
+  <!-- ── HEADER WEB07 ── -->
+  <header class="w7-nav">
+    <a href="index.html" class="w7-nav-brand">⚡ Web07</a>
+    <div class="w7-nav-center">
+      <span class="page-emoji">🚀</span>
+      <span>Showcase</span>
+    </div>
+    <nav class="w7-nav-links">
+      <a href="index.html"    class="w7-nav-link">🏠 Inicio</a>
+      <a href="showcase.html" class="w7-nav-link w7-showcase">🚀 Showcase</a>
+    </nav>
+  </header>
+
+  <header class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="hero-badge">✦ Tecnologías Web I — 2026</div>
+      <h1>Web07 Showcase</h1>
+      <p>Ejemplos interactivos de JavaScript organizados por bloques temáticos con SweetAlert2, Vanilla JS y estilos propios.</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">7</span><span class="stat-label">Bloques</span></div>
+        <div class="stat"><span class="stat-num">18+</span><span class="stat-label">Demos</span></div>
+        <div class="stat"><span class="stat-num">Swal</span><span class="stat-label">Integrado</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-bar">
+    <a href="#calc"     class="nav-link">🧮 Calculadoras</a>
+    <a href="#forms"    class="nav-link">📋 Formularios</a>
+    <a href="#json"     class="nav-link">🗂️ JSON &amp; Datos</a>
+    <a href="#api"      class="nav-link">🌐 Fetch &amp; API</a>
+    <a href="#swal"     class="nav-link">🔔 SweetAlert</a>
+    <a href="#dom"      class="nav-link">🔧 DOM &amp; Layout</a>
+    <a href="#avanzado" class="nav-link">🧠 JS Avanzado</a>
+  </nav>
+
+  <main>
+
+    <!-- ══ BLOQUE 1: CALCULADORAS ══ -->
+    <section class="section" id="calc">
+      <div class="section-header">
+        <div class="section-icon purple">🧮</div>
+        <div class="section-meta">
+          <h2>Calculadoras &amp; Operaciones</h2>
+          <p>Aritmética básica con Vanilla JS, inputs numéricos y alertas SweetAlert2.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+
+        <!-- Card: 2 Operandos -->
+        <div class="card fade-in-up">
+          <div class="card-top">
+            <span class="card-tag tag-purple">Vanilla JS</span>
+            <div class="card-complexity" title="Básico">
+              <span class="dot on"></span><span class="dot off"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Calculadora 2 Operandos</div>
+            <div class="card-desc">Suma, resta, multiplicación y división con SweetAlert2 para mostrar el resultado.</div>
+            <div class="demo-area">
+              <div class="input-row">
+                <input type="number" id="calc-a" class="input-field" placeholder="Número 1" />
+                <input type="number" id="calc-b" class="input-field" placeholder="Número 2" />
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-primary btn-sm" id="btn-sumar">➕ Sumar</button>
+                <button class="btn btn-ghost   btn-sm" id="btn-restar">➖ Restar</button>
+                <button class="btn btn-ghost   btn-sm" id="btn-mult">✖ Multiplicar</button>
+                <button class="btn btn-ghost   btn-sm" id="btn-div">➗ Dividir</button>
+              </div>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/calculadoras.js</div>
+                <pre><span class="cm">// Leer valores del DOM</span>
+<span class="kw">const</span> a = <span class="fn">parseFloat</span>(<span class="fn">document.getElementById</span>(<span class="str">'calc-a'</span>).value);
+<span class="kw">const</span> b = <span class="fn">parseFloat</span>(<span class="fn">document.getElementById</span>(<span class="str">'calc-b'</span>).value);
+
+<span class="fn">Swal.fire</span>({ title: <span class="str">'Suma'</span>, text: String(a + b), icon: <span class="str">'success'</span> });</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Radio Buttons -->
+        <div class="card fade-in-up">
+          <div class="card-top">
+            <span class="card-tag tag-purple">Radio + Swal</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Operaciones con Radio Buttons</div>
+            <div class="card-desc">Selecciona la operación con radios y obtén el resultado via Swal.</div>
+            <div class="demo-area">
+              <div class="input-row">
+                <input type="number" id="radio-a" class="input-field" placeholder="Dato 1" />
+                <input type="number" id="radio-b" class="input-field" placeholder="Dato 2" />
+              </div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="op" value="1" /> Suma</label>
+                <label class="radio-label"><input type="radio" name="op" value="2" /> Resta</label>
+                <label class="radio-label"><input type="radio" name="op" value="3" /> Multiplicación</label>
+                <label class="radio-label"><input type="radio" name="op" value="4" /> División</label>
+              </div>
+              <button class="btn btn-primary btn-sm sh-s1" id="btn-operar">⚡ Calcular</button>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/calculadoras.js</div>
+                <pre><span class="kw">const</span> op = <span class="fn">document.querySelector</span>(<span class="str">'input[name="op"]:checked'</span>).value;
+<span class="kw">let</span> res;
+<span class="kw">switch</span>(op) {
+  <span class="kw">case</span> <span class="str">'1'</span>: res = a + b; <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="str">'4'</span>: res = b !== <span class="num">0</span> ? a / b : <span class="str">'∞'</span>; <span class="kw">break</span>;
+}
+<span class="fn">Swal.fire</span>(<span class="str">'Resultado'</span>, String(res), <span class="str">'success'</span>);</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Múltiplos -->
+        <div class="card fade-in-up">
+          <div class="card-top">
+            <span class="card-tag tag-purple">Loops + Swal</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot off"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Generador de Múltiplos</div>
+            <div class="card-desc">Ingresa un número y obtén sus primeros 10 múltiplos en una alerta enriquecida.</div>
+            <div class="demo-area">
+              <input type="number" id="mult-num" class="input-field" placeholder="Ingrese un número entero" />
+              <button class="btn btn-primary btn-sm" id="btn-multiplos">🔢 Generar Múltiplos</button>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/calculadoras.js</div>
+                <pre><span class="kw">let</span> multiplos = [];
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= <span class="num">10</span>; i++) multiplos.<span class="fn">push</span>(n * i);
+<span class="fn">Swal.fire</span>({ title: <span class="str">`Múltiplos de ${n}`</span>, text: multiplos.<span class="fn">join</span>(<span class="str">', '</span>), icon: <span class="str">'success'</span> });</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ BLOQUE 2: FORMULARIOS ══ -->
+    <section class="section" id="forms">
+      <div class="section-header">
+        <div class="section-icon teal">📋</div>
+        <div class="section-meta">
+          <h2>Formularios &amp; Validación</h2>
+          <p>Manejo de formularios, validación de campos y feedback visual con SweetAlert2.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+
+        <!-- Card: Login -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-teal">Validación</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Sistema de Login</div>
+            <div class="card-desc">Valida credenciales (<code>admin</code> / <code>123456</code>) con Swal de éxito o error.</div>
+            <div class="demo-area">
+              <input type="text"     id="login-user" class="input-field" placeholder="Usuario: admin" />
+              <input type="password" id="login-pass" class="input-field" placeholder="Contraseña: 123456" />
+              <button class="btn btn-teal btn-sm" id="btn-login">🔐 Iniciar Sesión</button>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/formularios.js</div>
+                <pre><span class="kw">if</span> (user === <span class="str">'admin'</span> &amp;&amp; pass === <span class="str">'123456'</span>) {
+  <span class="fn">Swal.fire</span>(<span class="str">'Aceptado'</span>, <span class="str">'¡Bienvenido!'</span>, <span class="str">'success'</span>);
+} <span class="kw">else</span> {
+  <span class="fn">Swal.fire</span>(<span class="str">'Error'</span>, <span class="str">'Credenciales incorrectas'</span>, <span class="str">'error'</span>);
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Seminario -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-teal">Select + Swal</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Inscripción a Seminario</div>
+            <div class="card-desc">Precio dinámico según tipo de participante. Confirmación Swal al inscribirse.</div>
+            <div class="demo-area">
+              <input type="text" id="sem-nombre" class="input-field" placeholder="Tu nombre completo" />
+              <select id="sem-tipo" class="input-field">
+                <option value="">-- Tipo de participante --</option>
+                <option value="estudiante">Estudiante – Bs. 50</option>
+                <option value="profesional">Profesional – Bs. 90</option>
+              </select>
+              <div class="result-box empty" id="sem-costo">Seleccione un tipo para ver el costo</div>
+              <button class="btn btn-teal btn-sm sh-s2" id="btn-inscribir">📝 Inscribirse</button>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/formularios.js</div>
+                <pre><span class="kw">const</span> costo = tipo === <span class="str">'estudiante'</span> ? <span class="num">50</span> : <span class="num">90</span>;
+<span class="fn">Swal.fire</span>({
+  title: <span class="str">'¡Inscripción Exitosa!'</span>,
+  html: <span class="str">`Nombre: ${nombre}&lt;br&gt;Costo: Bs. ${costo}`</span>,
+  icon: <span class="str">'success'</span>
+});</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ BLOQUE 3: JSON & DATOS ══ -->
+    <section class="section" id="json">
+      <div class="section-header">
+        <div class="section-icon orange">🗂️</div>
+        <div class="section-meta">
+          <h2>JSON &amp; Datos Dinámicos</h2>
+          <p>Arrays de objetos JSON, renderizado dinámico con forEach y selects encadenados.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+
+        <!-- Card: Libros -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-orange">Array JSON</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Catálogo de Libros</div>
+            <div class="card-desc">Array de objetos JSON renderizado con <code>forEach + createElement</code>. Clic para detalle.</div>
+            <div class="demo-area" id="libros-container"></div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/datos-json.js</div>
+                <pre><span class="kw">const</span> libros = [
+  { titulo: <span class="str">'El Gran Gatsby'</span>, autor: <span class="str">'F.S. Fitzgerald'</span>, anio: <span class="num">1925</span> }
+];
+libros.<span class="fn">forEach</span>(libro =&gt; {
+  <span class="kw">const</span> div = <span class="fn">document.createElement</span>(<span class="str">'div'</span>);
+  div.innerHTML = <span class="str">`&lt;h3&gt;${libro.titulo}&lt;/h3&gt;`</span>;
+  container.<span class="fn">appendChild</span>(div);
+});</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Tours Bolivia -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-orange">Selects Encadenados</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Tours Bolivia</div>
+            <div class="card-desc">Elige el departamento y el segundo select se puebla dinámicamente con lugares turísticos.</div>
+            <div class="demo-area">
+              <select id="depto-sel" class="input-field">
+                <option value="">-- Elija departamento --</option>
+                <option value="1">🏙️ La Paz</option>
+                <option value="2">⛰️ Potosí</option>
+                <option value="3">🌴 Santa Cruz</option>
+              </select>
+              <select id="lugar-sel" class="input-field" disabled>
+                <option value="">-- Primero elige un departamento --</option>
+              </select>
+              <div class="result-box empty" id="tour-result">Selecciona un lugar para confirmar</div>
+              <button class="btn btn-orange btn-sm sh-s2" id="btn-tour" disabled>🗺️ Ver Tour con Swal</button>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/datos-json.js</div>
+                <pre><span class="kw">const</span> lugares = {
+  <span class="str">'1'</span>: [<span class="str">'Yungas'</span>, <span class="str">'Copacabana'</span>, <span class="str">'Tiahuanaco'</span>],
+  <span class="str">'2'</span>: [<span class="str">'Salar de Uyuni'</span>, <span class="str">'Cerro Rico'</span>]
+};
+depto.<span class="fn">addEventListener</span>(<span class="str">'change'</span>, () =&gt; {
+  lugar.innerHTML = lugares[depto.value]
+    .<span class="fn">map</span>(l =&gt; <span class="str">`&lt;option&gt;${l}&lt;/option&gt;`</span>).<span class="fn">join</span>(<span class="str">''</span>);
+});</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ BLOQUE 4: FETCH & API ══ -->
+    <section class="section" id="api">
+      <div class="section-header">
+        <div class="section-icon blue">🌐</div>
+        <div class="section-meta">
+          <h2>Fetch API &amp; Datos Externos</h2>
+          <p>Consumo de APIs REST con <code>fetch()</code> y <code>async/await</code>. Manejo de errores con Swal.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+
+        <!-- Card: Pokédex -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-blue">PokeAPI</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Pokédex — Fetch + Async/Await</div>
+            <div class="card-desc">Busca cualquier Pokémon en la PokéAPI. Prueba: <em>pikachu</em>, <em>charizard</em>, <em>gengar</em>.</div>
+            <div class="demo-area">
+              <div class="input-row">
+                <input type="text" id="poke-input" class="input-field" placeholder="ej: pikachu, bulbasaur..." />
+                <button class="btn btn-primary btn-sm" id="btn-poke">🔍</button>
+              </div>
+              <div id="poke-loading">⏳ Buscando...</div>
+              <div id="poke-result" class="hidden">
+                <img id="poke-img" src="" alt="" />
+                <div>
+                  <div id="poke-name"></div>
+                  <div class="poke-stat" id="poke-stats"></div>
+                </div>
+              </div>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/red.js</div>
+                <pre><span class="kw">async function</span> <span class="fn">buscarPokemon</span>() {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`https://pokeapi.co/api/v2/pokemon/${nombre}`</span>);
+    <span class="kw">if</span>(!res.ok) <span class="kw">throw new</span> Error(<span class="str">'No encontrado'</span>);
+    <span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+    <span class="fn">mostrar</span>(data);
+  } <span class="kw">catch</span>(e) {
+    <span class="fn">Swal.fire</span>(<span class="str">'Error'</span>, e.message, <span class="str">'error'</span>);
+  }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Cómo funciona Fetch -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-blue">Concepto</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">¿Cómo funciona Fetch?</div>
+            <div class="card-desc">Flujo de una petición HTTP asíncrona con manejo de errores y parsing JSON.</div>
+            <div class="demo-area">
+              <div class="fetch-steps">
+                <div class="fetch-step">
+                  <div class="fetch-step-icon">1️⃣</div>
+                  <div>
+                    <div class="fetch-step-label">fetch(url)</div>
+                    <div class="fetch-step-desc">Hace la petición HTTP GET.</div>
+                  </div>
+                </div>
+                <div class="fetch-step">
+                  <div class="fetch-step-icon">2️⃣</div>
+                  <div>
+                    <div class="fetch-step-label">await res.json()</div>
+                    <div class="fetch-step-desc">Parsea la respuesta como JSON.</div>
+                  </div>
+                </div>
+                <div class="fetch-step">
+                  <div class="fetch-step-icon">3️⃣</div>
+                  <div>
+                    <div class="fetch-step-label">try / catch</div>
+                    <div class="fetch-step-desc">Captura errores de red o datos inválidos.</div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-sm fetch-demo-btn" id="btn-fetch-demo">🧪 Demo: JSONPlaceholder</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ BLOQUE 5: SWEETALERT ══ -->
+    <section class="section" id="swal">
+      <div class="section-header">
+        <div class="section-icon pink">🔔</div>
+        <div class="section-meta">
+          <h2>SweetAlert2 — Galería de Alertas</h2>
+          <p>Tipos de alertas, confirmaciones, inputs interactivos y alertas con temporizador.</p>
+        </div>
+      </div>
+      <div class="grid grid-3">
+
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">✅ Éxito</div>
+            <div class="card-desc">Alerta de confirmación exitosa con ícono animado verde.</div>
+            <button class="btn btn-teal btn-sm" id="swal-success">Ver alerta</button>
+            <div class="tutorial sh-s3">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/sweetalert.js</div>
+                <pre><span class="fn">Swal.fire</span>(<span class="str">'Éxito'</span>, <span class="str">'Completado'</span>, <span class="str">'success'</span>);</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">❌ Error</div>
+            <div class="card-desc">Alerta de error con título, mensaje e ícono de X roja.</div>
+            <button class="btn btn-pink btn-sm" id="swal-error">Ver alerta</button>
+            <div class="tutorial sh-s3">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/sweetalert.js</div>
+                <pre><span class="fn">Swal.fire</span>(<span class="str">'Error'</span>, <span class="str">'Algo salió mal'</span>, <span class="str">'error'</span>);</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">⚠️ Advertencia</div>
+            <div class="card-desc">Alerta de advertencia con ícono triangular amarillo.</div>
+            <button class="btn btn-orange btn-sm" id="swal-warning">Ver alerta</button>
+            <div class="tutorial sh-s3">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/sweetalert.js</div>
+                <pre><span class="fn">Swal.fire</span>(<span class="str">'Cuidado'</span>, <span class="str">'Confirma la acción'</span>, <span class="str">'warning'</span>);</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">❓ Confirmación</div>
+            <div class="card-desc">Dialog con Sí / Cancelar. Reacciona al botón elegido con async/await.</div>
+            <button class="btn btn-primary btn-sm" id="swal-confirm">Ver alerta</button>
+            <div class="tutorial sh-s3">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/sweetalert.js</div>
+                <pre><span class="kw">const</span> { isConfirmed } = <span class="kw">await</span> <span class="fn">Swal.fire</span>({
+  title: <span class="str">'¿Seguro?'</span>,
+  showCancelButton: <span class="kw">true</span>,
+  icon: <span class="str">'question'</span>
+});
+<span class="kw">if</span>(isConfirmed) <span class="cm">/* ejecutar acción */</span></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">⏱️ Auto-cerrar</div>
+            <div class="card-desc">Alerta con timer de 3 segundos y barra de progreso animada.</div>
+            <button class="btn btn-ghost btn-sm" id="swal-timer">Ver alerta</button>
+            <div class="tutorial sh-s3">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/sweetalert.js</div>
+                <pre><span class="fn">Swal.fire</span>({
+  title: <span class="str">'Cerrando en 3s'</span>,
+  timer: <span class="num">3000</span>,
+  timerProgressBar: <span class="kw">true</span>,
+  showConfirmButton: <span class="kw">false</span>
+});</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">📝 Con Input</div>
+            <div class="card-desc">Alerta con campo de texto integrado. Obtiene el valor ingresado.</div>
+            <button class="btn btn-teal btn-sm" id="swal-input">Ver alerta</button>
+            <div class="tutorial sh-s3">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/sweetalert.js</div>
+                <pre><span class="kw">const</span> { value } = <span class="kw">await</span> <span class="fn">Swal.fire</span>({
+  title: <span class="str">'¿Cómo te llamas?'</span>,
+  input: <span class="str">'text'</span>,
+  inputPlaceholder: <span class="str">'Tu nombre aquí'</span>
+});</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ BLOQUE 6: DOM & LAYOUT ══ -->
+    <section class="section" id="dom">
+      <div class="section-header">
+        <div class="section-icon green">🔧</div>
+        <div class="section-meta">
+          <h2>DOM &amp; Layout</h2>
+          <p>Manipulación dinámica del DOM, operaciones sobre tablas y diseño Flexbox responsivo.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+
+        <!-- Card: Modificar párrafo -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-green">DOM Dinámico</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Modificar Párrafo con JS</div>
+            <div class="card-desc">Cada clic reemplaza el párrafo existente por uno nuevo con un contador de cambios.</div>
+            <div class="demo-area">
+              <div id="dom-output">Párrafo a ser modificado</div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" id="dom-bar"></div>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm sh-s4" id="btn-dom">🔄 Modificar párrafo</button>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/dom-layout.js</div>
+                <pre><span class="kw">let</span> veces = <span class="num">1</span>;
+btn.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, () =&gt; {
+  <span class="kw">const</span> p = <span class="fn">document.createElement</span>(<span class="str">'p'</span>);
+  p.textContent = <span class="str">`Cambio #${veces++}`</span>;
+  salida.<span class="fn">replaceChildren</span>(p);
+});</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Tabla -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-green">Tablas + querySelectorAll</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Operaciones sobre Tablas</div>
+            <div class="card-desc">Suma toda la tabla, solo la columna C2 o solo la fila 1 usando <code>querySelectorAll</code>.</div>
+            <div class="demo-area">
+              <table class="showcase-table" id="tabla-nums">
+                <tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th></tr>
+                <tr><td>10</td><td>20</td><td>30</td><td>40</td></tr>
+                <tr><td>5</td><td>15</td><td>25</td><td>35</td></tr>
+                <tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+              </table>
+            </div>
+            <div class="btn-group sh-s4">
+              <button class="btn btn-primary btn-sm" id="btn-suma-todo">∑ Total</button>
+              <button class="btn btn-ghost   btn-sm" id="btn-suma-col">∑ Col C2</button>
+              <button class="btn btn-ghost   btn-sm" id="btn-suma-fila">∑ Fila 1</button>
+            </div>
+            <div class="tutorial sh-s3">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/dom-layout.js</div>
+                <pre><span class="kw">let</span> suma = <span class="num">0</span>;
+<span class="fn">document.querySelectorAll</span>(<span class="str">'#tabla-nums td'</span>)
+  .<span class="fn">forEach</span>(td =&gt; suma += <span class="fn">Number</span>(td.textContent));
+<span class="fn">Swal.fire</span>(<span class="str">'Total'</span>, String(suma), <span class="str">'info'</span>);</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Flexbox -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-green">Flexbox</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot off"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Layout Flexbox Responsivo</div>
+            <div class="card-desc">Celdas flex que se adaptan automáticamente al ancho. Haz clic para el efecto visual.</div>
+            <div class="demo-area">
+              <div class="flex-grid" id="flex-demo">
+                <div class="flex-cell" onclick="selectCell(this)">Celda 1</div>
+                <div class="flex-cell" onclick="selectCell(this)">Celda 2</div>
+                <div class="flex-cell" onclick="selectCell(this)">Celda 3</div>
+                <div class="flex-cell" onclick="selectCell(this)">Celda 4</div>
+                <div class="flex-cell" onclick="selectCell(this)">Celda 5</div>
+                <div class="flex-cell" onclick="selectCell(this)">Celda 6</div>
+                <div class="flex-cell" onclick="selectCell(this)">Celda 7</div>
+                <div class="flex-cell" onclick="selectCell(this)">Celda 8</div>
+              </div>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">css/showcase.css</div>
+                <pre><span class="cm">/* CSS */</span>
+.flex-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.flex-cell { flex: <span class="num">1</span> <span class="num">1</span> 80px; } <span class="cm">/* crece, encoge, base */</span></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: createElement -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-green">createElement</span>
+            <div class="card-complexity">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot off"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Agregar Elementos al DOM</div>
+            <div class="card-desc">Crea nodos dinámicamente con <code>createElement</code> y <code>appendChild</code>. Click ✕ para eliminar.</div>
+            <div class="demo-area">
+              <div class="input-row">
+                <input type="text" id="list-input" class="input-field" placeholder="Escribe algo y presiona Enter..." />
+                <button class="btn btn-primary btn-sm" id="btn-add-item">➕</button>
+              </div>
+              <ul id="dynamic-list" class="dynamic-list"></ul>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/dom-layout.js</div>
+                <pre><span class="kw">const</span> li = <span class="fn">document.createElement</span>(<span class="str">'li'</span>);
+li.textContent = input.value;
+lista.<span class="fn">appendChild</span>(li);</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ BLOQUE 7: JS AVANZADO ══ -->
+    <section class="section" id="avanzado">
+      <div class="section-header">
+        <div class="section-icon purple">🧠</div>
+        <div class="section-meta">
+          <h2>JavaScript Avanzado — De Scripts a Motores</h2>
+          <p>Arquitectura en cuatro capas: <strong>Modelo → Red → Procesamiento → Resiliencia</strong>. Encapsulamiento, asincronía, pipelines funcionales y tolerancia a fallos.</p>
+        </div>
+      </div>
+      <div class="grid grid-adv">
+
+        <!-- Card: 1. Modelo -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-purple">1 · Modelo</span>
+            <div class="card-complexity" title="Avanzado">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Clase ES6 con encapsulamiento</div>
+            <div class="card-desc">Clase <code>Producto</code> con campo privado <code>#precio</code>, <code>getter/setter</code> que valida, método de negocio encadenable y serialización con <code>toJSON()</code>.</div>
+            <div class="demo-area">
+              <div class="input-row">
+                <input type="text"   id="mod-nombre" class="input-field" placeholder="Nombre" value="Laptop Lenovo" />
+                <input type="number" id="mod-precio" class="input-field" placeholder="Precio" value="5000" />
+              </div>
+              <div class="input-row sh-s7">
+                <input type="number" id="mod-pct" class="input-field" placeholder="Descuento %" value="10" min="0" max="100" />
+              </div>
+              <div class="obj-inspect" id="mod-inspect"></div>
+              <div class="btn-group sh-s4">
+                <button class="btn btn-primary btn-sm" id="btn-modelo">🏗️ Instanciar</button>
+                <button class="btn btn-ghost   btn-sm" id="btn-descuento">💸 Aplicar descuento</button>
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-ghost btn-sm" id="btn-privado">🔒 Acceder a #precio</button>
+                <button class="btn btn-pink  btn-sm" id="btn-negativo">⚠️ Precio negativo</button>
+              </div>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/core/model.js</div>
+                <pre class="compact"><span class="kw">class</span> Producto {
+  <span class="cm">#</span>precio;                       <span class="cm">// campo privado real</span>
+
+  <span class="kw">constructor</span>(id, nombre, precio) {
+    <span class="kw">this</span>.id     = id;
+    <span class="kw">this</span>.nombre = nombre;
+    <span class="kw">this</span>.precio = precio;      <span class="cm">// pasa por el setter</span>
+  }
+
+  <span class="fn">get</span> <span class="fn">precio</span>() { <span class="kw">return this</span>.#precio; }
+
+  <span class="fn">set</span> <span class="fn">precio</span>(valor) {
+    <span class="kw">if</span> (valor &lt; <span class="num">0</span>) <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">'El precio no puede ser negativo'</span>);
+    <span class="kw">this</span>.#precio = valor;       <span class="cm">// invariante del dominio</span>
+  }
+
+  <span class="fn">aplicarDescuento</span>(pct) {
+    <span class="kw">this</span>.precio = <span class="kw">this</span>.precio * (<span class="num">1</span> - pct / <span class="num">100</span>);
+    <span class="kw">return this</span>;                 <span class="cm">// encadenable</span>
+  }
+
+  <span class="fn">toJSON</span>() { <span class="cm">/* id, nombre, precio */</span> }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: 2. Red -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-blue">2 · Red</span>
+            <div class="card-complexity" title="Avanzado">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">ProductService — fetch + async/await</div>
+            <div class="card-desc">Capa de servicio que consume una API real y convierte el <code>JSON</code> plano en <strong>objetos de dominio</strong>. Observa el ciclo de la <code>Promise</code>.</div>
+            <div class="demo-area">
+              <select id="net-endpoint" class="input-field">
+                <option value="https://fakestoreapi.com/products?limit=8">🛍️ Fake Store API — GET /products (real)</option>
+                <option value="https://dummyjson.com/products?limit=8">📦 DummyJSON — GET /products (real)</option>
+                <option value="https://fakestoreapi.com/productos-inexistentes">🚫 URL inexistente — 404 → rejected</option>
+              </select>
+              <div class="promise-track sh-s7">
+                <div class="pt-node" id="pt-pending">pending<small>en vuelo…</small></div>
+                <div class="pt-node" id="pt-ok">fulfilled<small>response.ok</small></div>
+                <div class="pt-node" id="pt-err">rejected<small>throw / catch</small></div>
+              </div>
+              <div class="net-preview" id="net-preview">// esperando ProductService.getProducts()…</div>
+              <div class="btn-group sh-s4">
+                <button class="btn btn-primary btn-sm" id="btn-red">📡 GET /products</button>
+              </div>
+              <div class="hint-line sh-s7">💡 <code>fetch()</code> <strong>no</strong> rechaza ante un 404/500: la <code>Promise</code> se cumple. Por eso hay que validar <kbd>response.ok</kbd>.</div>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/core/model.js</div>
+                <pre class="compact"><span class="kw">class</span> ProductService {
+  <span class="fn">constructor</span>(baseURL) { <span class="kw">this</span>.baseURL = baseURL; }
+
+  <span class="kw">async</span> <span class="fn">getProducts</span>() {
+    <span class="kw">const</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`${this.baseURL}/products`</span>);
+
+    <span class="cm">// fetch NO lanza error en un 404/500</span>
+    <span class="kw">if</span> (!res.ok) <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">`HTTP ${res.status}: ${res.statusText}`</span>);
+
+    <span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+
+    <span class="cm">// JSON plano → objetos de dominio</span>
+    <span class="kw">return</span> data.<span class="fn">map</span>(item =&gt; <span class="kw">new</span> <span class="fn">Producto</span>(item.id, item.title, item.price, item.category));
+  }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: 3. Procesamiento -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-orange">3 · Procesamiento</span>
+            <div class="card-complexity" title="Avanzado">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Pipeline filter → map → sort → reduce</div>
+            <div class="card-desc">Cada etapa tiene una única responsabilidad y ninguna modifica el arreglo original. Cambia el filtro o el descuento y la tubería se recalcula.</div>
+            <div class="demo-area">
+              <div class="input-row">
+                <select id="pipe-cat" class="input-field">
+                  <option value="Tecnología">Categoría: Tecnología</option>
+                  <option value="Muebles">Categoría: Muebles</option>
+                  <option value="Todas">Categoría: Todas</option>
+                </select>
+                <input type="number" id="pipe-desc" class="input-field" placeholder="Descuento %" value="10" min="0" max="100" />
+              </div>
+              <div class="pipe sh-s7">
+                <div class="pipe-stage" id="ps-filter">
+                  <div class="pipe-head"><span><span class="fn">filter</span>(p =&gt; p.categoria === cat)</span><span class="pipe-out" id="po-filter"></span></div>
+                </div>
+                <div class="pipe-arrow">▼</div>
+                <div class="pipe-stage" id="ps-map">
+                  <div class="pipe-head"><span><span class="fn">map</span>(p =&gt; ({ ...p, precioFinal }))</span></div>
+                  <div id="po-map"></div>
+                </div>
+                <div class="pipe-arrow">▼</div>
+                <div class="pipe-stage" id="ps-sort">
+                  <div class="pipe-head"><span><span class="fn">sort</span>((a, b) =&gt; b.precioFinal - a.precioFinal)</span><span class="pipe-out" id="po-sort"></span></div>
+                </div>
+                <div class="pipe-arrow">▼</div>
+                <div class="pipe-stage" id="ps-reduce">
+                  <div class="pipe-head"><span><span class="fn">reduce</span>((t, p) =&gt; t + p.precioFinal, 0)</span></div>
+                  <div class="kpi-total"><span class="kpi-num" id="po-total">0.00</span><span class="kpi-lbl">Bs. · total del pipeline</span></div>
+                </div>
+              </div>
+              <div class="btn-group sh-s4">
+                <button class="btn btn-primary btn-sm" id="btn-pipe">▶ Ejecutar tubería</button>
+                <button class="btn btn-ghost   btn-sm" id="btn-pipe-raw">🧾 Ver cadena encadenada</button>
+              </div>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/blocks/procesamiento.js</div>
+                <pre class="compact">productos
+  .<span class="fn">filter</span>(p =&gt; p.categoria === <span class="str">'Tecnología'</span>)        <span class="cm">// 1 · selecciona</span>
+  .<span class="fn">map</span>(p =&gt; ({ ...p, precioFinal: p.precio * <span class="num">0.90</span> }))  <span class="cm">// 2 · transforma (spread)</span>
+  .<span class="fn">sort</span>((a, b) =&gt; b.precioFinal - a.precioFinal)           <span class="cm">// 3 · ordena</span>
+  .<span class="fn">reduce</span>((total, p) =&gt; total + p.precioFinal, <span class="num">0</span>);        <span class="cm">// 4 · colapsa</span>
+
+<span class="cm">// reduce acumulado:  0 → 4500 → 4635 → 4905</span>
+<span class="cm">// filter/map/sort NO mutan productos: devuelven nuevas referencias</span></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: 4. Resiliencia -->
+        <div class="card">
+          <div class="card-top">
+            <span class="card-tag tag-teal">4 · Resiliencia</span>
+            <div class="card-complexity" title="Avanzado">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Retry + Timeout + AbortController</div>
+            <div class="card-desc">Una API puede tardar, caerse o devolver errores. <code>fetchWithRetry()</code> reintenta con <strong>exponential backoff</strong> y cancela si el servidor no responde a tiempo.</div>
+            <div class="demo-area">
+              <div class="input-row">
+                <select id="res-modo" class="input-field">
+                  <option value="inestable">🧪 Servidor inestable (simulado)</option>
+                  <option value="real">🌍 API real — Fake Store</option>
+                  <option value="caido">💀 Servidor caído — siempre 503</option>
+                </select>
+              </div>
+              <div class="input-row sh-s7">
+                <input type="number" id="res-reintentos" class="input-field" placeholder="Reintentos" value="3" min="1" max="5" />
+                <input type="number" id="res-timeout"    class="input-field" placeholder="Timeout ms" value="3000" min="200" step="250" />
+              </div>
+              <div class="input-row sh-s7">
+                <input type="number" id="res-fallos"   class="input-field" placeholder="Fallos previos" value="1" min="0" max="5" />
+                <input type="number" id="res-latencia" class="input-field" placeholder="Latencia servidor ms" value="700" min="0" step="100" />
+              </div>
+              <div class="retry-log" id="res-log"></div>
+              <div class="btn-group sh-s4">
+                <button class="btn btn-teal  btn-sm" id="btn-resiliencia">🛡️ Ejecutar fetchWithRetry()</button>
+                <button class="btn btn-ghost btn-sm" id="btn-reset-log">↺ Limpiar bitácora</button>
+              </div>
+              <div class="hint-line sh-s7">💡 Ver el <kbd>AbortController</kbd>: deja <kbd>latencia 4000</kbd> y <kbd>timeout 800</kbd> → se cancela por tiempo. Backoff: 1000 → 2000 → 4000 ms.</div>
+            </div>
+            <div class="tutorial">
+              <button class="tutorial-toggle" onclick="toggleCode(this)"><span>💡 Ver código</span> <span class="arrow">▾</span></button>
+              <div class="code-block">
+                <div class="code-file">js/core/http.js</div>
+                <pre class="compact"><span class="kw">async function</span> <span class="fn">fetchWithRetry</span>(url, opciones = {}, reintentos = <span class="num">3</span>, timeout = <span class="num">5000</span>) {
+  <span class="kw">for</span> (<span class="kw">let</span> intento = <span class="num">1</span>; intento &lt;= reintentos; intento++) {
+
+    <span class="kw">const</span> controller = <span class="kw">new</span> <span class="fn">AbortController</span>();
+    <span class="kw">const</span> timer = <span class="fn">setTimeout</span>(() =&gt; controller.<span class="fn">abort</span>(), timeout);
+
+    <span class="kw">try</span> {
+      <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(url, { ...opciones, signal: controller.signal });
+      <span class="kw">if</span> (!res.ok) <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">`HTTP ${res.status}`</span>);
+      <span class="kw">return await</span> res.<span class="fn">json</span>();
+
+    } <span class="kw">catch</span> (error) {
+      <span class="kw">if</span> (intento === reintentos) <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">'Falló tras varios intentos'</span>);
+
+      <span class="kw">const</span> espera = <span class="num">2</span> ** intento * <span class="num">500</span>;   <span class="cm">// backoff exponencial</span>
+      <span class="kw">await new</span> <span class="fn">Promise</span>(r =&gt; <span class="fn">setTimeout</span>(r, espera));
+
+    } <span class="kw">finally</span> {
+      <span class="fn">clearTimeout</span>(timer);
+    }
+  }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Arquitectura -->
+        <div class="card span-all fade-in-up">
+          <div class="card-top">
+            <span class="card-tag tag-purple">Arquitectura</span>
+            <div class="card-complexity" title="Síntesis">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Las cuatro capas en una sola aplicación</div>
+            <div class="card-desc">Los cuatro ejemplos no son ejercicios sueltos: se encadenan para construir un cliente REST completo.</div>
+            <div class="arch-flow">
+              <div class="arch-box a-purple"><b>🧠 Modelo</b><span>Producto</span></div>
+              <div class="arch-arrow">→</div>
+              <div class="arch-box a-blue"><b>🌐 Red</b><span>ProductService</span></div>
+              <div class="arch-arrow">→</div>
+              <div class="arch-box a-orange"><b>⚙️ Procesamiento</b><span>filter·map·sort·reduce</span></div>
+              <div class="arch-arrow">→</div>
+              <div class="arch-box a-teal"><b>🛡️ Resiliencia</b><span>retry·timeout·abort</span></div>
+            </div>
+            <table class="levels-table">
+              <thead>
+                <tr><th>Nivel</th><th>Concepto</th><th>Pregunta que responde</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1 · Modelo</td><td><code>class</code>, <code>#privado</code>, <code>get/set</code>, <code>toJSON</code></td><td>¿Cómo represento correctamente mi dominio?</td></tr>
+                <tr><td>2 · Red</td><td><code>fetch</code>, <code>Promise</code>, <code>async/await</code>, <code>response.ok</code></td><td>¿Cómo obtengo información externa sin bloquear?</td></tr>
+                <tr><td>3 · Procesamiento</td><td><code>filter</code>, <code>map</code>, <code>sort</code>, <code>reduce</code>, spread</td><td>¿Cómo transformo grandes cantidades de datos?</td></tr>
+                <tr><td>4 · Resiliencia</td><td>Retry, <code>AbortController</code>, timeout, exponential backoff</td><td>¿Qué hago cuando el mundo exterior falla?</td></tr>
+              </tbody>
+            </table>
+            <div class="reto-box">
+              <h4>🎯 Reto final</h4>
+              <p>Construir un <strong>cliente JavaScript para una API REST</strong> que consulte productos, convierta las respuestas <code>JSON</code> en objetos de dominio, filtre y transforme la información, e implemente <em>timeout</em> y reintentos cuando el servidor no responda. De escribir scripts aislados a diseñar motores de software robustos.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Hecho con 💜 por <a href="#">Ing. Miguel Pacheco</a> — Tecnologías Web I © 2026 &nbsp;|&nbsp; Web07 Showcase</p>
+  </footer>
+
+  <!-- ── FOOTER WEB07 ── -->
+  <footer class="w7-footer">
+    <span>© 2026 <strong>Tecnologías Web I</strong></span>
+    <nav class="w7-footer-links">
+      <a href="index.html">🏠 Inicio</a>
+      <a href="showcase.html">🚀 Showcase</a>
+      <a href="calculadora.html">🧮 Calculadora</a>
+      <a href="formulario.html">📋 Formulario</a>
+      <a href="pokeclient.html">🐾 Pokédex</a>
+    </nav>
+  </footer>
+
+  <script src="js/app.js" data-page="showcase"></script>
+
+</body>
+
+</html>

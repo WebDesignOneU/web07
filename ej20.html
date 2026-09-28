@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>20 · Editar campos — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 20 de Web07: Editar campos."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function eliminaPrimerCampo() {
+          var campos = document.querySelectorAll('form[name="formUno"] input');
+          if (campos.length > 0) {
+            campos[0].remove();
+          } else {
+            Swal.fire("Mensaje", "¡No existen más campos!", "error");
+          }
+        }
+
+        document.getElementById("btnEliminar").addEventListener("click", function () {
+          eliminaPrimerCampo();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="20">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej20" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">20</span>
+      <span class="ej-name">Editar campos</span>
+    </header>
+
+    <button id="btnEliminar" class="btn btn-primary">
+      Eliminar primer campo
+    </button>
+    <br />
+    <form name="formUno" action="">
+      <input type="text" id="campo1" value="campo de edicion 1" /><br />
+      <input type="text" id="campo1" value="campo de edicion 2" /><br />
+      <input type="text" id="campo1" value="campo de edicion 3" /><br />
+      <input type="text" id="campo1" value="campo de edicion 4" /><br />
+      <input type="text" id="campo1" value="campo de edicion 5" /><br />
+      <input type="text" id="campo1" value="campo de edicion 6" /><br />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   variables.css  ·  Web07 (Tecnologías Web I)
+   Capa 1/6 · TOKENS
+   Custom properties del tema: color, radio, sombra, transición.
+   Se importa primero desde styles.css: aquí NO se escriben reglas,
+   sólo valores. Cambiar un color del sitio = editar este archivo.
+
+   TEMA CLARO · fondo papel, tinta profunda, seis tonos de marca.
+   Todos los tonos de marca pasan WCAG AA (≥ 4.5:1) como texto sobre
+   cualquier superficie clara, y también como relleno con texto blanco.
+   Para tintes se usa la tripleta -rgb: rgb(var(--accent-rgb) / 0.12).
+   Para texto pequeño dentro de un tinte, usar --accentN-texto (abajo).
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ══ SUPERFICIES ═══════════════════════════════════════════════════════ */
+  --bg: #f7f6f3; /* papel cálido, la base de la página */
+  --surface: #ffffff; /* paneles elev */
+  --card: #ffffff; /* tarjetas: se separan con borde y sombra, no con tono */
+  --surface-alt: #efeeea; /* rellenos sutiles, stripes, campos apagados */
+  --border: #e4e2dd;
+  --border-strong: #d2cfc8;
+
+  /* ══ TINTA ══════════════════════════════════════════════════════════════ */
+  /* Dos niveles, y ambos AA (≥ 4.5:1) contra TODA superficie del sitio,
+     incluida la más oscura (--border-strong). Se calculó el valor de cada
+     uno contra esa superficie, no contra el blanco: por eso --text-muted
+     es #54565e y no el gris claro que se ve bien sobre --bg pero falla
+     sobre un relleno. No añadir un tercer tono "tenue" sin comprobarlo:
+     bajar de 4.5:1 convierte texto de párrafo en texto de adorno. */
+  --text: #22232a; /* cuerpo      · 10.1:1 como mínimo */
+  --text-muted: #54565e; /* secundario ·  4.7:1 como mínimo */
+  --on-accent: #ffffff; /* texto sobre un relleno de marca */
+
+  /* ══ MARCA · seis tonos ═════════════════════════════════════════════════ */
+  --accent: #5b4fd6; /* violeta · 5.6:1 sobre --bg */
+  --accent2: #127a66; /* menta   · 4.8:1 */
+  --accent3: #b83f6b; /* rosa    · 4.6:1 (el mínimo es --surface-alt) */
+  --accent4: #8f5e07; /* ámbar   · 5.3:1 */
+  --accent5: #1a6fae; /* cielo   · 5.1:1 */
+  --accent6: #387a33; /* verde   · 4.8:1 */
+
+  /* Tripletas RGB para tintes: rgb(var(--accent-rgb) / 0.12) */
+  --accent-rgb: 91 79 214;
+  --accent2-rgb: 18 122 102;
+  --accent3-rgb: 184 63 107;
+  --accent4-rgb: 143 94 7;
+  --accent5-rgb: 26 111 174;
+  --accent6-rgb: 56 122 51;
+
+  /* ══ MARCA PARA TEXTO PEQUEÑO SOBRE TONO ══════════════════════════════
+     Un tono de marca al 100 % sí alcanza 4.5:1 sobre --bg, pero al
+     pintarlo sobre un tinte de sí mismo (12 %) el fondo se oscurece un
+     poco y el ratio baja de 4.5. Para texto pequeño —insignias, chips,
+     etiquetas— dentro de un tinte hace falta la versión profunda.
+     Con texto grande (≥ 24 px, o ≥ 18.66 px en negrita, umbral 3:1)
+     basta el tono normal. */
+  --accent-texto: #4a3ec9; /*  6.9:1 sobre tinte 12 % de --accent */
+  --accent2-texto: #0f6f5c; /*  5.0:1 sobre tinte 12 % de --accent2 */
+  --accent3-texto: #a82f57; /*  5.1:1 */
+  --accent4-texto: #7a5006; /*  5.6:1 */
+  --accent5-texto: #155f96; /*  5.3:1 */
+  --accent6-texto: #2f6a2b; /*  5.4:1 */
+
+  --radius: 12px;
+  --transition: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DEGRADADOS Y EFECTOS DE MARCA
+   Venían literal en index.css y paginas.css. Ahora se declaran una vez y
+   se consumen con var(): cambiar la marca es editar este bloque.
+
+   En tema claro los degradados de TEXTO son profundos (legibles) y los
+   de FONDO son pálidos (no compiten con el texto).
+   ══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* valor para background-clip: text (títulos con degradado) */
+  --clip-text: text;
+
+  --grad-marca: linear-gradient(135deg, #4a3ec9, #5b4fd6 50%, #127a66);
+  --grad-prim: linear-gradient(135deg, #5b4fd6, #6c5ce0);
+  --grad-titulo: linear-gradient(135deg, #4034b8, #5b4fd6 42%, #127a66);
+  --grad-texto: linear-gradient(135deg, var(--text), var(--text-muted));
+  --grad-cifra: linear-gradient(135deg, #5b4fd6, #127a66);
+  --grad-hero: linear-gradient(135deg, #fdfcfa 0%, #f0eefb 55%, #eef6f4 100%);
+  --grad-lab-hero: linear-gradient(135deg, #fdfcfa 0%, #f5f4f1 60%, #fdfcfa 100%);
+
+  /* sombras: en claro la difuminación es suave y nunca negra pura */
+  --sombra-elevada: 0 8px 30px rgba(34, 35, 42, 0.08);
+  --sombra-brillo: 0 6px 20px rgba(91, 79, 214, 0.16);
+  --sombra-borde: 0 0 0 1px rgba(91, 79, 214, 0.14);
+
+  /* velos de las barras pegadas y del menú móvil */
+  --scrim-nav: rgba(255, 255, 255, 0.88);
+  --scrim-menu: rgba(255, 255, 255, 0.98);
+}

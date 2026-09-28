@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>28 · Sumas de tabla — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 28 de Web07: Sumas de tabla."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function sumaTabla() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celdas = fila.querySelectorAll("td");
+            celdas.forEach(function (celda) {
+              suma += eval(celda.textContent);
+            });
+          });
+          alert("Suma de la tabla es = " + suma);
+        }
+
+        function sumaColumnaDos() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celda = fila.querySelectorAll("td")[2];
+            suma += eval(celda.textContent);
+          });
+          alert("Suma de la columna dos es = " + suma);
+        }
+
+        function sumaFilaUno() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          var celdas = filas[1].querySelectorAll("td");
+          celdas.forEach(function (celda) {
+            suma += eval(celda.textContent);
+          });
+          alert("Suma de la fila uno es = " + suma);
+        }
+
+        document.getElementById("btnSumar").addEventListener("click", function () {
+          sumaTabla();
+        });
+
+        document.getElementById("btnColumnaDos").addEventListener("click", function () {
+          sumaColumnaDos();
+        });
+
+        document.getElementById("btnFilaUno").addEventListener("click", function () {
+          sumaFilaUno();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="28">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej28" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">28</span>
+      <span class="ej-name">Sumas de tabla</span>
+    </header>
+
+    <button id="btnSumar" class="btn btn-primary">Suma la tabla</button>
+    <button id="btnColumnaDos" class="btn btn-primary">Suma la columa 2</button>
+    <button id="btnFilaUno" class="btn btn-primary">Suma la fila 1</button>
+    <br /><br />
+    <table id="tablaDatos" class="table">
+      <tr>
+        <td rowspan="2">10</td>
+        <td>20</td>
+        <td>30</td>
+        <td>40</td>
+        <td>50</td>
+        <td>60</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td colspan="2">10</td>
+        <td>15</td>
+        <td colspan="2">20</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td colspan="3">2</td>
+        <td colspan="3">3</td>
+      </tr>
+    </table>
+  </body>
+</html>

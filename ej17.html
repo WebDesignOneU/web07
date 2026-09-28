@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>17 · Operaciones con radio — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 17 de Web07: Operaciones con radio."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function operar(opcion) {
+          var dato1 = document.getElementById("campo1").value;
+          var dato2 = document.getElementById("campo2").value;
+          var resultado;
+          switch (opcion) {
+            case "1":
+              resultado = "La suma es = " + (Number(dato1) + Number(dato2));
+              break;
+            case "2":
+              resultado = "La resta es = " + (Number(dato1) - Number(dato2));
+              break;
+            case "3":
+              resultado =
+                "La multiplicación es = " + Number(dato1) * Number(dato2);
+              break;
+            case "4":
+              if (dato2 != 0)
+                resultado = "La división es = " + Number(dato1) / Number(dato2);
+              else resultado = "Indefinido";
+              break;
+          }
+          Swal.fire("Mensaje", resultado.toString(), "success");
+        }
+
+        document
+          .querySelectorAll('input[name="grupo"]')
+          .forEach(function (radio) {
+            radio.addEventListener("click", function () {
+              operar(this.value);
+            });
+          });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="17">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej17" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">17</span>
+      <span class="ej-name">Operaciones con radio</span>
+    </header>
+
+    <div class="form-group">
+      <p>Ingrese un número: <input type="text" value="" id="campo1" /></p>
+      <p>Ingrese otro número: <input type="text" value="" id="campo2" /></p>
+      <p>
+        <input type="radio" name="grupo" value="1" />Suma
+        <input type="radio" name="grupo" value="2" />Resta
+        <input type="radio" name="grupo" value="3" />Multiplicacion
+        <input type="radio" name="grupo" value="4" />Division
+      </p>
+    </div>
+  </body>
+</html>

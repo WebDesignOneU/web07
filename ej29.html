@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>29 · Tabla con colspan — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 29 de Web07: Tabla con colspan."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script>
+      function verEstructuraDeTabla() {
+        var tabla = document.getElementById("tablaMaestra");
+        alert(tabla.innerHTML);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        function agregarNuevaFila() {
+          var tabla = document.getElementById("tablaMaestra");
+          var fila = document.createElement("tr");
+          var numColumnas = 1 + Math.floor(Math.random() * 5);
+          var ubiColspan = Math.floor(Math.random() * numColumnas);
+          for (var i = 0; i <= numColumnas; i++) {
+            var celda = document.createElement("td");
+            var datoDeCelda = Math.floor(Math.random() * 1000);
+            var nColspan = 7 - numColumnas;
+            if (i == ubiColspan) celda.setAttribute("colspan", nColspan);
+            celda.textContent = datoDeCelda;
+            fila.appendChild(celda);
+          }
+          tabla.appendChild(fila);
+        }
+
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregarNuevaFila();
+        });
+
+        document.getElementById("btnEstructurar").addEventListener("click", function () {
+          verEstructuraDeTabla();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="29" onLoad="verEstructuraDeTabla()">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej29" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">29</span>
+      <span class="ej-name">Tabla con colspan</span>
+    </header>
+
+    <button id="btnAgregar" class="btn btn-primary">
+      Agregar fila de datos
+    </button>
+    <button id="btnEstructurar" class="btn btn-primary">
+      Ver estructura de la tabla
+    </button>
+    <table id="tablaMaestra" class="table table-striped table-bordered">
+      <tr>
+        <td>La Paz</td>
+        <td>Oruro</td>
+        <td>Tarija</td>
+        <td>Pando</td>
+        <td colspan="2">Beni</td>
+        <td>Potosi</td>
+      </tr>
+      <tr>
+        <td>Pando</td>
+        <td colspan="5">Beni</td>
+        <td>Chuquisaca</td>
+      </tr>
+    </table>
+  </body>
+</html>

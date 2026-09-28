@@ -1,0 +1,84 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   pokeclient.css  ·  Web07 (Tecnologías Web I)
+   Capa de página · POKÉDEX (ex pokeclient.css)
+   Estilos de pokeclient.html únicamente. Se enlaza DESPUÉS de
+   styles.css para ganar la cascada frente a los estilos globales.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── POKEDEX ── */
+
+body:has(.app) {
+  font-family: "Courier New", monospace;
+}
+.app {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 5px solid #ff0000;
+  border-radius: 15px;
+  background-color: #8b0000;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.app h1 {
+  color: #ffff00;
+  text-shadow: 2px 2px #000000;
+  font-size: 2em;
+}
+
+.app input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Courier New", monospace;
+}
+
+.app button {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+}
+.app button:hover {
+  background-color: #cc0000;
+}
+
+#resultado {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #000000;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#resultado img {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+}
+#resultado p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+#resultado h2 {
+  text-transform: capitalize;
+  color: #ff0000;
+  margin-bottom: 10px;
+}
+
+#mensaje {
+  color: #ffff00;
+  margin-top: 10px;
+  font-weight: bold;
+}

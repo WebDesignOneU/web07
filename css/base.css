@@ -1,0 +1,47 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   base.css  ·  Web07 (Tecnologías Web I)
+   Capa 2/6 · BASE
+   Reset, tipografía del body y scrollbar. Es la capa que todo el
+   sitio necesita y que nunca debería contener estilos de componentes.
+   ────────────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ── VARIANTES DE BODY ──
+   Cada página que necesita un cromo distinto declara su clase aquí y
+   usa body.<clase> como scope en las capas siguientes. Es lo que
+   reemplaza a los antiguos archivos de estilos por página. */
+body.lab {
+  margin: 0;
+} /* visor de ejercicios (ejercicios.html) */
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}

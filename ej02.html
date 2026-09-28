@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>02 · Párrafo clic — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 02 de Web07: Párrafo clic."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function mensaje() {
+          Swal.fire("Mensaje", "¡Eligió aquí!", "info");
+        }
+
+        document
+          .getElementById("parrafo")
+          .addEventListener("click", function () {
+            mensaje();
+          });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="02">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej02" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">02</span>
+      <span class="ej-name">Párrafo clic</span>
+    </header>
+
+    <div id="principal" class="row grow w-100">
+      <p id="parrafo" class="mb-5 vh-50 bg-info">Hacer clic.</p>
+      <p class="mb-5 vh-50 bg-warning">No puede hacer clic.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   calculadora.css  ·  Web07 (Tecnologías Web I)
+   Capa de página · CALCULADORA (ex styles.css)
+   Estilos de calculadora.html únicamente. Se enlaza DESPUÉS de
+   styles.css para ganar la cascada frente a los estilos globales.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── CALCULADORA ── */
+  @font-face {
+  font-family: "DS-Digital-Bold";
+  src: url("../fonts/DS-DIGIB.TTF");
+}
+
+#calculator {
+  background-color: var(--surface-alt);
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px 30px 0 30px;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  box-shadow: 0 20px 48px -24px rgba(34, 35, 42, 0.4);
+}
+
+#calculator > .operands {
+  width: 100%;
+  padding: 20px;
+  text-align: right;
+  background-color: #bcd1c0;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-size: 70px;
+  font-family: "DS-Digital-Bold";
+}
+
+#calculator > .operands > [data-operand-1] {
+  font-size: 40px;
+}
+
+#calculator > .btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+#calculator > .btn-grid > button {
+  padding: 10px;
+  background-color: var(--card);
+  font-weight: bold;
+  border-radius: 10px;
+  border-width: 5px;
+  border-color: var(--border-strong);
+  font-size: 25px;
+}
+
+#calculator > .btn-grid > button:nth-child(1) {
+  background-color: #66f54d;
+  border-color: #2ace53;
+}
+
+#calculator > .btn-grid > button:nth-child(2) {
+  grid-column: span 2;
+}
+
+#calculator > .btn-grid > button:last-child {
+  grid-column: span 2;
+  background-color: #f5a34d;
+  border-color: #ce812a;
+}
+
+#copy {
+  font-size: 12px;
+  padding: 10px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+#copy a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+#copy a:hover,
+#copy a:focus {
+  color: var(--accent);
+}

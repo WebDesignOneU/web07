@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📐 Flexbox – Web07 Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/flexbox.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="w7-nav">
+      <a href="index.html" class="w7-nav-brand">⚡ Web07</a>
+      <div class="w7-nav-center"><span>📐</span><span>Flexbox Demo</span></div>
+      <nav class="w7-nav-links">
+        <a href="index.html" class="w7-nav-link">🏠 Inicio</a>
+        <a href="showcase.html" class="w7-nav-link accent">🚀 Showcase</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-badge">📐 CSS Flexbox — Layouts Modernos</div>
+      <h1>Flexbox<br />Interactivo</h1>
+      <p>
+        Explora las propiedades de CSS Flexbox con demos en vivo. Cambia los
+        valores y ve el resultado al instante.
+      </p>
+    </div>
+
+    <main>
+      <!-- ══════════════════════════════════════════ -->
+      <!-- SECCIÓN 1: PLAYGROUND INTERACTIVO          -->
+      <!-- ══════════════════════════════════════════ -->
+      <section class="section fade">
+        <div class="section-header">
+          <div class="section-label lbl-blue">⚡ Playground</div>
+          <h2>Playground Interactivo</h2>
+          <p>
+            Controla todas las propiedades del contenedor flex y observa el
+            resultado en tiempo real.
+          </p>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title"
+              >🎮 Flex Container – Control Total</span
+            >
+            <span class="fx-s1">Modifica las propiedades</span>
+          </div>
+          <div class="demo-card-body">
+            <div class="prop-grid">
+              <div class="prop-group">
+                <label>flex-direction</label>
+                <select
+                  class="prop-select"
+                  id="sel-direction"
+                  onchange="updatePlayground()"
+                >
+                  <option value="row">row</option>
+                  <option value="row-reverse">row-reverse</option>
+                  <option value="column">column</option>
+                  <option value="column-reverse">column-reverse</option>
+                </select>
+              </div>
+              <div class="prop-group">
+                <label>justify-content</label>
+                <select
+                  class="prop-select"
+                  id="sel-justify"
+                  onchange="updatePlayground()"
+                >
+                  <option value="flex-start">flex-start</option>
+                  <option value="flex-end">flex-end</option>
+                  <option value="center">center</option>
+                  <option value="space-between">space-between</option>
+                  <option value="space-around">space-around</option>
+                  <option value="space-evenly">space-evenly</option>
+                </select>
+              </div>
+              <div class="prop-group">
+                <label>align-items</label>
+                <select
+                  class="prop-select"
+                  id="sel-align"
+                  onchange="updatePlayground()"
+                >
+                  <option value="stretch">stretch</option>
+                  <option value="flex-start">flex-start</option>
+                  <option value="flex-end">flex-end</option>
+                  <option value="center">center</option>
+                  <option value="baseline">baseline</option>
+                </select>
+              </div>
+              <div class="prop-group">
+                <label>flex-wrap</label>
+                <select
+                  class="prop-select"
+                  id="sel-wrap"
+                  onchange="updatePlayground()"
+                >
+                  <option value="nowrap">nowrap</option>
+                  <option value="wrap">wrap</option>
+                  <option value="wrap-reverse">wrap-reverse</option>
+                </select>
+              </div>
+              <div class="prop-group">
+                <label>align-content</label>
+                <select
+                  class="prop-select"
+                  id="sel-aligncontent"
+                  onchange="updatePlayground()"
+                >
+                  <option value="normal">normal</option>
+                  <option value="flex-start">flex-start</option>
+                  <option value="flex-end">flex-end</option>
+                  <option value="center">center</option>
+                  <option value="space-between">space-between</option>
+                  <option value="space-around">space-around</option>
+                  <option value="stretch">stretch</option>
+                </select>
+              </div>
+              <div class="prop-group">
+                <label>gap</label>
+                <select
+                  class="prop-select"
+                  id="sel-gap"
+                  onchange="updatePlayground()"
+                >
+                  <option value="0">0px</option>
+                  <option value="8px" selected>8px</option>
+                  <option value="16px">16px</option>
+                  <option value="24px">24px</option>
+                  <option value="32px">32px</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="code-display" class="code-badge">
+              <span class="prop">display</span>: <span class="val">flex</span>;
+              &nbsp;
+              <span id="cd-direction"></span>
+              <span id="cd-justify"></span>
+              <span id="cd-align"></span>
+              <span id="cd-wrap"></span>
+              <span id="cd-gap"></span>
+            </div>
+
+            <div id="playground" class="flex-stage pulse fx-s2">
+              <div class="fx fx-1 fx-s3">A</div>
+              <div class="fx fx-2 fx-s3">B</div>
+              <div class="fx fx-3 fx-s3">C</div>
+              <div class="fx fx-4 fx-s3">D</div>
+              <div class="fx fx-5 fx-s3">E</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- SECCIÓN 2: PRESETS VISUALES               -->
+      <!-- ══════════════════════════════════════════ -->
+      <section class="section fade delay-1">
+        <div class="section-header">
+          <div class="section-label lbl-purple">🎨 Patrones</div>
+          <h2>Patrones de Layout Comunes</h2>
+          <p>
+            Haz clic en cada preset para ver el layout resultante aplicado en
+            vivo.
+          </p>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title">📦 Presets de justify-content</span>
+          </div>
+          <div class="demo-card-body">
+            <div class="preset-row" id="justify-presets">
+              <button
+                class="preset-btn active"
+                onclick="applyJustify('flex-start', this)"
+              >
+                flex-start
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyJustify('flex-end', this)"
+              >
+                flex-end
+              </button>
+              <button class="preset-btn" onclick="applyJustify('center', this)">
+                center
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyJustify('space-between', this)"
+              >
+                space-between
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyJustify('space-around', this)"
+              >
+                space-around
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyJustify('space-evenly', this)"
+              >
+                space-evenly
+              </button>
+            </div>
+            <div id="stage-justify" class="flex-stage fx-s4">
+              <div class="fx fx-1 fx-s5">1</div>
+              <div class="fx fx-2 fx-s5">2</div>
+              <div class="fx fx-3 fx-s5">3</div>
+            </div>
+            <div class="code-badge" id="code-justify">
+              <span class="prop">justify-content</span>:
+              <span class="val" id="val-justify">flex-start</span>;
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title">📏 Presets de align-items</span>
+          </div>
+          <div class="demo-card-body">
+            <div class="preset-row" id="align-presets">
+              <button
+                class="preset-btn active"
+                onclick="applyAlign('stretch', this)"
+              >
+                stretch
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyAlign('flex-start', this)"
+              >
+                flex-start
+              </button>
+              <button class="preset-btn" onclick="applyAlign('flex-end', this)">
+                flex-end
+              </button>
+              <button class="preset-btn" onclick="applyAlign('center', this)">
+                center
+              </button>
+              <button class="preset-btn" onclick="applyAlign('baseline', this)">
+                baseline
+              </button>
+            </div>
+            <div id="stage-align" class="flex-stage fx-s6">
+              <div class="fx fx-1 fx-s7">Item 1</div>
+              <div class="fx fx-2 fx-s8">Item 2</div>
+              <div class="fx fx-3 fx-s9">Item 3</div>
+            </div>
+            <div class="code-badge">
+              <span class="prop">align-items</span>:
+              <span class="val" id="val-align">stretch</span>;
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title">🔄 flex-direction</span>
+          </div>
+          <div class="demo-card-body">
+            <div class="preset-row">
+              <button
+                class="preset-btn active"
+                onclick="applyDirection('row', this)"
+              >
+                row →
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyDirection('row-reverse', this)"
+              >
+                row-reverse ←
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyDirection('column', this)"
+              >
+                column ↓
+              </button>
+              <button
+                class="preset-btn"
+                onclick="applyDirection('column-reverse', this)"
+              >
+                column-reverse ↑
+              </button>
+            </div>
+            <div id="stage-direction" class="flex-stage fx-s10">
+              <div class="fx fx-1 fx-s11">1</div>
+              <div class="fx fx-2 fx-s11">2</div>
+              <div class="fx fx-3 fx-s11">3</div>
+              <div class="fx fx-4 fx-s11">4</div>
+            </div>
+            <div class="code-badge">
+              <span class="prop">flex-direction</span>:
+              <span class="val" id="val-direction">row</span>;
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- SECCIÓN 3: FLEX-GROW / SHRINK / BASIS     -->
+      <!-- ══════════════════════════════════════════ -->
+      <section class="section fade delay-2">
+        <div class="section-header">
+          <div class="section-label lbl-teal">📊 Items</div>
+          <h2>flex-grow · flex-shrink · flex-basis</h2>
+          <p>
+            Propiedades de los <em>hijos</em> flex que controlan cómo crecen,
+            encogen y su tamaño base.
+          </p>
+        </div>
+
+        <!-- flex-grow -->
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title"
+              >📈 flex-grow — cómo se distribuye el espacio libre</span
+            >
+          </div>
+          <div class="demo-card-body">
+            <div class="flex-stage fx-s12">
+              <div class="fx fx-1 fx-s13">
+                <div class="fx-s14">flex-grow: 1</div>
+                A
+              </div>
+              <div class="fx fx-3 fx-s15">
+                <div class="fx-s14">flex-grow: 2</div>
+                B (×2)
+              </div>
+              <div class="fx fx-5 fx-s16">
+                <div class="fx-s14">flex-grow: 3</div>
+                C (×3)
+              </div>
+            </div>
+            <div class="code-badge fx-s17">
+              <span class="prop">.item-A</span> { flex-grow:
+              <span class="val">1</span>; } &nbsp;
+              <span class="prop">.item-B</span> { flex-grow:
+              <span class="val">2</span>; } &nbsp;
+              <span class="prop">.item-C</span> { flex-grow:
+              <span class="val">3</span>; }
+            </div>
+          </div>
+        </div>
+
+        <!-- flex-basis slider -->
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title"
+              >📐 flex-basis — tamaño inicial del ítem</span
+            >
+          </div>
+          <div class="demo-card-body">
+            <div class="fx-s18">
+              <label class="fx-s19">
+                flex-basis: <span class="fx-s20" id="basis-val">120px</span>
+              </label>
+              <input
+                class="fx-s21"
+                type="range"
+                id="basis-range"
+                min="40"
+                max="300"
+                value="120"
+                oninput="updateBasis(this.value)"
+              />
+            </div>
+            <div class="flex-stage fx-s22">
+              <div class="fx fx-1 fx-s23" id="basis-item-1">A</div>
+              <div class="fx fx-2 fx-s23" id="basis-item-2">B</div>
+              <div class="fx fx-3 fx-s23" id="basis-item-3">C</div>
+              <div class="fx fx-4 fx-s23" id="basis-item-4">D</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- order -->
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title"
+              >🔢 order — reordenar ítems sin cambiar el HTML</span
+            >
+          </div>
+          <div class="demo-card-body">
+            <p class="fx-s24">
+              El HTML tiene el orden 1→5 pero la propiedad
+              <code class="fx-s25">order</code> los reordena visualmente.
+            </p>
+            <div class="flex-stage fx-s26">
+              <div class="fx fx-3 fx-s27">
+                <div class="fx-s28">
+                  <div class="fx-s29">HTML: 1</div>
+                  order: 3
+                </div>
+              </div>
+              <div class="fx fx-5 fx-s30">
+                <div class="fx-s28">
+                  <div class="fx-s29">HTML: 2</div>
+                  order: 1
+                </div>
+              </div>
+              <div class="fx fx-1 fx-s31">
+                <div class="fx-s28">
+                  <div class="fx-s29">HTML: 3</div>
+                  order: 5
+                </div>
+              </div>
+              <div class="fx fx-2 fx-s32">
+                <div class="fx-s28">
+                  <div class="fx-s29">HTML: 4</div>
+                  order: 2
+                </div>
+              </div>
+              <div class="fx fx-4 fx-s33">
+                <div class="fx-s28">
+                  <div class="fx-s29">HTML: 5</div>
+                  order: 4
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- SECCIÓN 4: LAYOUTS REALES                  -->
+      <!-- ══════════════════════════════════════════ -->
+      <section class="section fade delay-3">
+        <div class="section-header">
+          <div class="section-label lbl-pink">🏗️ Layouts</div>
+          <h2>Layouts Reales con Flexbox</h2>
+          <p>
+            Patrones concretos usados en producción: navbar, cards, sidebar,
+            centering.
+          </p>
+        </div>
+
+        <!-- Navbar layout -->
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title"
+              >🔗 Navbar (justify-content: space-between)</span
+            >
+          </div>
+          <div class="demo-card-body">
+            <div class="fx-s34">
+              <div class="fx-s35">⚡ Logo</div>
+              <div class="fx-s36">
+                <span class="fx-s37">Inicio</span>
+                <span class="fx-s37">Acerca</span>
+                <span class="fx-s37">Contacto</span>
+              </div>
+              <div class="fx-s38">CTA</div>
+            </div>
+            <div class="code-badge fx-s17">
+              <span class="prop">.navbar</span> { display:
+              <span class="val">flex</span>; justify-content:
+              <span class="val">space-between</span>; align-items:
+              <span class="val">center</span>; }
+            </div>
+          </div>
+        </div>
+
+        <!-- Card grid -->
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title">🃏 Card Grid (flex-wrap: wrap)</span>
+          </div>
+          <div class="demo-card-body">
+            <div class="fx-s39">
+              <div class="fx fx-1 fx-s40">
+                <span class="fx-s41">🧮</span><span class="fx-s42">Card A</span>
+              </div>
+              <div class="fx fx-2 fx-s40">
+                <span class="fx-s41">📋</span><span class="fx-s42">Card B</span>
+              </div>
+              <div class="fx fx-3 fx-s40">
+                <span class="fx-s41">🗂️</span><span class="fx-s42">Card C</span>
+              </div>
+              <div class="fx fx-4 fx-s40">
+                <span class="fx-s41">🌐</span><span class="fx-s42">Card D</span>
+              </div>
+            </div>
+            <div class="code-badge fx-s17">
+              <span class="prop">.grid</span> { display:
+              <span class="val">flex</span>; flex-wrap:
+              <span class="val">wrap</span>; gap: <span class="val">12px</span>;
+              } &nbsp; <span class="prop">.card</span> { flex:
+              <span class="val">1 1 140px</span>; }
+            </div>
+          </div>
+        </div>
+
+        <!-- Centering perfecto -->
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title"
+              >🎯 Centrado perfecto (el clásico de Flexbox)</span
+            >
+          </div>
+          <div class="demo-card-body">
+            <div class="flex-stage fx-s43">
+              <div class="fx fx-2 fx-s44">✨ Centrado</div>
+            </div>
+            <div class="code-badge fx-s17">
+              <span class="prop">.container</span> { display:
+              <span class="val">flex</span>; justify-content:
+              <span class="val">center</span>; align-items:
+              <span class="val">center</span>; }
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar layout -->
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title">🗂️ Layout Sidebar + Main</span>
+          </div>
+          <div class="demo-card-body">
+            <div class="fx-s45">
+              <div class="fx fx-1 fx-s46">
+                <span>📂</span> Sidebar<br /><span class="fx-s47"
+                  >flex: 0 0 120px</span
+                >
+              </div>
+              <div class="fx fx-5 fx-s48">
+                <span>📄</span> Main Content<br /><span class="fx-s47"
+                  >flex: 1 (crece)</span
+                >
+              </div>
+            </div>
+            <div class="code-badge fx-s17">
+              <span class="prop">.sidebar</span> { flex:
+              <span class="val">0 0 120px</span>; } &nbsp;
+              <span class="prop">.main</span> { flex:
+              <span class="val">1</span>; }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- SECCIÓN 5: TABLA DE REFERENCIA            -->
+      <!-- ══════════════════════════════════════════ -->
+      <section class="section fade">
+        <div class="section-header">
+          <div class="section-label lbl-orange">📋 Referencia</div>
+          <h2>Tabla de Propiedades Flexbox</h2>
+          <p>
+            Resumen completo de todas las propiedades del contenedor y los
+            ítems.
+          </p>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title"
+              >📦 Propiedades del Contenedor (padre)</span
+            >
+          </div>
+          <div class="demo-card-body fx-s49">
+            <table class="fx-s50">
+              <thead>
+                <tr>
+                  <th class="fx-s51">Propiedad</th>
+                  <th class="fx-s51">Valores</th>
+                  <th class="fx-s51">Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fx-s52">display</td>
+                  <td class="fx-s53">flex | inline-flex</td>
+                  <td class="fx-s54">Activa el contexto flex</td>
+                </tr>
+                <tr class="fx-s55">
+                  <td class="fx-s52">flex-direction</td>
+                  <td class="fx-s53">row | column | *-reverse</td>
+                  <td class="fx-s54">Eje principal del layout</td>
+                </tr>
+                <tr>
+                  <td class="fx-s52">justify-content</td>
+                  <td class="fx-s53">flex-start | center | space-*</td>
+                  <td class="fx-s54">Distribución en eje principal</td>
+                </tr>
+                <tr class="fx-s55">
+                  <td class="fx-s52">align-items</td>
+                  <td class="fx-s53">stretch | center | flex-start/end</td>
+                  <td class="fx-s54">Alineación en eje cruzado</td>
+                </tr>
+                <tr>
+                  <td class="fx-s52">flex-wrap</td>
+                  <td class="fx-s53">nowrap | wrap | wrap-reverse</td>
+                  <td class="fx-s54">Control de salto de línea</td>
+                </tr>
+                <tr class="fx-s55">
+                  <td class="fx-s52">gap</td>
+                  <td class="fx-s53">&lt;length&gt;</td>
+                  <td class="fx-s54">Espacio entre ítems</td>
+                </tr>
+                <tr>
+                  <td class="fx-s52">align-content</td>
+                  <td class="fx-s53">flex-start | center | space-*</td>
+                  <td class="fx-s54">Alinea filas (solo con wrap)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-card-title">🧩 Propiedades del Ítem (hijo)</span>
+          </div>
+          <div class="demo-card-body fx-s49">
+            <table class="fx-s50">
+              <thead>
+                <tr>
+                  <th class="fx-s56">Propiedad</th>
+                  <th class="fx-s56">Valores</th>
+                  <th class="fx-s56">Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fx-s57">flex-grow</td>
+                  <td class="fx-s54">0 | 1 | 2 …</td>
+                  <td class="fx-s54">Factor de crecimiento</td>
+                </tr>
+                <tr class="fx-s58">
+                  <td class="fx-s57">flex-shrink</td>
+                  <td class="fx-s54">0 | 1 …</td>
+                  <td class="fx-s54">Factor de encogimiento</td>
+                </tr>
+                <tr>
+                  <td class="fx-s57">flex-basis</td>
+                  <td class="fx-s54">auto | &lt;length&gt;</td>
+                  <td class="fx-s54">Tamaño inicial</td>
+                </tr>
+                <tr class="fx-s58">
+                  <td class="fx-s57">flex</td>
+                  <td class="fx-s54">grow shrink basis</td>
+                  <td class="fx-s54">Shorthand de los 3 anteriores</td>
+                </tr>
+                <tr>
+                  <td class="fx-s57">align-self</td>
+                  <td class="fx-s54">auto | flex-start | center …</td>
+                  <td class="fx-s54">Anula align-items para 1 ítem</td>
+                </tr>
+                <tr class="fx-s58">
+                  <td class="fx-s57">order</td>
+                  <td class="fx-s54">0 | 1 | -1 …</td>
+                  <td class="fx-s54">Orden visual del ítem</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w7-footer">
+      <span>© 2026 <strong>Tecnologías Web I</strong></span>
+      <nav class="w7-footer-links">
+        <a href="index.html">🏠 Inicio</a>
+        <a href="showcase.html">🚀 Showcase</a>
+        <a href="calculadora.html">🧮 Calculadora</a>
+        <a href="formulario.html">📋 Formulario</a>
+        <a href="pokeclient.html">🐾 Pokédex</a>
+      </nav>
+    </footer>
+
+    <script>
+      // ── Playground interactivo ──
+      function updatePlayground() {
+        const pg = document.getElementById("playground");
+        const dir = document.getElementById("sel-direction").value;
+        const jc = document.getElementById("sel-justify").value;
+        const ai = document.getElementById("sel-align").value;
+        const fw = document.getElementById("sel-wrap").value;
+        const ac = document.getElementById("sel-aligncontent").value;
+        const gap = document.getElementById("sel-gap").value;
+
+        pg.style.flexDirection = dir;
+        pg.style.justifyContent = jc;
+        pg.style.alignItems = ai;
+        pg.style.flexWrap = fw;
+        pg.style.alignContent = ac;
+        pg.style.gap = gap;
+        pg.style.minHeight =
+          dir === "column" || dir === "column-reverse" ? "260px" : "140px";
+
+        const fmt = (prop, val) =>
+          `<span class="prop">${prop}</span>: <span class="val">${val}</span>; &nbsp;`;
+
+        document.getElementById("cd-direction").innerHTML = fmt(
+          "flex-direction",
+          dir,
+        );
+        document.getElementById("cd-justify").innerHTML = fmt(
+          "justify-content",
+          jc,
+        );
+        document.getElementById("cd-align").innerHTML = fmt("align-items", ai);
+        document.getElementById("cd-wrap").innerHTML = fmt("flex-wrap", fw);
+        document.getElementById("cd-gap").innerHTML = fmt("gap", gap);
+      }
+      updatePlayground();
+
+      // ── Justify presets ──
+      function applyJustify(val, btn) {
+        document.getElementById("stage-justify").style.justifyContent = val;
+        document.getElementById("val-justify").textContent = val;
+        document
+          .querySelectorAll("#justify-presets .preset-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
+
+      // ── Align presets ──
+      function applyAlign(val, btn) {
+        document.getElementById("stage-align").style.alignItems = val;
+        document.getElementById("val-align").textContent = val;
+        document
+          .querySelectorAll("#align-presets .preset-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
+
+      // ── Direction presets ──
+      function applyDirection(val, btn) {
+        const s = document.getElementById("stage-direction");
+        s.style.flexDirection = val;
+        s.style.minHeight =
+          val === "column" || val === "column-reverse" ? "280px" : "80px";
+        document.getElementById("val-direction").textContent = val;
+        document.querySelectorAll(".preset-row .preset-btn").forEach((b) => {
+          if (b.onclick && b.onclick.toString().includes("applyDirection"))
+            b.classList.remove("active");
+        });
+        btn.classList.add("active");
+      }
+
+      // ── flex-basis slider ──
+      function updateBasis(val) {
+        document.getElementById("basis-val").textContent = val + "px";
+        ["1", "2", "3", "4"].forEach((n) => {
+          document.getElementById("basis-item-" + n).style.flexBasis =
+            val + "px";
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,703 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   components.css  ·  Web07 (Tecnologías Web I)
+   Capa 5/6 · COMPONENTES
+   Reestilizado de Bootstrap 4 al tema claro (form-control, btn-*, 
+   card, table, alert) para que las páginas con CDN y las propias
+   compartan el mismo lenguaje visual, más las piezas propias del sitio:
+   navbar de la portada, tarjetas, botones, sidebar del laboratorio y
+   los bordes de tabla de los ejercicios (ex index.css, paginas.css y
+   prueba16–21.css, que ya no son archivos aparte).
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── BOOTSTRAP · OVERRIDES ── */
+  .container,
+.container-fluid {
+  position: relative;
+  z-index: 1;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--text);
+}
+p,
+label,
+span {
+  color: var(--text-muted);
+}
+
+.form-control {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 8px;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+.form-control:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgb(var(--accent-rgb) / 0.15) !important;
+  background: var(--surface) !important;
+}
+.form-control::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+select.form-control option {
+  background: var(--card);
+  color: var(--text);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent)) !important;
+  border: none !important;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+.btn-primary:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 4px 18px rgb(var(--accent-rgb) / 0.35);
+}
+
+.btn-secondary {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 8px;
+}
+.btn-secondary:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+.card {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  color: var(--text);
+}
+
+.table {
+  color: var(--text);
+}
+.table th {
+  background: rgb(var(--accent-rgb) / 0.15);
+  color: var(--accent);
+  border-color: var(--border) !important;
+}
+.table td {
+  border-color: var(--border) !important;
+}
+.table tbody tr:hover td {
+  background: rgb(var(--accent-rgb) / 0.06);
+}
+.alert {
+  border-radius: var(--radius);
+}
+
+/* Botón Volver → Inicio */
+.btn[onclick*="index.html"] {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin: 8px;
+}
+.btn[onclick*="index.html"]:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INICIO · navbar de la portada (ex index.css)
+   La portada usa .navbar en vez de la .w7-nav del resto del sitio,
+   por eso va completo aquí: caja, marca, links y estado hamburguesa.
+   ══════════════════════════════════════════════════════════════════════════ */
+body.inicio .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--scrim-nav);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+}
+
+body.inicio .nav-brand {
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: var(--grad-marca);
+  -webkit-background-clip: var(--clip-text);
+  -webkit-text-fill-color: transparent;
+  background-clip: var(--clip-text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+body.inicio .nav-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+body.inicio .nav-link {
+  padding: 8px 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.87rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+body.inicio .nav-link:hover {
+  color: var(--text);
+  background: rgb(var(--accent-rgb) / 0.12);
+}
+body.inicio .nav-link.highlight {
+  background: var(--grad-prim);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+body.inicio .nav-link.highlight:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 4px 16px rgb(var(--accent-rgb) / 0.35);
+}
+
+body.inicio .nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: var(--transition);
+}
+body.inicio .nav-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* el menú desplegable del móvil: es la misma pieza en otro tamaño */
+@media (max-width: 680px) {
+  body.inicio .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--scrim-menu);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    gap: 4px;
+  }
+  body.inicio .nav-links.open {
+    display: flex;
+  }
+  body.inicio .nav-toggle {
+    display: block;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INICIO · botones (ex index.css)
+   ══════════════════════════════════════════════════════════════════════════ */
+body.inicio .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+body.inicio .btn:active {
+  transform: scale(0.96);
+}
+body.inicio .btn-primary {
+  background: var(--grad-prim);
+  color: var(--on-accent);
+}
+body.inicio .btn-primary:hover {
+  filter: brightness(1.12);
+  box-shadow: var(--sombra-brillo);
+}
+body.inicio .btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+body.inicio .btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgb(var(--accent-rgb) / 0.06);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INICIO · textos y distintivos (ex index.css)
+   ══════════════════════════════════════════════════════════════════════════ */
+body.inicio .hero-badge {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--accent-rgb) / 0.16),
+    rgb(var(--accent2-rgb) / 0.09)
+  );
+  border: 1px solid rgb(var(--accent-rgb) / 0.34);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+
+body.inicio .hero h1 {
+  font-size: clamp(2.2rem, 7vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  background: var(--grad-titulo);
+  -webkit-background-clip: var(--clip-text);
+  -webkit-text-fill-color: transparent;
+  background-clip: var(--clip-text);
+}
+
+body.inicio .stat {
+  text-align: center;
+}
+body.inicio .stat-num {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: var(--grad-cifra);
+  -webkit-background-clip: var(--clip-text);
+  -webkit-text-fill-color: transparent;
+  background-clip: var(--clip-text);
+}
+body.inicio .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+body.inicio .section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: var(--grad-texto);
+  -webkit-background-clip: var(--clip-text);
+  -webkit-text-fill-color: transparent;
+  background-clip: var(--clip-text);
+}
+body.inicio .section-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+}
+
+body.inicio .banner-text h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+body.inicio .banner-text p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+body.inicio footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+body.inicio footer a:hover {
+  text-decoration: underline;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INICIO · rejilla de bloques (ex index.css)
+   ══════════════════════════════════════════════════════════════════════════ */
+body.inicio .block-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 28px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+body.inicio .block-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--transition);
+  background: linear-gradient(
+    135deg,
+    rgb(var(--accent-rgb) / 0.06),
+    rgb(var(--accent2-rgb) / 0.04)
+  );
+}
+body.inicio .block-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--sombra-elevada), var(--sombra-borde);
+}
+body.inicio .block-card:hover::after {
+  opacity: 1;
+}
+body.inicio .block-card:hover .block-arrow {
+  transform: translateX(4px);
+}
+
+body.inicio .block-icon {
+  font-size: 2rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+}
+body.inicio .block-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+body.inicio .block-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  flex: 1;
+}
+body.inicio .block-arrow {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  align-self: flex-end;
+  transition: transform var(--transition);
+}
+body.inicio .block-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+body.inicio .icon-purple {
+  background: rgb(var(--accent-rgb) / 0.18);
+  border: 1px solid rgb(var(--accent-rgb) / 0.3);
+}
+body.inicio .icon-teal {
+  background: rgb(var(--accent2-rgb) / 0.12);
+  border: 1px solid rgb(var(--accent2-rgb) / 0.25);
+}
+body.inicio .icon-pink {
+  background: rgb(var(--accent3-rgb) / 0.12);
+  border: 1px solid rgb(var(--accent3-rgb) / 0.25);
+}
+body.inicio .icon-orange {
+  background: rgb(var(--accent4-rgb) / 0.12);
+  border: 1px solid rgb(var(--accent4-rgb) / 0.25);
+}
+body.inicio .icon-blue {
+  background: rgb(var(--accent5-rgb) / 0.12);
+  border: 1px solid rgb(var(--accent5-rgb) / 0.25);
+}
+body.inicio .icon-green {
+  background: rgb(var(--accent6-rgb) / 0.12);
+  border: 1px solid rgb(var(--accent6-rgb) / 0.25);
+}
+
+body.inicio .tag-purple {
+  background: rgb(var(--accent-rgb) / 0.2);
+  color: var(--accent);
+  border: 1px solid rgb(var(--accent-rgb) / 0.3);
+}
+body.inicio .tag-teal {
+  background: rgb(var(--accent2-rgb) / 0.15);
+  color: var(--accent2);
+  border: 1px solid rgb(var(--accent2-rgb) / 0.25);
+}
+body.inicio .tag-pink {
+  background: rgb(var(--accent3-rgb) / 0.15);
+  color: var(--accent3);
+  border: 1px solid rgb(var(--accent3-rgb) / 0.25);
+}
+body.inicio .tag-orange {
+  background: rgb(var(--accent4-rgb) / 0.15);
+  color: var(--accent4);
+  border: 1px solid rgb(var(--accent4-rgb) / 0.25);
+}
+body.inicio .tag-blue {
+  background: rgb(var(--accent5-rgb) / 0.15);
+  color: var(--accent5);
+  border: 1px solid rgb(var(--accent5-rgb) / 0.25);
+}
+body.inicio .tag-green {
+  background: rgb(var(--accent6-rgb) / 0.15);
+  color: var(--accent6);
+  border: 1px solid rgb(var(--accent6-rgb) / 0.25);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INICIO · accesos rápidos (ex index.css)
+   ══════════════════════════════════════════════════════════════════════════ */
+body.inicio .quick-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.87rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+body.inicio .quick-link:hover {
+  border-color: rgb(var(--accent-rgb) / 0.4);
+  background: rgb(var(--accent-rgb) / 0.06);
+  color: var(--accent);
+}
+body.inicio .quick-link span {
+  font-size: 1.1rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LABORATORIO · distintivo y barra de direcciones (ex paginas.css)
+   ══════════════════════════════════════════════════════════════════════════ */
+body.lab .lab-badge {
+  display: inline-block;
+  margin-bottom: 14px;
+  background: rgb(var(--accent2-rgb) / 0.12);
+  border: 1px solid rgb(var(--accent2-rgb) / 0.3);
+  /* texto de 11 px sobre un tinte: hace falta la versión profunda */
+  color: var(--accent2-texto);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+body.lab .lab-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin: 0 0 10px;
+  background: var(--grad-marca);
+  -webkit-background-clip: var(--clip-text);
+  -webkit-text-fill-color: transparent;
+  background-clip: var(--clip-text);
+}
+
+body.lab .frame-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+body.lab .frame-url {
+  font-family: "Fira Code", monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+/* la barra usa <a> y <button> (Anterior / Siguiente): se les da la misma
+   caja para que la fila quede alineada */
+body.lab .frame-open {
+  display: inline-flex;
+  align-items: center;
+  min-height: 33px;
+  padding: 5px 14px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.2;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+body.lab .frame-open:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+body.lab .frame-open:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+body.lab .frame-open:disabled:hover {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LABORATORIO · sidebar (ex paginas.css y pruebas.css)
+   Estas reglas sustituyen a las dos capas de visor que había antes:
+   ejercicios.html es el único visor y usa body.lab.
+   ══════════════════════════════════════════════════════════════════════════ */
+body.lab .sidebar-group-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 10px 4px;
+  opacity: 0.6;
+}
+body.lab .sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: "Inter", sans-serif;
+  font-size: 0.83rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s;
+}
+body.lab .sidebar-btn:hover {
+  background: rgb(var(--accent-rgb) / 0.1);
+  color: var(--text);
+}
+body.lab .sidebar-btn.active {
+  background: rgb(var(--accent-rgb) / 0.18);
+  color: var(--accent);
+  font-weight: 600;
+}
+body.lab .sidebar-btn .num {
+  font-size: 0.7rem;
+  font-family: "Fira Code", monospace;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  body.lab .sidebar-group-label {
+    display: none;
+  }
+  body.lab .sidebar-btn {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EJERCICIOS · bordes de tabla (ex prueba16–21.css)
+   Cada página declaraba un archivo para un solo selector. Aquí están
+   juntos y con el scope body.legacy, que es quien los usa.
+   ══════════════════════════════════════════════════════════════════════════ */
+body.legacy #tablaDatos tr:not(:last-of-type) {
+  border: 1px black solid;
+}
+body.legacy #tablaDatos td {
+  border: 1px black solid;
+}
+body.legacy #tablaMaestra td {
+  border: 1px black solid;
+}
+body.legacy #idTabla {
+  border: 1px black solid;
+}
+body.legacy #id_miTabla {
+  border: 1px black solid;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EJERCICIOS · cabecera de contexto (ej01…ej33)
+   Los 33 ejercicios comparten esta barra: número, título y vuelta al
+   visor. Es lo que permite abrir cualquiera en pestaña aparte sin
+   perder el hilo. Vive aquí y no en una capa de página porque las 33
+   páginas lo consumen — igual que legacy.css.
+
+   Restricción importante: la barra NO puede contener <p>, <ul>, <form>
+   ni <input>. Varios ejercicios los localizan por posición
+   (querySelector("p"), document.forms[...]) y añadir un elemento de
+   ese tipo rompería el ejercicio.
+   ══════════════════════════════════════════════════════════════════════════ */
+body.ejercicio .ej-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: .85rem;
+}
+body.ejercicio .ej-back {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+body.ejercicio .ej-back:hover {
+  text-decoration: underline;
+}
+body.ejercicio .ej-num {
+  font-family: "Fira Code", monospace;
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--accent2);
+  background: rgb(var(--accent2-rgb) / 12);
+  border: 1px solid rgb(var(--accent2-rgb) / 25);
+  border-radius: 5px;
+  padding: 1px 7px;
+}
+body.ejercicio .ej-name {
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  body.ejercicio .ej-head {
+    padding: 8px 12px;
+    font-size: .8rem;
+  }
+}

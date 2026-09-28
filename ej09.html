@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>09 · Formulario validado — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 09 de Web07: Formulario validado."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function enviar() {
+          var nombre = document.getElementById("nombre").value;
+          var fecha = document.getElementById("fecha").value;
+          var texto = "Nombre: " + nombre + " \n" + "Fecha: " + fecha;
+          Swal.fire("Mensaje", texto, "info");
+        }
+
+        function cancelar() {
+          document.getElementById("nombre").value = "";
+          document.getElementById("fecha").value = "";
+        }
+
+        // Validar que el campo #nombre solo acepte letras y espacios
+        document
+          .getElementById("nombre")
+          .addEventListener("input", function () {
+            var regex = /^[a-zA-Z\s]*$/;
+            if (!regex.test(this.value)) {
+              this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
+            }
+          });
+
+        // Puedes llamar a las funciones enviar() y cancelar() cuando sea necesario
+        document
+          .getElementById("btnEnviar")
+          .addEventListener("click", function () {
+            enviar();
+          });
+
+        document
+          .getElementById("btnCancelar")
+          .addEventListener("click", function () {
+            cancelar();
+          });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="09">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej09" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">09</span>
+      <span class="ej-name">Formulario validado</span>
+    </header>
+
+    <div id="principal" class="form-group">
+      <p class="mb-5">
+        NOMBRE:
+        <input type="text" id="nombre" class="form-control" />
+      </p>
+      <p class="mb-5">
+        F. NAC:
+        <input type="date" id="fecha" class="form-control" />
+      </p>
+      <p>
+        <button id="btnEnviar" class="btn btn-primary">Enviar</button>&nbsp;
+        <button id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>27 · Checks: radios — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 27 de Web07: Checks: radios."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        var radioNum = 1;
+
+        function hizoClick(idOrden) {
+          var radios = document.querySelectorAll("form[name='fRadios'] input");
+          radios.forEach(function (radio) {
+            if (radio.value == idOrden) {
+              radio.checked = true;
+            } else {
+              radio.checked = false;
+            }
+          });
+        }
+
+        function agregarRadio() {
+          var dvr = document.getElementById("divRadiolist");
+          var radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = "radios";
+          radio.value = radioNum;
+          radio.addEventListener("click", function () {
+            hizoClick(this.value);
+          });
+          var objetoLabel = document.createElement("label");
+          var objetoTextNodo = document.createElement("span");
+          objetoTextNodo.textContent = "Mensaje radio " + radioNum;
+          objetoLabel.appendChild(radio);
+          objetoLabel.appendChild(objetoTextNodo);
+          dvr.appendChild(objetoLabel);
+          radioNum++;
+        }
+
+        document.getElementById("btnAddRadio").addEventListener("click", function () {
+          agregarRadio();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="27">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej27" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">27</span>
+      <span class="ej-name">Checks: radios</span>
+    </header>
+
+    <button id="btnAddRadio" class="btn btn-primary">Agregar radio</button>
+    <form name="fRadios" action="">
+      <div id="divRadiolist"></div>
+    </form>
+  </body>
+</html>

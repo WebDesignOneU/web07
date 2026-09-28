@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>07 · Suma con confirm — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 07 de Web07: Suma con confirm."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function confirmar() {
+          if (confirm("¿Desea continuar?")) {
+            var _x = "9";
+            var _y = 8;
+            var resultado = Number(_x) + _y;
+            Swal.fire("Mensaje", resultado.toString(), "info");
+          }
+        }
+
+        document
+          .getElementById("btnSumar")
+          .addEventListener("click", function () {
+            confirmar();
+          });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="07">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej07" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">07</span>
+      <span class="ej-name">Suma con confirm</span>
+    </header>
+
+    <div id="principal" class="row grow w-100">
+      <button id="btnSumar" class="btn btn-primary">Sumar</button>
+    </div>
+  </body>
+</html>
