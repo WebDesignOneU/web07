@@ -28,7 +28,7 @@ js/
 │   └── resiliencia.js       Showcase bloque 7.4 · retry, timeout, backoff
 │
 └── pages/              un archivo por página que tiene lógica propia
-    ├── index.js · calculadora.js · formulario.js · seminario.js
+    ├── index.js · calculadora.js · auth.js · seminario.js
     ├── demojson.js · pokeclient.js · swalconbs.js
     └── showcase.js
 ```
@@ -136,8 +136,8 @@ que uno puede depender de las APIs de otro que esté antes.
 
 ## Páginas que todavía llevan `<script>` inline
 
-los 25 ejercicios (`ej01.html` … `ej25.html`), más `flexbox.html` y
-`bootstapemb.html` **no** usan
+los 25 ejercicios (`ej01.html` … `ej25.html`), más `flexbox.html`
+**no** usan
 `app.js`: son ejercicios de clase con su JS incrustado y así se
 entregaron. Migrarlos es opcional y no afecta al resto.
 

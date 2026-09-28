@@ -5,7 +5,7 @@ Colección de ejercicios y demos de **HTML, CSS, Bootstrap y JavaScript
 abre `index.html` y funciona.
 
 ```
-36 HTML · 11 CSS · 24 JS
+34 HTML · 11 CSS · 25 JS
 ```
 
 ## Cómo abrirlo
@@ -29,12 +29,11 @@ web07/
 ├── ejercicios.html         visor de los 25 ejercicios → ej01…ej25
 ├── showcase.html          Showcase: 7 bloques de demo reutilizables
 │
-├── calculadora.html · formulario.html · demojson.html
+├── calculadora.html · auth.html · demojson.html
 ├── pokeclient.html · swalconbs.html · seminario.html
 ├── flexbox.html           página autónoma de flexbox
-├── bootstapemb.html
 │
-├── ej01.html … ej27.html   los 25 ejercicios, uno por archivo
+├── ej01.html … ej25.html   los 25 ejercicios, uno por archivo
 │
 ├── css/                   estilos (ver css/README.md)
 │   ├── styles.css          centralizador: @import de las 6 capas base
@@ -51,7 +50,7 @@ web07/
 │   ├── app.js              centralizador: lee data-page y carga módulos
 │   ├── core/               5 módulos compartidos por todo el sitio
 │   ├── blocks/             10 demos reutilizables
-│   └── pages/              8 módulos, uno por página
+│   └── pages/              9 módulos, uno por página
 │
 ├── fonts/                 DS-Digi (4 variantes .TTF)
 ├── img/

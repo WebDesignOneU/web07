@@ -79,7 +79,7 @@
              ${historial.slice().reverse().map(n => `<button class="hist-btn" data-nombre="${n}">${capitalizar(n)}</button>`).join("")}
            </div>`
         );
-        dom.todos(".hist-btn").forEach(btn => {
+        dom.$$(".hist-btn").forEach(btn => {
           btn.addEventListener("click", () => buscar(btn.dataset.nombre));
         });
       };
@@ -121,7 +121,7 @@
           return;
         }
         dom.html("sugerencias", coinciden.map(p => `<button class="sug-btn" data-nombre="${p}">${capitalizar(p)}</button>`).join(""));
-        dom.todos(".sug-btn").forEach(btn => {
+        dom.$$(".sug-btn").forEach(btn => {
           btn.addEventListener("click", () => {
             dom.valor("pokemon", btn.dataset.nombre);
             dom.html("sugerencias", "");
