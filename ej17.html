@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>17 · Operaciones con radio — Ejercicios Web07</title>
+    <title>17 · Formularios dinámicos — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 17 de Web07: Operaciones con radio."
+      content="Ejercicio 17 de Web07: Formularios dinámicos."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,37 +28,20 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function operar(opcion) {
-          var dato1 = document.getElementById("campo1").value;
-          var dato2 = document.getElementById("campo2").value;
-          var resultado;
-          switch (opcion) {
-            case "1":
-              resultado = "La suma es = " + (Number(dato1) + Number(dato2));
-              break;
-            case "2":
-              resultado = "La resta es = " + (Number(dato1) - Number(dato2));
-              break;
-            case "3":
-              resultado =
-                "La multiplicación es = " + Number(dato1) * Number(dato2);
-              break;
-            case "4":
-              if (dato2 != 0)
-                resultado = "La división es = " + Number(dato1) / Number(dato2);
-              else resultado = "Indefinido";
-              break;
-          }
-          Swal.fire("Mensaje", resultado.toString(), "success");
+        var numCampo = 0;
+
+        function agregarCampos() {
+          var objetoTexto = document.getElementById("idCampos");
+          var objetoItem = document.createElement("input");
+          objetoItem.type = "text";
+          objetoItem.id = "Campo_" + numCampo;
+          objetoItem.value = "campo " + numCampo++;
+          objetoTexto.appendChild(objetoItem);
         }
 
-        document
-          .querySelectorAll('input[name="grupo"]')
-          .forEach(function (radio) {
-            radio.addEventListener("click", function () {
-              operar(this.value);
-            });
-          });
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregarCampos();
+        });
       });
         </script>
   </head>
@@ -66,18 +50,10 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej17" class="ej-back">← Ejercicios</a>
       <span class="ej-num">17</span>
-      <span class="ej-name">Operaciones con radio</span>
+      <span class="ej-name">Formularios dinámicos</span>
     </header>
 
-    <div class="form-group">
-      <p>Ingrese un número: <input type="text" value="" id="campo1" /></p>
-      <p>Ingrese otro número: <input type="text" value="" id="campo2" /></p>
-      <p>
-        <input type="radio" name="grupo" value="1" />Suma
-        <input type="radio" name="grupo" value="2" />Resta
-        <input type="radio" name="grupo" value="3" />Multiplicacion
-        <input type="radio" name="grupo" value="4" />Division
-      </p>
-    </div>
+    <button id="btnAgregar" class="btn btn-primary">Agregar nuevo campo</button>
+    <div id="idCampos"></div>
   </body>
 </html>

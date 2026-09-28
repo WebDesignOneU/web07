@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>24 · Tours de Bolivia — Ejercicios Web07</title>
+    <title>24 · Menú de opciones — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 24 de Web07: Tours de Bolivia."
+      content="Ejercicio 24 de Web07: Menú de opciones."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,70 +24,86 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var valueNuevo = 4;
+      document.addEventListener("DOMContentLoaded", function (){
+          var flagArc = 0;
+          var flagGes = 0;
+          var flagRep = 0;
 
-        function opcionElegida(opcion) {
-          var arrayDataLaPaz = [
-            ["0", "Elija lugar"],
-            ["1", "Yungas"],
-            ["2", "Copacabana"],
-            ["3", "Tiahuanaco"],
-            ["4", "El Lago sagrado"],
-            ["5", "San BuenaVentura"],
-          ];
-          var arrayDataPotosi = [
-            ["0", "Elija lugar"],
-            ["1", "Salar de Uyuni"],
-            ["2", "La casa de la Moneda"],
-            ["3", "Cerro Rico"],
-            ["4", "Lagunas Colorada"],
-          ];
-          var arrayDataSantaCruz = [
-            ["0", "Elija lugar"],
-            ["1", "Misiones Jesuitas"],
-            ["2", "El pantanal"],
-            ["3", "Samaipata"],
-            ["4", "Puerto Busch"],
-            ["5", "El Mutun"],
-          ];
+          function archivo() {
+              if (flagArc == 0) {
+                  flagArc = 1;
+                  var arrayArchivo = ["Productos", "Proveedores", "Clientes", "Empleados"];
+                  var itemNuevo = document.getElementById("idArc");
+                  for (var i = 0; i < arrayArchivo.length; i++) {
+                  var nuevoLi = document.createElement("li");
+                  nuevoLi.textContent = arrayArchivo[i];
+                  itemNuevo.appendChild(nuevoLi);
+                  }
+              } else {
+                  flagArc = 0;
+                  var ulArc = document.querySelectorAll("ul")[1];
+                  while (ulArc.querySelectorAll("li").length > 0) {
+                  ulArc.querySelector("li").remove();
+                  }
+              }
+          }
 
-          var opciones = document.querySelectorAll('form[name="formLugar"] option');
-          opciones.forEach(function (op) {
-            op.remove();
+          function gestion() {
+              if (flagGes == 0) {
+                  flagGes = 1;
+                  var arrayGestion = ["Compras", "Ventas", "Devoluciones"];
+                  var itemNuevo = document.getElementById("idGes");
+                  for (var i = 0; i < arrayGestion.length; i++) {
+                  var parrafo = document.createElement("li");
+                  parrafo.textContent = arrayGestion[i];
+                  itemNuevo.appendChild(parrafo);
+                  }
+              } else {
+                  flagGes = 0;
+                  var ulArc = document.querySelectorAll("ul")[2];
+                  while (ulArc.querySelectorAll("li").length > 0) {
+                  ulArc.querySelector("li").remove();
+                  }
+              }
+          }
+
+          function reportes() {
+              if (flagRep == 0) {
+                  flagRep = 1;
+                  var arrayReportes = [
+                  "Ventas consolidadas",
+                  "Ventas al crédito",
+                  "Compras al crédito",
+                  "Clientes morosos",
+                  "Balance mensual"
+                  ];
+                  var itemNuevo = document.getElementById("idRep");
+                  for (var i = 0; i < arrayReportes.length; i++) {
+                  var parrafo = document.createElement("li");
+                  parrafo.textContent = arrayReportes[i];
+                  itemNuevo.appendChild(parrafo);
+                  }
+              } else {
+                  flagRep = 0;
+                  var ulRep = document.querySelectorAll("ul")[3];
+                  while (ulRep.querySelectorAll("li").length > 0) {
+                  ulRep.querySelector("li").remove();
+                  }
+              }
+          }
+
+          document.getElementById("btnArchivo").addEventListener("click", function (){
+              archivo();
           });
 
-          var dataArray;
-          switch (opcion) {
-            case "1":
-              dataArray = arrayDataLaPaz;
-              break;
-            case "2":
-              dataArray = arrayDataPotosi;
-              break;
-            case "3":
-              dataArray = arrayDataSantaCruz;
-              break;
-          }
+          document.getElementById("btnGestion").addEventListener("click", function (){
+              gestion();
+          });
 
-          if (dataArray) {
-            dataArray.forEach(function (value) {
-              var objetoOption = document.createElement("option");
-              objetoOption.value = value[0];
-              objetoOption.text = value[1];
-              document.getElementById("idLugar").appendChild(objetoOption);
-            });
-          }
-        }
-
-        // Ejemplo de cómo llamar a la función opcionElegida
-        document.getElementById("idDepto").addEventListener("change", function () {
-          var opcion = this.value;
-          opcionElegida(opcion);
-        });
+          document.getElementById("btnReportes").addEventListener("click", function (){
+              reportes();
+          });
       });
         </script>
   </head>
@@ -95,19 +112,20 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej24" class="ej-back">← Ejercicios</a>
       <span class="ej-num">24</span>
-      <span class="ej-name">Tours de Bolivia</span>
+      <span class="ej-name">Menú de opciones</span>
     </header>
 
-    <p>Visite BOLIVIA:</p>
-    <select id="idDepto" class="form-select form-select-lg" size="1">
-      <option value="0">Elija departamento</option>
-      <option value="1">La Paz</option>
-      <option value="2">Potosi</option>
-      <option value="3">Santa Cruz</option>
-    </select>
-    <br />
-    <form name="formLugar" class="form-select form-select-lg" action="">
-      <select id="idLugar" size="1"></select>
-    </form>
+    <button id="btnArchivo" class="btn btn-primary">Archivo</button>
+    <button id="btnGestion" class="btn btn-primary">Gestion</button>
+    <button id="btnReportes" class="btn btn-primary">Reportes</button>
+    <ul>
+        <li>Archivo</li>
+        <ul id="idArc"></ul>
+        <li>Gestion</li>
+        <ul id="idGes"></ul>
+        <li>Reportes</li>
+        <ul id="idRep"></ul>
+        <li>Salir</li>
+    <ul>
   </body>
 </html>

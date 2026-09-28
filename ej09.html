@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>09 · Formulario validado — Ejercicios Web07</title>
+    <title>09 · Matriz 3x3 — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 09 de Web07: Formulario validado."
+      content="Ejercicio 09 de Web07: Matriz 3x3."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,40 +28,35 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function enviar() {
-          var nombre = document.getElementById("nombre").value;
-          var fecha = document.getElementById("fecha").value;
-          var texto = "Nombre: " + nombre + " \n" + "Fecha: " + fecha;
-          Swal.fire("Mensaje", texto, "info");
-        }
+        function cargar() {
+          var matriz = new Array(3); // vector - columnas
+          let cont = 0;
+          for (let i = 0; i < 3; i++) matriz[i] = new Array(3); // vector - filas
 
-        function cancelar() {
-          document.getElementById("nombre").value = "";
-          document.getElementById("fecha").value = "";
-        }
-
-        // Validar que el campo #nombre solo acepte letras y espacios
-        document
-          .getElementById("nombre")
-          .addEventListener("input", function () {
-            var regex = /^[a-zA-Z\s]*$/;
-            if (!regex.test(this.value)) {
-              this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
+          for (let i = 0; i < 3; i++) {
+            // cargo la matriz
+            for (let j = 0; j < 3; j++) {
+              matriz[i][j] = ++cont; // pre incremento
             }
-          });
+          }
 
-        // Puedes llamar a las funciones enviar() y cancelar() cuando sea necesario
-        document
-          .getElementById("btnEnviar")
-          .addEventListener("click", function () {
-            enviar();
-          });
+          var table = document.createElement("table");
+          table.className = "table table-bordered";
+          for (let i = 0; i < 3; i++) {
+            // imprimo la matriz en una tabla
+            var row = document.createElement("tr");
+            for (let j = 0; j < 3; j++) {
+              var cell = document.createElement("td");
+              cell.textContent = matriz[i][j];
+              row.appendChild(cell);
+            }
+            table.appendChild(row);
+          }
+          document.body.appendChild(table);
+        }
 
-        document
-          .getElementById("btnCancelar")
-          .addEventListener("click", function () {
-            cancelar();
-          });
+        // Llamar a la función cargar() al ingresar a la página
+        cargar();
       });
         </script>
   </head>
@@ -69,22 +65,9 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej09" class="ej-back">← Ejercicios</a>
       <span class="ej-num">09</span>
-      <span class="ej-name">Formulario validado</span>
+      <span class="ej-name">Matriz 3x3</span>
     </header>
 
-    <div id="principal" class="form-group">
-      <p class="mb-5">
-        NOMBRE:
-        <input type="text" id="nombre" class="form-control" />
-      </p>
-      <p class="mb-5">
-        F. NAC:
-        <input type="date" id="fecha" class="form-control" />
-      </p>
-      <p>
-        <button id="btnEnviar" class="btn btn-primary">Enviar</button>&nbsp;
-        <button id="btnCancelar" class="btn btn-secondary">Cancelar</button>
-      </p>
-    </div>
+    <p>Matrices</p>
   </body>
 </html>

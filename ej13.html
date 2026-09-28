@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>13 · Modificar párrafo — Ejercicios Web07</title>
+    <title>13 · Operaciones con radio — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 13 de Web07: Modificar párrafo."
+      content="Ejercicio 13 de Web07: Operaciones con radio."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,19 +28,37 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var veces = 1;
-
-        function modificarParrafo() {
-          var nuevoParrafo = document.createElement("p");
-          nuevoParrafo.textContent =
-            "Este párrafo es nuevo. Es el cambio # " + veces++;
-          var anteriorParrafo = document.querySelector("p");
-          anteriorParrafo.replaceWith(nuevoParrafo);
+        function operar(opcion) {
+          var dato1 = document.getElementById("campo1").value;
+          var dato2 = document.getElementById("campo2").value;
+          var resultado;
+          switch (opcion) {
+            case "1":
+              resultado = "La suma es = " + (Number(dato1) + Number(dato2));
+              break;
+            case "2":
+              resultado = "La resta es = " + (Number(dato1) - Number(dato2));
+              break;
+            case "3":
+              resultado =
+                "La multiplicación es = " + Number(dato1) * Number(dato2);
+              break;
+            case "4":
+              if (dato2 != 0)
+                resultado = "La división es = " + Number(dato1) / Number(dato2);
+              else resultado = "Indefinido";
+              break;
+          }
+          Swal.fire("Mensaje", resultado.toString(), "success");
         }
 
-        document.getElementById("btnModificar").addEventListener("click", function () {
-          modificarParrafo();
-        });
+        document
+          .querySelectorAll('input[name="grupo"]')
+          .forEach(function (radio) {
+            radio.addEventListener("click", function () {
+              operar(this.value);
+            });
+          });
       });
         </script>
   </head>
@@ -48,10 +67,28 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej13" class="ej-back">← Ejercicios</a>
       <span class="ej-num">13</span>
-      <span class="ej-name">Modificar párrafo</span>
+      <span class="ej-name">Operaciones con radio</span>
     </header>
 
-    <button id="btnModificar" class="btn btn-primary">Modificar parrafo</button>
-    <p>Parrafo a ser modificado</p>
+    <div class="form-group">
+      <p>Ingrese un número: <input type="text" value="" id="campo1" class="form-control" /></p>
+      <p>Ingrese otro número: <input type="text" value="" id="campo2" class="form-control" /></p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="1" id="grupo1" />
+        <label class="form-check-label" for="grupo1">Suma</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="2" id="grupo2" />
+        <label class="form-check-label" for="grupo2">Resta</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="3" id="grupo3" />
+        <label class="form-check-label" for="grupo3">Multiplicacion</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="4" id="grupo4" />
+        <label class="form-check-label" for="grupo4">Division</label>
+      </div>
+    </div>
   </body>
 </html>

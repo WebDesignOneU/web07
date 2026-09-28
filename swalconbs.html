@@ -1,54 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generador de Múltiplos</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
-  <!-- ── HEADER WEB07 ── -->
-  <header class="w7-nav">
-    <a href="index.html" class="w7-nav-brand">⚡ Web07</a>
-    <div class="w7-nav-center">
-      <span class="page-emoji">🔔</span>
-      <span>SweetAlert</span>
-    </div>
-    <nav class="w7-nav-links">
-      <a href="index.html"    class="w7-nav-link">🏠 Inicio</a>
-      <a href="showcase.html" class="w7-nav-link w7-showcase">🚀 Showcase</a>
-    </nav>
-  </header>
-
-  <div class="container mt-5">
-    <h1>Generador de Múltiplos</h1>
-    <form id="multiplosForm">
-      <div class="form-group">
-        <label for="numero">Ingrese un número entero:</label>
-        <input type="number" class="form-control" id="numero" required />
+  <head>
+    <link rel="icon" href="favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de Múltiplos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <!-- ── HEADER WEB07 ── -->
+    <header class="w7-nav">
+      <a href="index.html" class="w7-nav-brand">⚡ Web07</a>
+      <div class="w7-nav-center">
+        <span class="page-emoji">🔔</span>
+        <span>SweetAlert</span>
       </div>
-      <button type="submit" class="btn btn-primary">Generar Múltiplos</button>
-    </form>
-  </div>
-  <br />
-  <input class="btn btn-primary" type="button" onclick="window.location.href='index.html';" value="Volver" />
+      <nav class="w7-nav-links">
+        <a href="index.html" class="w7-nav-link">🏠 Inicio</a>
+        <a href="showcase.html" class="w7-nav-link w7-showcase">🚀 Showcase</a>
+      </nav>
+    </header>
 
-  <script src="js/app.js" data-page="swalconbs"></script>
+    <div class="container mt-5">
+      <h1>Generador de Múltiplos</h1>
+      <form id="multiplosForm">
+        <div class="form-group">
+          <label for="numero">Ingrese un número entero:</label>
+          <input type="number" class="form-control" id="numero" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Generar Múltiplos</button>
+      </form>
+    </div>
+    <br />
+    <input
+      class="btn btn-primary"
+      type="button"
+      onclick="window.location.href = 'index.html'"
+      value="Volver"
+    />
 
-  <!-- ── FOOTER WEB07 ── -->
-  <footer class="w7-footer">
-    <span>© 2026 <strong>Tecnologías Web I</strong></span>
-    <nav class="w7-footer-links">
-      <a href="index.html">🏠 Inicio</a>
-      <a href="showcase.html">🚀 Showcase</a>
-      <a href="calculadora.html">🧮 Calculadora</a>
-      <a href="formulario.html">📋 Formulario</a>
-      <a href="pokeclient.html">🐾 Pokédex</a>
-    </nav>
-  </footer>
-</body>
+    <script src="js/app.js" data-page="swalconbs"></script>
+
+    <!-- ── FOOTER WEB07 ── -->
+    <footer class="w7-footer">
+      <span>© 2026 <strong>Tecnologías Web I</strong></span>
+      <nav class="w7-footer-links">
+        <a href="index.html">🏠 Inicio</a>
+        <a href="showcase.html">🚀 Showcase</a>
+        <a href="calculadora.html">🧮 Calculadora</a>
+        <a href="formulario.html">📋 Formulario</a>
+        <a href="pokeclient.html">🐾 Pokédex</a>
+      </nav>
+    </footer>
+  </body>
 </html>

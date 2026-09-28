@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>23 · Opciones JS — Ejercicios Web07</title>
+    <title>23 · Tabla con colspan — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 23 de Web07: Opciones JS."
+      content="Ejercicio 23 de Web07: Tabla con colspan."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,54 +24,67 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
+      function verEstructuraDeTabla() {
+        var tabla = document.getElementById("tablaMaestra");
+        alert(tabla.innerHTML);
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
-        function eliminaOption() {
-          var objetoSelect = document.querySelectorAll("option");
-          if (objetoSelect.length > 1) {
-            objetoSelect.forEach(function (option, index) {
-              if (index > 0 && option.selected) {
-                Swal.fire("Mensaje", "Eligió el valor " + option.value, "info");
-                option.remove();
-              }
-            });
-          } else {
-            Swal.fire(
-              "Mensaje",
-              "¡No hay más opciones para eliminar!",
-              "error"
-            );
+        function agregarNuevaFila() {
+          var tabla = document.getElementById("tablaMaestra");
+          var fila = document.createElement("tr");
+          var numColumnas = 1 + Math.floor(Math.random() * 5);
+          var ubiColspan = Math.floor(Math.random() * numColumnas);
+          for (var i = 0; i <= numColumnas; i++) {
+            var celda = document.createElement("td");
+            var datoDeCelda = Math.floor(Math.random() * 1000);
+            var nColspan = 7 - numColumnas;
+            if (i == ubiColspan) celda.setAttribute("colspan", nColspan);
+            celda.textContent = datoDeCelda;
+            fila.appendChild(celda);
           }
+          tabla.appendChild(fila);
         }
 
-        document
-          .querySelector("input[name='eliminaOpcion']")
-          .addEventListener("click", function () {
-            eliminaOption();
-          });
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregarNuevaFila();
+        });
+
+        document.getElementById("btnEstructurar").addEventListener("click", function () {
+          verEstructuraDeTabla();
+        });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="23">
+  <body class="legacy ejercicio" data-ejercicio="23" onLoad="verEstructuraDeTabla()">
     <header class="ej-head">
       <a href="ejercicios.html#ej23" class="ej-back">← Ejercicios</a>
       <span class="ej-num">23</span>
-      <span class="ej-name">Opciones JS</span>
+      <span class="ej-name">Tabla con colspan</span>
     </header>
 
-    <input type="button" name="eliminaOpcion" value="Eliminar opción" />
-    <br /><br />
-    <select id="idComponentes" name="componentes" size="1">
-      <option value="0">Elija</option>
-      <option value="2">Discos duros</option>
-      <option value="3">Tarjetas madre</option>
-      <option value="4">Memorias RAM</option>
-      <option value="5">Tarjetas de video</option>
-      <option value="1">Lectores de DVD</option>
-      <option value="6">Teclados</option>
-    </select>
+    <button id="btnAgregar" class="btn btn-primary">
+      Agregar fila de datos
+    </button>
+    <button id="btnEstructurar" class="btn btn-primary">
+      Ver estructura de la tabla
+    </button>
+    <table id="tablaMaestra" class="table table-striped table-bordered">
+      <tr>
+        <td>La Paz</td>
+        <td>Oruro</td>
+        <td>Tarija</td>
+        <td>Pando</td>
+        <td colspan="2">Beni</td>
+        <td>Potosi</td>
+      </tr>
+      <tr>
+        <td>Pando</td>
+        <td colspan="5">Beni</td>
+        <td>Chuquisaca</td>
+      </tr>
+    </table>
   </body>
 </html>

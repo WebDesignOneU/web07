@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>16 · Agregar párrafos — Ejercicios Web07</title>
+    <title>16 · Editar campos — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 16 de Web07: Agregar párrafos."
+      content="Ejercicio 16 de Web07: Editar campos."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,17 +28,17 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var veces = 1;
-
-        function agregarParrafo() {
-          var texto = "Párrafo agregado " + veces++;
-          var parrafo = document.createElement("p");
-          parrafo.textContent = texto;
-          document.body.appendChild(parrafo);
+        function eliminaPrimerCampo() {
+          var campos = document.querySelectorAll('form[name="formUno"] input');
+          if (campos.length > 0) {
+            campos[0].remove();
+          } else {
+            Swal.fire("Mensaje", "¡No existen más campos!", "error");
+          }
         }
 
-        document.getElementById("btnAgregar").addEventListener("click", function () {
-          agregarParrafo();
+        document.getElementById("btnEliminar").addEventListener("click", function () {
+          eliminaPrimerCampo();
         });
       });
         </script>
@@ -47,10 +48,20 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej16" class="ej-back">← Ejercicios</a>
       <span class="ej-num">16</span>
-      <span class="ej-name">Agregar párrafos</span>
+      <span class="ej-name">Editar campos</span>
     </header>
 
-    <button id="btnAgregar" class="btn btn-primary">Agregar parrafo</button>
-    <p>Parrafo inicial existente</p>
+    <button id="btnEliminar" class="btn btn-primary">
+      Eliminar primer campo
+    </button>
+    <br />
+    <form name="formUno" action="">
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 1" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 2" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 3" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 4" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 5" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 6" /><br />
+    </form>
   </body>
 </html>

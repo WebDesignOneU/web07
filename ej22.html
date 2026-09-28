@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>22 · Universidades — Ejercicios Web07</title>
+    <title>22 · Sumas de tabla — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 22 de Web07: Universidades."
+      content="Ejercicio 22 de Web07: Sumas de tabla."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,32 +24,50 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var valueNuevo = document.querySelectorAll("#idUniv option").length;
-
-        function agregaOption() {
-          var objetoSelect = document.getElementById("idUniv");
-          var objetoOption = document.createElement("option");
-          objetoOption.value = valueNuevo;
-          objetoOption.text = "Universidad " + valueNuevo;
-          objetoSelect.appendChild(objetoOption);
-          Swal.fire("Mensaje", "Se agregó la opción: " + valueNuevo++, "info");
+        function sumaTabla() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celdas = fila.querySelectorAll("td");
+            celdas.forEach(function (celda) {
+              suma += eval(celda.textContent);
+            });
+          });
+          alert("Suma de la tabla es = " + suma);
         }
 
-        function opcionElegida(valor) {
-          Swal.fire("Mensaje", "Valor asignado=" + valor, "info");
+        function sumaColumnaDos() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celda = fila.querySelectorAll("td")[2];
+            suma += eval(celda.textContent);
+          });
+          alert("Suma de la columna dos es = " + suma);
         }
 
-        document.getElementById("btnAgregar").addEventListener("click", function () {
-          agregaOption();
+        function sumaFilaUno() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          var celdas = filas[1].querySelectorAll("td");
+          celdas.forEach(function (celda) {
+            suma += eval(celda.textContent);
+          });
+          alert("Suma de la fila uno es = " + suma);
+        }
+
+        document.getElementById("btnSumar").addEventListener("click", function () {
+          sumaTabla();
         });
 
-        // Ejemplo de cómo llamar a opcionElegida() con un valor
-        document.getElementById("idUniv").addEventListener("change", function () {
-          opcionElegida(this.value);
+        document.getElementById("btnColumnaDos").addEventListener("click", function () {
+          sumaColumnaDos();
+        });
+
+        document.getElementById("btnFilaUno").addEventListener("click", function () {
+          sumaFilaUno();
         });
       });
         </script>
@@ -58,19 +77,33 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej22" class="ej-back">← Ejercicios</a>
       <span class="ej-num">22</span>
-      <span class="ej-name">Universidades</span>
+      <span class="ej-name">Sumas de tabla</span>
     </header>
 
-    <button id="btnAgregar" class="btn btn-primary">Agregar opcion</button>
-    <br />
-    <br />
-    <select id="idUniv" size="1">
-      <option value="0">Elija</option>
-      <option value="1">UMSA</option>
-      <option value="2">UCB</option>
-      <option value="3">EMI</option>
-      <option value="4">UNIVALLE</option>
-      <option value="5">UDABOL</option>
-    </select>
+    <button id="btnSumar" class="btn btn-primary">Suma la tabla</button>
+    <button id="btnColumnaDos" class="btn btn-primary">Suma la columa 2</button>
+    <button id="btnFilaUno" class="btn btn-primary">Suma la fila 1</button>
+    <br /><br />
+    <table id="tablaDatos" class="table">
+      <tr>
+        <td rowspan="2">10</td>
+        <td>20</td>
+        <td>30</td>
+        <td>40</td>
+        <td>50</td>
+        <td>60</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td colspan="2">10</td>
+        <td>15</td>
+        <td colspan="2">20</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td colspan="3">2</td>
+        <td colspan="3">3</td>
+      </tr>
+    </table>
   </body>
 </html>

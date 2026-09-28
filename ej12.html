@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>12 · Primer JS: saludo — Ejercicios Web07</title>
+    <title>12 · Insertar aleatorios — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 12 de Web07: Primer JS: saludo."
+      content="Ejercicio 12 de Web07: Insertar aleatorios."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,29 +25,34 @@
     <link rel="stylesheet" href="css/styles.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function insertTexto() {
+          document.querySelectorAll("p").forEach(function (parrafo) {
+            var texto = (Math.random() * 1000).toFixed() + ") ";
+            parrafo.textContent = texto + parrafo.textContent;
+          });
+        }
+
+        document.getElementById("btnInsertar").addEventListener("click", function () {
+          insertTexto();
+        });
+      });
+        </script>
   </head>
 
   <body class="legacy ejercicio" data-ejercicio="12">
     <header class="ej-head">
       <a href="ejercicios.html#ej12" class="ej-back">← Ejercicios</a>
       <span class="ej-num">12</span>
-      <span class="ej-name">Primer JS: saludo</span>
+      <span class="ej-name">Insertar aleatorios</span>
     </header>
 
-    <input type="text" id="txtPersona" />
-    <button id="btnSaludo" class="btn btn-primary">Saludo</button>
-    <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", function () {
-        // Escribimos en el navegador
-        var encabezado = document.createElement("h1");
-        encabezado.textContent = "Bienvenido a JavaScript";
-        document.body.prepend(encabezado);
-
-        // Evento click para el botón
-        document.getElementById("btnSaludo").addEventListener("click", function () {
-          Swal.fire("Mensaje", document.getElementById("txtPersona").value, "info");
-        });
-      });
-    </script>
+    <button id="btnInsertar" class="btn btn-primary">Insertar textos</button>
+    <p>Este es el parrafo uno</p>
+    <p>Este es le parrafo dos</p>
+    <p>Este es el parrafo tres</p>
+    <p>Este es el parrafo cuatro</p>
   </body>
 </html>

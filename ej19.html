@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>19 · Radio con doble clic — Ejercicios Web07</title>
+    <title>19 · Opciones JS — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 19 de Web07: Radio con doble clic."
+      content="Ejercicio 19 de Web07: Opciones JS."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,11 +28,29 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
-          radio.addEventListener("dblclick", function () {
-            this.checked = false;
+        function eliminaOption() {
+          var objetoSelect = document.querySelectorAll("option");
+          if (objetoSelect.length > 1) {
+            objetoSelect.forEach(function (option, index) {
+              if (index > 0 && option.selected) {
+                Swal.fire("Mensaje", "Eligió el valor " + option.value, "info");
+                option.remove();
+              }
+            });
+          } else {
+            Swal.fire(
+              "Mensaje",
+              "¡No hay más opciones para eliminar!",
+              "error"
+            );
+          }
+        }
+
+        document
+          .querySelector("input[name='eliminaOpcion']")
+          .addEventListener("click", function () {
+            eliminaOption();
           });
-        });
       });
         </script>
   </head>
@@ -40,13 +59,19 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej19" class="ej-back">← Ejercicios</a>
       <span class="ej-num">19</span>
-      <span class="ej-name">Radio con doble clic</span>
+      <span class="ej-name">Opciones JS</span>
     </header>
 
-    <p>Elija la carrera de su preferencia (doble click=ninguno)</p>
-    <input type="radio" name="grupo" value="1" />Sistemas
-    <input type="radio" name="grupo" value="2" />Industrial
-    <input type="radio" name="grupo" value="3" />Civil
-    <input type="radio" name="grupo" value="4" />Biomedica
+    <input type="button" name="eliminaOpcion" class="btn btn-primary" value="Eliminar opción" />
+    <br /><br />
+    <select id="idComponentes" name="componentes" class="form-control" size="1">
+      <option value="0">Elija</option>
+      <option value="2">Discos duros</option>
+      <option value="3">Tarjetas madre</option>
+      <option value="4">Memorias RAM</option>
+      <option value="5">Tarjetas de video</option>
+      <option value="1">Lectores de DVD</option>
+      <option value="6">Teclados</option>
+    </select>
   </body>
 </html>

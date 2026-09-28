@@ -5,7 +5,7 @@ Colección de ejercicios y demos de **HTML, CSS, Bootstrap y JavaScript
 abre `index.html` y funciona.
 
 ```
-47 HTML · 11 CSS · 24 JS
+38 HTML · 11 CSS · 24 JS
 ```
 
 ## Cómo abrirlo
@@ -26,15 +26,15 @@ conexión la primera vez que se cargan.
 ```
 web07/
 ├── index.html              portada
-├── ejercicios.html         visor de los 33 ejercicios → ej01…ej33
+├── ejercicios.html         visor de los 27 ejercicios → ej01…ej27
 ├── showcase.html          Showcase: 7 bloques de demo reutilizables
 │
 ├── calculadora.html · formulario.html · demojson.html
 ├── pokeclient.html · swalconbs.html · seminario.html
 ├── flexbox.html           página autónoma de flexbox
-├── bootstapemb.html · otros.html
+├── bootstapemb.html
 │
-├── ej01.html … ej33.html   los 33 ejercicios, uno por archivo
+├── ej01.html … ej27.html   los 27 ejercicios, uno por archivo
 │
 ├── css/                   estilos (ver css/README.md)
 │   ├── styles.css          centralizador: @import de las 6 capas base
@@ -43,7 +43,7 @@ web07/
 │   ├── animations.css      3 · @keyframes
 │   ├── layout.css          4 · navbar, footer, estructuras
 │   ├── components.css      5 · componentes y overrides de Bootstrap
-│   ├── legacy.css          6 · <body class="legacy"> (los 33 ejercicios)
+│   ├── legacy.css          6 · <body class="legacy"> (los 27 ejercicios)
 │   ├── showcase.css · calculadora.css · pokeclient.css   capas de página
 │   └── flexbox.css          página autónoma, no usa styles.css
 │
@@ -58,10 +58,10 @@ web07/
 └── README.md
 ```
 
-## Los 33 ejercicios
+## Los 27 ejercicios
 
 `ejercicios.html` es el único visor: sidebar agrupado por tema, contador
-`NN / 33`, botones *Anterior* / *Siguiente*, navegación con las flechas
+`NN / 27`, botones *Anterior* / *Siguiente*, navegación con las flechas
 del teclado y enlace directo por hash.
 
 ```
@@ -80,43 +80,37 @@ mandar una URL concreta sin perder el hilo.
 | `ej03` | JS básico | `pagina3` |
 | `ej04` | Estilos CSS con JS | `pagina4` |
 | `ej05` | Formulario y envío | `pagina5` |
-| `ej06` | Suma de campos | `pagina6` |
-| `ej07` | Suma con confirm | `pagina7` |
-| `ej08` | Suma con prompt | `pagina8` |
-| `ej09` | Formulario validado | `pagina9` |
-| `ej10` | Tipos de campo | `pagina10` |
-| `ej11` | Matriz 3x3 | `pagina11` |
+| `ej06` | Suma con diálogos | `pagina6`+`pagina7`+`pagina8` |
+| `ej07` | Formulario validado | `pagina9` |
+| `ej08` | Tipos de campo | `pagina10` |
+| `ej09` | Matriz 3x3 | `pagina11` |
 | **Intro al DOM** | | |
-| `ej12` | Primer JS: saludo | `prueba` |
-| `ej13` | Modificar párrafo | `prueba1` |
-| `ej14` | Insertar aleatorios | `prueba2` |
-| `ej15` | Quitar párrafo | `prueba3` |
-| `ej16` | Agregar párrafos | `prueba4` |
+| `ej10` | Primer JS: saludo | `prueba` |
+| `ej11` | Párrafos: agregar, modificar y quitar | `prueba1`+`prueba3`+`prueba4` |
+| `ej12` | Insertar aleatorios | `prueba2` |
 | **Operaciones** | | |
-| `ej17` | Operaciones con radio | `prueba5` |
-| `ej18` | Operaciones validadas | `prueba6` |
+| `ej13` | Operaciones con radio | `prueba5` |
+| `ej14` | Operaciones validadas | `prueba6` |
 | **Controles** | | |
-| `ej19` | Radio con doble clic | `prueba7` |
-| `ej20` | Editar campos | `prueba8` |
-| `ej21` | Formularios dinámicos | `prueba9` |
-| `ej22` | Universidades | `prueba10` |
-| `ej23` | Opciones JS | `prueba11` |
+| `ej15` | Radio con doble clic | `prueba7` |
+| `ej16` | Editar campos | `prueba8` |
+| `ej17` | Formularios dinámicos | `prueba9` |
+| `ej18` | Universidades | `prueba10` |
+| `ej19` | Opciones JS | `prueba11` |
 | **Selects dinámicos** | | |
-| `ej24` | Tours de Bolivia | `prueba12` |
+| `ej20` | Tours de Bolivia | `prueba12` |
 | **Checks y radios** | | |
-| `ej25` | Checks: resumen | `prueba13` |
-| `ej26` | Checks: limpiar | `prueba14` |
-| `ej27` | Checks: radios | `prueba15` |
+| `ej21` | Checks: resumen, limpiar y radios | `prueba13`+`prueba14`+`prueba15` |
 | **Tablas dinámicas** | | |
-| `ej28` | Sumas de tabla | `prueba16` |
-| `ej29` | Tabla con colspan | `prueba17` |
-| `ej30` | Menú de opciones | `prueba18` |
-| `ej31` | Tabla dinámica | `prueba19` |
-| `ej32` | Matriz dinámica | `prueba20` |
+| `ej22` | Sumas de tabla | `prueba16` |
+| `ej23` | Tabla con colspan | `prueba17` |
+| `ej24` | Menú de opciones | `prueba18` |
+| `ej25` | Tabla dinámica | `prueba19` |
+| `ej26` | Matriz dinámica | `prueba20` |
 | **Proyecto final** | | |
-| `ej33` | Encuesta JS | `prueba21` |
+| `ej27` | Encuesta JS | `prueba21` |
 
-Los 33 comparten la misma cabecera: `<!doctype html>`, `lang="es"`,
+Los 27 comparten la misma cabecera: `<!doctype html>`, `lang="es"`,
 charset, viewport, fuentes, Bootstrap antes de `styles.css` y
 `<body class="legacy ejercicio" data-ejercicio="NN">` con una barra de
 contexto (`.ej-head`) que da el número, el título y el vuelta al visor.
@@ -130,7 +124,8 @@ contexto (`.ej-head`) que da el número, el título y el vuelta al visor.
 ### Qué cambió y qué no
 
 - **El cuerpo de cada ejercicio es idéntico al original**, byte a byte
-  salvo la indentación. Se comprobó automáticamente en los 33.
+  salvo la indentación. Se comprobó automáticamente en los 27 (salvo los
+  tres unificados: `ej06`, `ej11` y `ej21` concentran ahora cada grupo).
 - Los scripts de `<head>` y `<body>` se conservan en el mismo orden;
   SweetAlert2 se añade sólo donde ya se usaba.
 - Se eliminaron los CSS por página (`index`, `paginas`, `pruebas`,
@@ -175,7 +170,7 @@ Los módulos se registran con `Web07.use()` y su `init()` corre cuando el
 DOM ya está listo, en orden. Un `init()` que falla no detiene a los demás.
 Detalle completo en [`js/README.md`](js/README.md).
 
-Los 33 ejercicios **no** usan `app.js`: su código *es* la lección, así
+Los 27 ejercicios **no** usan `app.js`: su código *es* la lección, así
 que cada uno se basta solo, tal como se entregaron.
 
 ## Convenciones
@@ -194,11 +189,11 @@ que cada uno se basta solo, tal como se entregaron.
 
 ## Notas
 
-- `ej10` y `showcase` emiten un error de recurso en consola por un
+- `ej08` y `showcase` emiten un error de recurso en consola por un
   `src=""` en un `<input type="image">` y en un `<img>`. Es contenido
   original de los ejercicios, no un fallo del proyecto.
-- `ej29` (antes `prueba17`) abre un `alert` al cargar. Es parte del
+- `ej23` (antes `prueba17`) abre un `alert` al cargar. Es parte del
   ejercicio; en pruebas automatizadas hay que interceptarlo.
 - Antes existían `paginas.html`, `pruebas.html` y los 33 archivos
   `pagina*.html` / `prueba*.html`. Se unificaron en `ejercicios.html` +
-  `ej01…ej33`.
+  `ej01…ej27`.

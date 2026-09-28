@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>18 · Operaciones validadas — Ejercicios Web07</title>
+    <title>18 · Universidades — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 18 de Web07: Operaciones validadas."
+      content="Ejercicio 18 de Web07: Universidades."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,78 +28,28 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function recuperarContenido() {
-          var dato1 = document.getElementById("campo1").value;
-          var dato2 = document.getElementById("campo2").value;
-          var operacion = -1;
-          var tipoInputs = document.querySelectorAll('input[name="grupo"]');
-          tipoInputs.forEach(function (input) {
-            if (input.checked) {
-              operacion = input.value;
-            }
-          });
+        var valueNuevo = document.querySelectorAll("#idUniv option").length;
 
-          var resultado;
-          switch (operacion) {
-            case "1":
-              resultado = Number(dato1) + Number(dato2);
-              Swal.fire("Mensaje", "La suma es = " + resultado, "success");
-              break;
-            case "2":
-              resultado = Number(dato1) - Number(dato2);
-              Swal.fire("Mensaje", "La resta es = " + resultado, "success");
-              break;
-            case "3":
-              resultado = Number(dato1) * Number(dato2);
-              Swal.fire("Mensaje", "El producto es = " + resultado, "success");
-              break;
-            case "4":
-              if (dato2 != 0) {
-                resultado = Number(dato1) / Number(dato2);
-              } else {
-                resultado = "Indefinido";
-              }
-              Swal.fire("Mensaje", "La división es = " + resultado, "success");
-              break;
-            default:
-              Swal.fire("Mensaje", "Elija una operación", "error");
-          }
+        function agregaOption() {
+          var objetoSelect = document.getElementById("idUniv");
+          var objetoOption = document.createElement("option");
+          objetoOption.value = valueNuevo;
+          objetoOption.text = "Universidad " + valueNuevo;
+          objetoSelect.appendChild(objetoOption);
+          Swal.fire("Mensaje", "Se agregó la opción: " + valueNuevo++, "info");
         }
 
-        function nuevaOperacion() {
-          document.getElementById("campo1").value = "";
-          document.getElementById("campo2").value = "";
-          document.querySelectorAll('input[name="grupo"]').forEach(function (radio) {
-            radio.checked = false;
-          });
-          document.getElementById("campo1").focus();
+        function opcionElegida(valor) {
+          Swal.fire("Mensaje", "Valor asignado=" + valor, "info");
         }
 
-        // Validar que solo se acepten números de hasta tres dígitos
-        document.querySelectorAll("#campo1, #campo2").forEach(function (campo) {
-          campo.addEventListener("input", function () {
-            if (!/^\d{0,3}$/.test(this.value)) {
-              this.value = this.value.slice(0, 3);
-            }
-          });
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregaOption();
         });
 
-        // Evitar que se ingresen letras u otros símbolos por teclado
-        document.querySelectorAll("#campo1, #campo2").forEach(function (campo) {
-          campo.addEventListener("keypress", function (event) {
-            var keyCode = event.which ? event.which : event.keyCode;
-            if (keyCode < 48 || keyCode > 57) {
-              event.preventDefault();
-            }
-          });
-        });
-
-        document.getElementById("btnOperar").addEventListener("click", function () {
-          recuperarContenido();
-        });
-
-        document.getElementById("btnNuevo").addEventListener("click", function () {
-          nuevaOperacion();
+        // Ejemplo de cómo llamar a opcionElegida() con un valor
+        document.getElementById("idUniv").addEventListener("change", function () {
+          opcionElegida(this.value);
         });
       });
         </script>
@@ -108,28 +59,19 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej18" class="ej-back">← Ejercicios</a>
       <span class="ej-num">18</span>
-      <span class="ej-name">Operaciones validadas</span>
+      <span class="ej-name">Universidades</span>
     </header>
 
-    <div class="form-group">
-      <p>
-        Ingrese un número:
-        <input type="text" value="" id="campo1" />
-      </p>
-      <p>
-        Ingrese otro número:
-        <input type="text" value="" id="campo2" />
-      </p>
-      <p>
-        <input type="radio" name="grupo" value="1" />Suma
-        <input type="radio" name="grupo" value="2" />Resta
-        <input type="radio" name="grupo" value="3" />Multiplicacion
-        <input type="radio" name="grupo" value="4" />Division
-      </p>
-      <p>
-        <button id="btnOperar" class="btn btn-primary">Operar</button> &nbsp;
-        <button id="btnNuevo" class="btn btn-primary">Nuevo</button>
-      </p>
-    </div>
+    <button id="btnAgregar" class="btn btn-primary">Agregar opcion</button>
+    <br />
+    <br />
+    <select id="idUniv" class="form-control" size="1">
+      <option value="0">Elija</option>
+      <option value="1">UMSA</option>
+      <option value="2">UCB</option>
+      <option value="3">EMI</option>
+      <option value="4">UNIVALLE</option>
+      <option value="5">UDABOL</option>
+    </select>
   </body>
 </html>

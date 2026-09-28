@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>25 · Checks: resumen — Ejercicios Web07</title>
+    <title>25 · Tabla dinámica — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 25 de Web07: Checks: resumen."
+      content="Ejercicio 25 de Web07: Tabla dinámica."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,68 +24,148 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script type="text/javascript">
+      function load() {
+        document.querySelector("form[id='form_uno'] [id='cmdNuevo']").disabled = true;
+        document.querySelector("form[id='form_uno'] [id='numeroCampos']").focus();
+        document.querySelector("form[id='form_tres'] [id='cmdBajarDatos']").disabled = true;
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
-        var value1 = 0;
-        function agregarCheckBox() {
-          var objetoCheck = document.getElementById("idCheck");
-          var objetoCheckItem = document.createElement("input");
-          objetoCheckItem.type = "checkbox";
-          objetoCheckItem.name = "Check" + value1;
-          objetoCheckItem.value = value1;
-          var objetoTextNodo = document.createElement("span");
-          objetoTextNodo.textContent = "Check " + value1++;
-          var objetoBr = document.createElement("br");
-          var objetoLabel = document.createElement("label");
-          objetoLabel.appendChild(objetoCheckItem);
-          objetoLabel.appendChild(objetoTextNodo);
-          objetoLabel.appendChild(objetoBr);
-          objetoCheck.appendChild(objetoLabel);
+        var num_fila_nueva = 0;
+
+        function crearCampos() {
+          var formUno = document.getElementById("form_uno");
+          var numCampos = formUno.querySelector("[id='numeroCampos']").value;
+
+          if (numCampos === "") {
+            alert("Ingrese número de campos!");
+            load();
+          } else if (isNaN(numCampos)) {
+            alert("Error, debe ingresar un número");
+            load();
+          } else {
+            var objetoTexto = document.getElementById("idTextos");
+            for (var i = 0; i < numCampos; i++) {
+              var objItem = document.createElement("input");
+              objItem.type = "text";
+              objItem.id = "campo_" + i;
+              objItem.value = "";
+              objItem.className = "form-control";
+              var objLabel = document.createElement("label");
+              objLabel.appendChild(objItem);
+              objetoTexto.appendChild(objLabel);
+            }
+            formUno.querySelector("[id='cmdCampos']").disabled = true;
+            formUno.querySelector("[id='numeroCampos']").disabled = true;
+            formUno.querySelector("[id='cmdNuevo']").disabled = false;
+            document.querySelector(
+              "form[id='form_tres'] [id='cmdBajarDatos']"
+            ).disabled = false;
+            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+          }
         }
 
-        function contarChequeados() {
-          var cbx = document.querySelectorAll("form[name='formCheck'] input");
-          var sumaCbx = 0;
-          cbx.forEach(function (input) {
-            if (input.checked) sumaCbx++;
+        function bajarDatos() {
+          var numCampos = document.querySelector(
+            "form[id='form_uno'] [id='numeroCampos']"
+          ).value;
+          var lleno = true;
+
+          for (var i = 0; i < numCampos; i++) {
+            var d = document.getElementById("campo_" + i);
+            if (d.value === "") lleno = false;
+          }
+
+          if (!lleno) {
+            alert("Todos los campos deben tener datos");
+            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+          } else {
+            var tabla = document.getElementById("idTabla");
+            var fila = document.createElement("tr");
+
+            for (var i = 0; i < numCampos; i++) {
+              var d = document.getElementById("campo_" + i);
+              var celda = document.createElement("td");
+              celda.textContent = d.value;
+              fila.appendChild(celda);
+            }
+
+            tabla.appendChild(fila);
+            num_fila_nueva++;
+
+            for (var i = 0; i < numCampos; i++) {
+              document.getElementById("campo_" + i).value = "";
+            }
+
+            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+          }
+        }
+
+        function nuevaTabla() {
+          var formUno = document.getElementById("form_uno");
+          var numeroCampos = formUno.querySelector("[id='numeroCampos']");
+          formUno.querySelector("[id='cmdCampos']").disabled = false;
+          numeroCampos.disabled = false;
+          numeroCampos.value = "";
+          numeroCampos.focus();
+          num_fila_nueva = 0;
+
+          // Eliminamos los espacios de texto
+          document.querySelectorAll("form[id='form_dos'] input").forEach(function (input) {
+            input.remove();
           });
-          Swal.fire(
-            "Mensaje",
-            "Elegidos = " +
-              sumaCbx +
-              "\r" +
-              "No elegidos = " +
-              (cbx.length - sumaCbx),
-            "info"
-          );
+          // Eliminamos la tabla
+          document.querySelectorAll("#idTabla tr").forEach(function (fila) {
+            fila.remove();
+          });
+          load();
         }
 
-        document.getElementById("cmdAgregar").addEventListener("click", function () {
-          agregarCheckBox();
+        document.getElementById("cmdCampos").addEventListener("click", function () {
+          crearCampos();
         });
 
-        document.getElementById("cmdContarElegidos").addEventListener("click", function () {
-          contarChequeados();
+        document.getElementById("cmdNuevo").addEventListener("click", function () {
+          nuevaTabla();
+        });
+
+        document.getElementById("cmdBajarDatos").addEventListener("click", function () {
+          bajarDatos();
         });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="25">
+  <body class="legacy ejercicio" data-ejercicio="25" onload="load()">
     <header class="ej-head">
       <a href="ejercicios.html#ej25" class="ej-back">← Ejercicios</a>
       <span class="ej-num">25</span>
-      <span class="ej-name">Checks: resumen</span>
+      <span class="ej-name">Tabla dinámica</span>
     </header>
 
-    <button id="cmdAgregar" class="btn btn-primary">Agregar CheckBox</button>
-    <button id="cmdContarElegidos" class="btn btn-primary">
-      Contar elegidos
-    </button>
-    <form name="formCheck">
-      <div id="idCheck" class="form-group"></div>
+    <form id="form_uno" action="" class="form-group">
+      <p>
+        Ingrese número de campos:
+        <input type="text" id="numeroCampos" value="" maxlength="3" size="3" class="form-control" />
+      </p>
+      <p>
+        <button id="cmdCampos" class="btn btn-primary">
+          Crear espacios de entrada
+        </button>
+        <button id="cmdNuevo" class="btn btn-primary">Nueva tabla</button>
+      </p>
+    </form>
+    <form id="form_dos" action="">
+      <div id="idTextos"></div>
+    </form>
+    <form id="form_tres" action="">
+      <p>
+        <button id="cmdBajarDatos" class="btn btn-primary">
+          Bajar datos a la tabla
+        </button>
+      </p>
+      <table id="idTabla"></table>
     </form>
   </body>
 </html>

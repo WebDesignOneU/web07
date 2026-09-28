@@ -647,10 +647,10 @@ body.legacy #id_miTabla {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   EJERCICIOS · cabecera de contexto (ej01…ej33)
-   Los 33 ejercicios comparten esta barra: número, título y vuelta al
+   EJERCICIOS · cabecera de contexto (ej01…ej27)
+   Los 27 ejercicios comparten esta barra: número, título y vuelta al
    visor. Es lo que permite abrir cualquiera en pestaña aparte sin
-   perder el hilo. Vive aquí y no en una capa de página porque las 33
+   perder el hilo. Vive aquí y no en una capa de página porque las 27
    páginas lo consumen — igual que legacy.css.
 
    Restricción importante: la barra NO puede contener <p>, <ul>, <form>

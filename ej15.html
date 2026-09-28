@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>15 · Quitar párrafo — Ejercicios Web07</title>
+    <title>15 · Radio con doble clic — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 15 de Web07: Quitar párrafo."
+      content="Ejercicio 15 de Web07: Radio con doble clic."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,18 +28,10 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function eliminarUltimoParrafo() {
-          var parrafos = document.querySelectorAll("p");
-          var ultimoParrafo = parrafos.length - 1;
-          if (ultimoParrafo >= 0) {
-            parrafos[ultimoParrafo].remove();
-          } else {
-            Swal.fire("Mensaje", "No existen más párrafos", "error");
-          }
-        }
-
-        document.getElementById("btnEliminar").addEventListener("click", function () {
-          eliminarUltimoParrafo();
+        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+          radio.addEventListener("dblclick", function () {
+            this.checked = false;
+          });
         });
       });
         </script>
@@ -48,16 +41,25 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej15" class="ej-back">← Ejercicios</a>
       <span class="ej-num">15</span>
-      <span class="ej-name">Quitar párrafo</span>
+      <span class="ej-name">Radio con doble clic</span>
     </header>
 
-    <button id="btnEliminar" class="btn btn-primary">
-      Elimina el ultimo parrafo
-    </button>
-    <p>Parrafo uno</p>
-    <p>Parrafo dos</p>
-    <p>Parrafo tres</p>
-    <p>Parrafo cuatro</p>
-    <p>Parrafo cinco</p>
+    <p>Elija la carrera de su preferencia (doble click=ninguno)</p>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="grupo" value="1" id="grupo1" />
+      <label class="form-check-label" for="grupo1">Sistemas</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="grupo" value="2" id="grupo2" />
+      <label class="form-check-label" for="grupo2">Industrial</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="grupo" value="3" id="grupo3" />
+      <label class="form-check-label" for="grupo3">Civil</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="grupo" value="4" id="grupo4" />
+      <label class="form-check-label" for="grupo4">Biomedica</label>
+    </div>
   </body>
 </html>
