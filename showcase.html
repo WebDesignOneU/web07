@@ -61,7 +61,7 @@
 
     <nav class="nav-bar">
       <a href="#calc" class="nav-link">🧮 Calculadoras</a>
-      <a href="#forms" class="nav-link">📋 Formularios</a>
+      <a href="#auth" class="nav-link">🔐 Autenticación</a>
       <a href="#json" class="nav-link">🗂️ JSON &amp; Datos</a>
       <a href="#api" class="nav-link">🌐 Fetch &amp; API</a>
       <a href="#swal" class="nav-link">🔔 SweetAlert</a>
@@ -253,113 +253,93 @@
         </div>
       </section>
 
-      <!-- ══ BLOQUE 2: FORMULARIOS ══ -->
-      <section class="section" id="forms">
+<!-- ══ BLOQUE 2: AUTENTICACIÓN ══ -->
+      <section class="section" id="auth">
         <div class="section-header">
-          <div class="section-icon teal">📋</div>
+          <div class="section-icon teal">🔐</div>
           <div class="section-meta">
-            <h2>Formularios &amp; Validación</h2>
+            <h2>Autenticación Unificada</h2>
             <p>
-              Manejo de formularios, validación de campos y feedback visual con
-              SweetAlert2.
+              Login y Registro en una sola página con pestañas Bootstrap, validación
+              de formularios, toggle de contraseña y persistencia en localStorage.
             </p>
           </div>
         </div>
         <div class="grid grid-2">
-          <!-- Card: Login -->
+          <!-- Card: Login Demo -->
           <div class="card">
             <div class="card-top">
-              <span class="card-tag tag-teal">Validación</span>
+              <span class="card-tag tag-teal">Login + Registro</span>
               <div class="card-complexity">
                 <span class="dot on"></span><span class="dot on"></span
                 ><span class="dot off"></span>
               </div>
             </div>
             <div class="card-body">
-              <div class="card-title">Sistema de Login</div>
+              <div class="card-title">Sistema de Autenticación</div>
               <div class="card-desc">
-                Valida credenciales (<code>admin</code> / <code>123456</code>)
-                con Swal de éxito o error.
+                Pestañas para Login/Register, validación en tiempo real, mostrar/ocultar
+                contraseña, recordarme y persistencia (localStorage/sessionStorage).
               </div>
               <div class="demo-area">
-                <input
-                  type="text"
-                  id="login-user"
-                  class="input-field"
-                  placeholder="Usuario: admin"
-                />
-                <input
-                  type="password"
-                  id="login-pass"
-                  class="input-field"
-                  placeholder="Contraseña: 123456"
-                />
-                <button class="btn btn-teal btn-sm" id="btn-login">
-                  🔐 Iniciar Sesión
-                </button>
+                <p class="text-center text-muted mb-3">Demo interactivo en <a href="auth.html">auth.html</a></p>
+                <div class="input-row">
+                  <input type="text" id="auth-demo-user" class="input-field" placeholder="Usuario: admin" />
+                  <input type="password" id="auth-demo-pass" class="input-field" placeholder="Pass: 123456" />
+                </div>
+                <button class="btn btn-teal btn-sm" id="btn-auth-demo">🔐 Probar Login</button>
               </div>
               <div class="tutorial">
                 <button class="tutorial-toggle" onclick="toggleCode(this)">
                   <span>💡 Ver código</span> <span class="arrow">▾</span>
                 </button>
                 <div class="code-block">
-                  <div class="code-file">js/blocks/formularios.js</div>
-                  <pre><span class="kw">if</span> (user === <span class="str">'admin'</span> &amp;&amp; pass === <span class="str">'123456'</span>) {
-  <span class="fn">Swal.fire</span>(<span class="str">'Aceptado'</span>, <span class="str">'¡Bienvenido!'</span>, <span class="str">'success'</span>);
-} <span class="kw">else</span> {
-  <span class="fn">Swal.fire</span>(<span class="str">'Error'</span>, <span class="str">'Credenciales incorrectas'</span>, <span class="str">'error'</span>);
+                  <div class="code-file">js/pages/auth.js</div>
+                  <pre><span class="kw">const</span> users = JSON.parse(localStorage.getItem(<span class="str">'web07_usuarios'</span>) || <span class="str">'[]'</span>);
+<span class="kw">const</span> user = users.find(u => u.usuario === usuario && u.pass === pass);
+<span class="kw">if</span> (user) {
+  sessionStorage.setItem(<span class="str">'web07_sesion'</span>, JSON.stringify(user));
+  Swal.fire(<span class="str">'Éxito'</span>, <span class="str">`Bienvenido, ${user.nombre}`</span>, <span class="str">'success'</span>);
 }</pre>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Card: Seminario -->
+          <!-- Card: Registro -->
           <div class="card">
             <div class="card-top">
-              <span class="card-tag tag-teal">Select + Swal</span>
+              <span class="card-tag tag-teal">Validación + localStorage</span>
               <div class="card-complexity">
                 <span class="dot on"></span><span class="dot on"></span
-                ><span class="dot off"></span>
+                ><span class="dot on"></span>
               </div>
             </div>
             <div class="card-body">
-              <div class="card-title">Inscripción a Seminario</div>
+              <div class="card-title">Registro de Usuarios</div>
               <div class="card-desc">
-                Precio dinámico según tipo de participante. Confirmación Swal al
-                inscribirse.
+                Formulario completo con validación: nombre, email, contraseña (mín. 6),
+                confirmación, checkbox de términos. Datos guardados en localStorage.
               </div>
               <div class="demo-area">
-                <input
-                  type="text"
-                  id="sem-nombre"
-                  class="input-field"
-                  placeholder="Tu nombre completo"
-                />
-                <select id="sem-tipo" class="input-field">
-                  <option value="">-- Tipo de participante --</option>
-                  <option value="estudiante">Estudiante – Bs. 50</option>
-                  <option value="profesional">Profesional – Bs. 90</option>
-                </select>
-                <div class="result-box empty" id="sem-costo">
-                  Seleccione un tipo para ver el costo
+                <input type="text" id="reg-demo-nombre" class="input-field" placeholder="Nombre completo" />
+                <input type="email" id="reg-demo-email" class="input-field" placeholder="Email" />
+                <div class="input-row">
+                  <input type="password" id="reg-demo-pass" class="input-field" placeholder="Contraseña" />
+                  <input type="password" id="reg-demo-confirm" class="input-field" placeholder="Confirmar" />
                 </div>
-                <button class="btn btn-teal btn-sm sh-s2" id="btn-inscribir">
-                  📝 Inscribirse
-                </button>
+                <button class="btn btn-success btn-sm sh-s2" id="btn-reg-demo">📝 Probar Registro</button>
               </div>
               <div class="tutorial">
                 <button class="tutorial-toggle" onclick="toggleCode(this)">
                   <span>💡 Ver código</span> <span class="arrow">▾</span>
                 </button>
                 <div class="code-block">
-                  <div class="code-file">js/blocks/formularios.js</div>
-                  <pre><span class="kw">const</span> costo = tipo === <span class="str">'estudiante'</span> ? <span class="num">50</span> : <span class="num">90</span>;
-<span class="fn">Swal.fire</span>({
-  title: <span class="str">'¡Inscripción Exitosa!'</span>,
-  html: <span class="str">`Nombre: ${nombre}&lt;br&gt;Costo: Bs. ${costo}`</span>,
-  icon: <span class="str">'success'</span>
-});</pre>
+                  <div class="code-file">js/pages/auth.js</div>
+                  <pre><span class="kw">if</span> (pass !== confirm) <span class="kw">throw</span> <span class="str">'No coinciden'</span>;
+<span class="kw">const</span> nuevo = { id: Date.now(), nombre, email, usuario: email.split(<span class="str">'@'</span>)[<span class="num">0</span>], pass, fecha: <span class="kw">new</span> Date().toISOString() };
+users.push(nuevo);
+localStorage.setItem(<span class="str">'web07_usuarios'</span>, JSON.stringify(users));</pre>
                 </div>
               </div>
             </div>
@@ -1508,7 +1488,7 @@ lista.<span class="fn">appendChild</span>(li);</pre>
         <a href="index.html">🏠 Inicio</a>
         <a href="showcase.html">🚀 Showcase</a>
         <a href="calculadora.html">🧮 Calculadora</a>
-        <a href="formulario.html">📋 Formulario</a>
+        <a href="auth.html">🔐 Autenticación</a>
         <a href="pokeclient.html">🐾 Pokédex</a>
       </nav>
     </footer>

@@ -4,11 +4,11 @@
   <link rel="icon" href="favicon.ico" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pokédex</title>
+  <title>Pokédex — Web07</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/pokeclient.css" />
+  <link rel="stylesheet" href="css/pokeclient.css" />
 </head>
 <body>
   <!-- ── HEADER WEB07 ── -->
@@ -25,11 +25,22 @@
   </header>
 
   <div class="app">
-    <h1>Pokédex</h1>
-    <input type="text" id="pokemon" placeholder="Ingrese el nombre del Pokémon" />
-    <button id="buscar">Buscar</button>
-    <div id="resultado"></div>
-    <p id="mensaje"></p>
+    <div class="screen">
+      <h1>Pokédex</h1>
+      <div class="search-area">
+        <input type="text" id="pokemon" placeholder="Ingrese el nombre del Pokémon" autocomplete="off" />
+        <button id="buscar" type="button">Buscar</button>
+      </div>
+      <div id="sugerencias" class="sugerencias"></div>
+      <div id="resultado"></div>
+      <p id="mensaje"></p>
+      <div id="historial" class="historial"></div>
+    </div>
+    <div class="buttons">
+      <button id="btn-ant" type="button">◀</button>
+      <button id="btn-sig" type="button">▶</button>
+      <button id="btn-limpiar" type="button">Limpiar</button>
+    </div>
   </div>
 
   <script src="js/app.js" data-page="pokeclient"></script>
@@ -41,7 +52,7 @@
       <a href="index.html">🏠 Inicio</a>
       <a href="showcase.html">🚀 Showcase</a>
       <a href="calculadora.html">🧮 Calculadora</a>
-      <a href="formulario.html">📋 Formulario</a>
+      <a href="auth.html">🔐 Auth</a>
       <a href="pokeclient.html">🐾 Pokédex</a>
     </nav>
   </footer>

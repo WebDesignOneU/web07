@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <link rel="icon" href="favicon.ico" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Autenticación — Web07</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <!-- ── HEADER WEB07 ── -->
+  <header class="w7-nav">
+    <a href="index.html" class="w7-nav-brand">⚡ Web07</a>
+    <div class="w7-nav-center">
+      <span class="page-emoji">🔐</span>
+      <span>Autenticación</span>
+    </div>
+    <nav class="w7-nav-links">
+      <a href="index.html" class="w7-nav-link">🏠 Inicio</a>
+      <a href="showcase.html" class="w7-nav-link w7-showcase">🚀 Showcase</a>
+    </nav>
+  </header>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <ul class="nav nav-tabs card-header-tabs" id="authTabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">🔑 Iniciar Sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">📝 Registrarse</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content" id="authTabContent">
+              <!-- LOGIN TAB -->
+              <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                <form id="loginForm" novalidate>
+                  <div class="form-group">
+                    <label for="loginUsuario">Usuario o Email</label>
+                    <input type="text" class="form-control" id="loginUsuario" placeholder="admin" required autofocus />
+                    <div class="invalid-feedback">Ingrese su usuario o email</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="loginContrasena">Contraseña</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" id="loginContrasena" placeholder="••••••" required />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="toggleLoginPass" aria-label="Mostrar contraseña">👁</button>
+                      </div>
+                    </div>
+                    <div class="invalid-feedback">Ingrese su contraseña</div>
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="loginRecordar" />
+                    <label class="form-check-label" for="loginRecordar">Recordarme</label>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                </form>
+                <div class="text-center mt-3">
+                  <small class="text-muted">Demo: <code>admin</code> / <code>123456</code></small>
+                </div>
+              </div>
+
+              <!-- REGISTER TAB -->
+              <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                <form id="registerForm" novalidate>
+                  <div class="form-group">
+                    <label for="regNombre">Nombre completo</label>
+                    <input type="text" class="form-control" id="regNombre" placeholder="Juan Pérez" required minlength="2" />
+                    <div class="invalid-feedback">Ingrese su nombre (mín. 2 caracteres)</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="regEmail">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="regEmail" placeholder="juan@ejemplo.com" required />
+                    <div class="invalid-feedback">Ingrese un email válido</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="regContrasena">Contraseña</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" id="regContrasena" placeholder="••••••" required minlength="6" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="toggleRegPass" aria-label="Mostrar contraseña">👁</button>
+                      </div>
+                    </div>
+                    <div class="invalid-feedback">Mínimo 6 caracteres</div>
+                    <small class="form-text text-muted">Mínimo 6 caracteres</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="regConfirmar">Confirmar Contraseña</label>
+                    <input type="password" class="form-control" id="regConfirmar" placeholder="••••••" required />
+                    <div class="invalid-feedback">Las contraseñas no coinciden</div>
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="regTerminos" required />
+                    <label class="form-check-label" for="regTerminos">Acepto los <a href="#" data-toggle="modal" data-target="#terminosModal">Términos y Condiciones</a></label>
+                    <div class="invalid-feedback">Debe aceptar los términos</div>
+                  </div>
+                  <button type="submit" class="btn btn-success btn-block">Registrarse</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <a href="index.html" class="btn btn-outline-secondary btn-sm">← Volver al Inicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Términos -->
+  <div class="modal fade" id="terminosModal" tabindex="-1" role="dialog" aria-labelledby="terminosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="terminosModalLabel">Términos y Condiciones</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+          <h6>1. Aceptación de los Términos</h6>
+          <p>Al registrarse en Web07, usted acepta cumplir con estos términos y condiciones.</p>
+          <h6>2. Uso de la Cuenta</h6>
+          <p>Es responsable de mantener la confidencialidad de su contraseña y de todas las actividades que ocurran bajo su cuenta.</p>
+          <h6>3. Información Personal</h6>
+          <p>Sus datos se almacenan localmente en el navegador (localStorage) con fines educativos. No se envían a servidores externos.</p>
+          <h6>4. Conducta del Usuario</h6>
+          <p>No debe usar el sistema para actividades ilegales, dañinas o que violen los derechos de otros.</p>
+          <h6>5. Limitación de Responsabilidad</h6>
+          <p>Este es un proyecto educativo (Tecnologías Web I). El sistema se proporciona "tal cual" sin garantías.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="aceptarTerminos" data-dismiss="modal">Acepto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js" data-page="auth"></script>
+
+  <!-- ── FOOTER WEB07 ── -->
+  <footer class="w7-footer">
+    <span>© 2026 <strong>Tecnologías Web I</strong></span>
+    <nav class="w7-footer-links">
+      <a href="index.html">🏠 Inicio</a>
+      <a href="showcase.html">🚀 Showcase</a>
+      <a href="calculadora.html">🧮 Calculadora</a>
+      <a href="auth.html">🔐 Auth</a>
+      <a href="pokeclient.html">🐾 Pokédex</a>
+    </nav>
+  </footer>
+</body>
+</html>
