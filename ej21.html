@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
   <head>
-  <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -16,6 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
     <link
@@ -27,7 +28,7 @@
     <script>
       function verEstructuraDeTabla() {
         var tabla = document.getElementById("tablaMaestra");
-        alert(tabla.innerHTML);
+        Swal.fire("Estructura Tabla", tabla.innerHTML, "info");
       }
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -47,18 +48,26 @@
           tabla.appendChild(fila);
         }
 
-        document.getElementById("btnAgregar").addEventListener("click", function () {
-          agregarNuevaFila();
-        });
+        document
+          .getElementById("btnAgregar")
+          .addEventListener("click", function () {
+            agregarNuevaFila();
+          });
 
-        document.getElementById("btnEstructurar").addEventListener("click", function () {
-          verEstructuraDeTabla();
-        });
+        document
+          .getElementById("btnEstructurar")
+          .addEventListener("click", function () {
+            verEstructuraDeTabla();
+          });
       });
-        </script>
+    </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="21" onLoad="verEstructuraDeTabla()">
+  <body
+    class="legacy ejercicio"
+    data-ejercicio="21"
+    onLoad="verEstructuraDeTabla()"
+  >
     <header class="ej-head">
       <a href="ejercicios.html#ej21" class="ej-back">← Ejercicios</a>
       <span class="ej-num">21</span>

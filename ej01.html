@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,7 @@
     <title>01 · Mi HTML5 — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 01 de Web07: Mi HTML5."
+      content="Ejercicio 01 de Web07: Mi HTML5 - Estructura semántica moderna."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,38 +25,376 @@
     <link rel="stylesheet" href="css/styles.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  </head>
+    
+    <style>
+      /* Estilos específicos para ej01 - Diseño llamativo */
+      .ej01-showcase {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+      }
+      .ej01-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.3);
+      }
+      .ej01-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .ej01-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
+      }
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .ej01-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 1;
+      }
+      .ej01-header .subtitle {
+        opacity: 0.9;
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 1;
+      }
+      .ej01-nav {
+        background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        padding: 1rem 2rem;
+        position: relative;
+        z-index: 1;
+      }
+      .ej01-nav .nav-link {
+        color: rgba(255,255,255,0.9) !important;
+        font-weight: 500;
+        padding: 0.5rem 1.5rem !important;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        margin: 0 0.3rem;
+      }
+      .ej01-nav .nav-link:hover,
+      .ej01-nav .nav-link.active {
+        background: rgba(255,255,255,0.2);
+        color: white !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      }
+      .ej01-section {
+        padding: 2.5rem;
+        background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
+        position: relative;
+      }
+      .ej01-section h4 {
+        color: #667eea;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .ej01-section h4::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background: #667eea;
+        border-radius: 50%;
+      }
+      .ej01-section p {
+        color: #4a5568;
+        line-height: 1.8;
+        font-size: 1.05rem;
+      }
+      .ej01-aside {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 2rem 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .ej01-aside::after {
+        content: '';
+        position: absolute;
+        bottom: -30px;
+        right: -30px;
+        width: 100px;
+        height: 100px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+      }
+      .ej01-aside h4 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .ej01-aside h4::before {
+        content: '💡';
+        font-size: 1.2rem;
+      }
+      .ej01-aside p {
+        opacity: 0.95;
+        line-height: 1.7;
+      }
+      .ej01-aside .aside-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .ej01-aside .badge {
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        backdrop-filter: blur(5px);
+      }
+      .ej01-paragraph {
+        padding: 2rem 2.5rem;
+        background: #fff;
+        border-top: 1px solid #e2e8f0;
+        text-align: center;
+      }
+      .ej01-paragraph p {
+        font-size: 1.2rem;
+        color: #2d3748;
+        font-weight: 500;
+        font-style: italic;
+        position: relative;
+        display: inline-block;
+        padding: 0 2rem;
+      }
+      .ej01-paragraph p::before,
+      .ej01-paragraph p::after {
+        content: '"';
+        font-size: 3rem;
+        color: #667eea;
+        opacity: 0.3;
+        position: absolute;
+        top: -1rem;
+      }
+      .ej01-paragraph p::before { left: -1rem; }
+      .ej01-paragraph p::after { right: -1rem; bottom: -2rem; top: auto; }
+      .ej01-footer {
+        background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        color: white;
+        padding: 1.5rem 2.5rem;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+      .ej01-footer .signature {
+        font-family: 'Brush Script MT', cursive;
+        font-size: 1.5rem;
+        color: #f093fb;
+        margin-top: 0.5rem;
+      }
+      .html5-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #e53e3e;
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.4); }
+        50% { box-shadow: 0 0 0 10px rgba(229, 62, 62, 0); }
+      }
+      .semantic-tag {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 0.2rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin: 0.2rem;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+      }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .feature-card {
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.25rem;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+      .feature-card:hover {
+        border-color: #667eea;
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+      }
+      .feature-card .icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .feature-card strong {
+        color: #2d3748;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+      .feature-card small {
+        color: #718096;
+      }
+    </style>
+</head>
 
-  <body class="legacy ejercicio" data-ejercicio="01">
+<body class="legacy ejercicio" data-ejercicio="01">
     <header class="ej-head">
       <a href="ejercicios.html#ej01" class="ej-back">← Ejercicios</a>
       <span class="ej-num">01</span>
       <span class="ej-name">Mi HTML5</span>
     </header>
 
-    <div class="container mt-5">
-      <h1 class="text-center fuente-verdana">Mi Primer HTML5</h1>
-      <h3 class="text-center">Contenido desarrollado en HTML</h3>
-      <header class="bg-success text-white text-center py-3">
-        MI ENCABEZADO
-      </header>
-      <nav class="bg-light py-2">
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Menu</a>
-          </li>
-        </ul>
-      </nav>
-      <section class="my-3">
-        <h4>Section</h4>
-        <p class="text-center">Contenido de la sección</p>
-      </section>
-      <aside class="bg-secondary text-white p-3 my-3">
-        <h4>Aside</h4>
-        <p>Contenido del aside</p>
-      </aside>
-      <p class="text-center">Mi párrafo en HTML</p>
-      <footer class="bg-info text-black text-center py-3">Mi firma</footer>
+    <div class="ej01-showcase">
+      <div class="container">
+        <div class="ej01-card">
+          <!-- HEADER SEMÁNTICO -->
+          <header class="ej01-header">
+            <span class="html5-badge">HTML5 Semántico</span>
+            <h1>Mi Primer HTML5</h1>
+            <p class="subtitle">Estructura semántica moderna con elementos HTML5</p>
+          </header>
+
+          <!-- NAV SEMÁNTICO -->
+          <nav class="ej01-nav" role="navigation" aria-label="Navegación principal">
+            <ul class="nav justify-content-center flex-wrap">
+              <li class="nav-item">
+                <a class="nav-link active" href="#inicio" role="button">🏠 Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#acerca" role="button">ℹ️ Acerca</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#servicios" role="button">⚙️ Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contacto" role="button">📧 Contacto</a>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- SECTION PRINCIPAL -->
+          <section class="ej01-section" aria-labelledby="section-title">
+            <h4 id="section-title">Sección Principal</h4>
+            <p>
+              El elemento <code><section></code> representa una sección genérica de un documento.
+              Se utiliza para agrupar contenido temáticamente relacionado, generalmente con un encabezado.
+              A diferencia de <code><div></code>, <code><section></code> tiene significado semántico.
+            </p>
+            <div class="feature-grid">
+              <div class="feature-card">
+                <div class="icon">📄</div>
+                <strong>Semántica</strong>
+                <small>Significado claro para navegadores y SEO</small>
+              </div>
+              <div class="feature-card">
+                <div class="icon">♿</div>
+                <strong>Accesibilidad</strong>
+                <small>Lectores de pantalla navegan mejor</small>
+              </div>
+              <div class="feature-card">
+                <div class="icon">🔍</div>
+                <strong>SEO</strong>
+                <small>Mejor indexación en buscadores</small>
+              </div>
+              <div class="feature-card">
+                <div class="icon">🧹</div>
+                <strong>Mantenible</strong>
+                <small>Código más limpio y organizado</small>
+              </div>
+            </div>
+          </section>
+
+          <!-- ASIDE SEMÁNTICO -->
+          <aside class="ej01-aside" aria-labelledby="aside-title">
+            <h4 id="aside-title">Información Adicional</h4>
+            <p>
+              El elemento <code><aside></code> representa contenido tangencialmente relacionado
+              con el contenido principal. Ideal para barras laterales, publicidad, enlaces relacionados,
+              definiciones o información del autor.
+            </p>
+            <div class="aside-tags">
+              <span class="badge">HTML5</span>
+              <span class="badge">Semántico</span>
+              <span class="badge">Accesible</span>
+              <span class="badge">Responsive</span>
+              <span class="badge">Moderno</span>
+            </div>
+          </aside>
+
+          <!-- PÁRRAFO -->
+          <div class="ej01-paragraph">
+            <p>Este párrafo demuestra el uso correcto de <p> para contenido textual principal</p>
+          </div>
+
+          <!-- FOOTER SEMÁNTICO -->
+          <footer class="ej01-footer">
+            <div>Pie de página semántico con <footer></div>
+            <div class="signature">— Desarrollado con HTML5 —</div>
+          </footer>
+        </div>
+      </div>
     </div>
-  </body>
+
+    <script>
+      // Interactividad simple para el nav
+      document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.ej01-nav .nav-link');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            
+            const messages = {
+              '#inicio': 'Bienvenido a la página de inicio',
+              '#acerca': 'Información sobre este ejercicio HTML5',
+              '#servicios': 'Servicios de desarrollo web semántico',
+              '#contacto': 'Contacto: web07@ejemplo.com'
+            };
+            Swal.fire({
+              title: 'Navegación',
+              text: messages[this.getAttribute('href')] || 'Sección seleccionada',
+              icon: 'info',
+              toast: true,
+              position: 'top-end',
+              timer: 2000,
+              showConfirmButton: false
+            });
+          });
+        });
+      });
+    </script>
+</body>
 </html>
