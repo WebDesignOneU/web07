@@ -23,329 +23,9 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/ej03-forms.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    <style>
-      /* Estilos específicos - Formularios Unificados */
-      .forms-showcase {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        min-height: 100vh;
-        padding: 2rem 0;
-      }
-      .forms-card {
-        background: rgba(255, 255, 255, 0.97);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        box-shadow: 0 25px 80px rgba(0,0,0,0.2);
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.4);
-      }
-      .forms-header {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        color: white;
-        padding: 2.5rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .forms-header::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 36v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 6V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        animation: float 30s linear infinite;
-      }
-      @keyframes float {
-        from { transform: translate(0, 0); }
-        to { transform: translate(60px, 60px); }
-      }
-      .forms-header h1 {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        position: relative;
-        z-index: 1;
-      }
-      .forms-header .subtitle {
-        opacity: 0.9;
-        font-size: 1.1rem;
-        position: relative;
-        z-index: 1;
-      }
-      .demo-tabs {
-        background: #f7fafc;
-        border-bottom: 1px solid #e2e8f0;
-        padding: 0 2rem;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-      .demo-tabs .nav-link {
-        color: #4a5568 !important;
-        font-weight: 500;
-        padding: 1rem 1.5rem !important;
-        border-radius: 0;
-        border-bottom: 3px solid transparent;
-        transition: all 0.3s ease;
-        margin-bottom: -1px;
-      }
-      .demo-tabs .nav-link:hover {
-        color: #2a5298 !important;
-        background: #edf2f7;
-      }
-      .demo-tabs .nav-link.active {
-        color: #2a5298 !important;
-        border-bottom-color: #2a5298;
-        background: white;
-      }
-      .demo-tabs .nav-link i {
-        margin-right: 0.5rem;
-      }
-      .tab-content-area {
-        padding: 2.5rem;
-      }
-      .demo-panel {
-        display: none;
-        animation: fadeIn 0.4s ease;
-      }
-      .demo-panel.active {
-        display: block;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .demo-panel h3 {
-        color: #1e3c72;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-      .demo-panel h3 span {
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-        color: white;
-        padding: 0.2rem 0.75rem;
-        border-radius: 12px;
-        font-size: 0.75rem;
-        font-weight: 600;
-      }
-      .demo-panel .lead {
-        color: #4a5568;
-        margin-bottom: 2rem;
-      }
-      .form-group-enhanced {
-        margin-bottom: 1.5rem;
-      }
-      .form-group-enhanced label {
-        font-weight: 600;
-        color: #2d3748;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .form-group-enhanced label .required {
-        color: #e53e3e;
-      }
-      .form-control-enhanced {
-        border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-      .form-control-enhanced:focus {
-        border-color: #2a5298;
-        box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.15);
-        outline: none;
-      }
-      .form-control-enhanced.is-invalid {
-        border-color: #e53e3e;
-      }
-      .form-control-enhanced.is-valid {
-        border-color: #38a169;
-      }
-      .invalid-feedback {
-        display: block;
-        color: #e53e3e;
-        font-size: 0.85rem;
-        margin-top: 0.4rem;
-      }
-      .valid-feedback {
-        display: block;
-        color: #38a169;
-        font-size: 0.85rem;
-        margin-top: 0.4rem;
-      }
-      .input-group-enhanced .input-group-prepend .input-group-text {
-        background: #edf2f7;
-        border: 2px solid #e2e8f0;
-        border-right: none;
-        border-radius: 10px 0 0 10px;
-        color: #4a5568;
-      }
-      .input-group-enhanced .form-control {
-        border-left: none;
-        border-radius: 0 10px 10px 0;
-      }
-      .input-group-enhanced .input-group-append .input-group-text {
-        background: #edf2f7;
-        border: 2px solid #e2e8f0;
-        border-left: none;
-        border-radius: 0 10px 10px 0;
-        cursor: pointer;
-      }
-      .btn-demo {
-        padding: 0.875rem 2rem;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        border: none;
-      }
-      .btn-demo:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      }
-      .btn-primary-demo {
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-      }
-      .btn-success-demo {
-        background: linear-gradient(135deg, #38a169, #2f855a);
-      }
-      .btn-secondary-demo {
-        background: linear-gradient(135deg, #718096, #4a5568);
-      }
-      .btn-warning-demo {
-        background: linear-gradient(135deg, #dd6b20, #c05621);
-        color: white;
-      }
-      .code-block-demo {
-        background: #1a202c;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin-top: 2rem;
-        overflow-x: auto;
-        font-size: 0.85rem;
-        line-height: 1.6;
-      }
-      .code-block-demo pre {
-        margin: 0;
-        color: #e2e8f0;
-      }
-      .code-block-demo .keyword { color: #c678dd; }
-      .code-block-demo .string { color: #98c379; }
-      .code-block-demo .comment { color: #5c6370; font-style: italic; }
-      .code-block-demo .function { color: #61afef; }
-      .code-block-demo .variable { color: #e06c75; }
-      .feature-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        background: linear-gradient(135deg, #2a5298, #1e3c72);
-        color: white;
-        padding: 0.35rem 0.85rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        margin: 0.25rem;
-      }
-      .form-row-demo {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-      .form-row-demo .form-group-enhanced {
-        flex: 1;
-        min-width: 200px;
-        margin-bottom: 0;
-      }
-      .result-display {
-        background: #f7fafc;
-        border: 2px dashed #cbd5e0;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin-top: 1.5rem;
-        min-height: 100px;
-        transition: all 0.3s ease;
-      }
-      .result-display.has-data {
-        border-color: #2a5298;
-        background: #ebf4ff;
-      }
-      .result-display pre {
-        margin: 0;
-        white-space: pre-wrap;
-        word-break: break-word;
-        font-family: 'Fira Code', monospace;
-        font-size: 0.9rem;
-      }
-      .color-preview {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        border: 2px solid #e2e8f0;
-        display: inline-block;
-        margin-left: 0.5rem;
-        vertical-align: middle;
-      }
-      .image-preview {
-        max-width: 150px;
-        max-height: 150px;
-        border-radius: 8px;
-        border: 2px solid #e2e8f0;
-        margin-top: 1rem;
-        display: none;
-      }
-      .greeting-output {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin-top: 1rem;
-        display: none;
-        animation: slideUp 0.4s ease;
-      }
-      @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .info-card {
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 1.25rem;
-        margin-bottom: 1rem;
-      }
-      .info-card h5 {
-        color: #1e3c72;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .info-card ul {
-        margin: 0;
-        padding-left: 1.25rem;
-      }
-      .info-card li {
-        color: #4a5568;
-        margin-bottom: 0.35rem;
-      }
-      .demo-section-divider {
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
-        margin: 2rem 0;
-        border-radius: 1px;
-      }
-    </style>
 </head>
 
 <body class="legacy ejercicio" data-ejercicio="03">
@@ -601,32 +281,102 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
         // === TAB SWITCHING ===
         const tabs = document.querySelectorAll('#formsTabs .nav-link');
         const panels = document.querySelectorAll('.demo-panel');
-        
-        tabs.forEach(tab => {
+        const tabList = document.getElementById('formsTabs');
+        let currentTabIndex = 0;
+
+        function switchTab(index, pushState = true) {
+          const clampedIndex = Math.max(0, Math.min(index, tabs.length - 1));
+          if (clampedIndex === currentTabIndex) return;
+
+          tabs.forEach(t => t.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
+
+          tabs[clampedIndex].classList.add('active');
+          panels[clampedIndex].classList.add('active');
+
+          // Focus management for accessibility
+          tabs[clampedIndex].focus();
+
+          currentTabIndex = clampedIndex;
+
+          if (pushState) {
+            const hash = tabs[clampedIndex].getAttribute('href');
+            history.replaceState(null, '', hash);
+          }
+        }
+
+        tabs.forEach((tab, index) => {
           tab.addEventListener('click', function(e) {
             e.preventDefault();
-            tabs.forEach(t => t.classList.remove('active'));
-            panels.forEach(p => p.classList.remove('active'));
-            this.classList.add('active');
-            const target = this.getAttribute('href');
-            document.querySelector(target).classList.add('active');
+            switchTab(index);
           });
+
+          // Keyboard navigation within tab list
+          tab.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+              e.preventDefault();
+              switchTab((index + 1) % tabs.length);
+            } else if (e.key === 'ArrowLeft') {
+              e.preventDefault();
+              switchTab((index - 1 + tabs.length) % tabs.length);
+            } else if (e.key === 'Home') {
+              e.preventDefault();
+              switchTab(0);
+            } else if (e.key === 'End') {
+              e.preventDefault();
+              switchTab(tabs.length - 1);
+            }
+          });
+        });
+
+        // Initialize from URL hash
+        function initFromHash() {
+          const hash = location.hash;
+          if (hash) {
+            const targetTab = document.querySelector(`#formsTabs .nav-link[href="${hash}"]`);
+            if (targetTab) {
+              const index = Array.from(tabs).indexOf(targetTab);
+              if (index !== -1) {
+                switchTab(index, false);
+                return;
+              }
+            }
+          }
+          // Default to first tab
+          switchTab(0, false);
+        }
+
+        initFromHash();
+
+        // Handle browser back/forward
+        window.addEventListener('hashchange', () => {
+          initFromHash();
         });
 
         // === TAB 1: ENVÍO BÁSICO ===
         const formBasico = document.getElementById('formBasico');
         const resultBasico = document.getElementById('resultBasico');
+        const txtDato = document.getElementById('txtDato');
         
         formBasico.addEventListener('submit', function(e) {
           e.preventDefault();
-          const valor = document.getElementById('txtDato').value.trim();
+          const valor = txtDato.value.trim();
           if (!valor) {
             Swal.fire('Atención', 'Por favor ingresa un dato', 'warning');
+            txtDato.focus();
             return;
           }
           resultBasico.innerHTML = '<pre>Dato enviado: <strong>' + valor.replace(/</g, '<').replace(/>/g, '>') + '</strong></pre>';
           resultBasico.classList.add('has-data');
           Swal.fire('¡Enviado!', 'Dato: ' + valor, 'success');
+        });
+
+        // Enter to submit
+        txtDato.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            formBasico.dispatchEvent(new Event('submit'));
+          }
         });
 
         // === TAB 2: FORMULARIO VALIDADO ===
@@ -675,6 +425,9 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           
           if (!valido) {
             Swal.fire('Error', 'Completa todos los campos correctamente', 'error');
+            // Focus first invalid
+            const firstInvalid = formValidado.querySelector('.is-invalid');
+            if (firstInvalid) firstInvalid.focus();
             return;
           }
           
@@ -692,6 +445,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           resultValidado.innerHTML = '<small class="text-muted">Formulario limpiado</small>';
           resultValidado.classList.remove('has-data');
           Swal.fire('Cancelado', 'Campos limpiados', 'info');
+          nombreInput.focus();
         });
 
         // === TAB 3: TIPOS DE CAMPO ===
@@ -761,6 +515,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           resultTipos.innerHTML = '<small class="text-muted">Formulario limpiado</small>';
           resultTipos.classList.remove('has-data');
           Swal.fire('Limpiado', 'Todos los campos restablecidos', 'info');
+          document.getElementById('nombre2').focus();
         });
 
         // === TAB 4: PRIMER JS SALUDO ===
@@ -789,6 +544,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           if (!nombre) {
             txtPersona.classList.add('is-invalid');
             Swal.fire('Atención', 'Ingresa tu nombre para saludar', 'warning');
+            txtPersona.focus();
             return;
           }
           
@@ -804,7 +560,16 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
         // Enter key en txtPersona
         txtPersona.addEventListener('keydown', function(e) {
           if (e.key === 'Enter') {
+            e.preventDefault();
             btnSaludo.click();
+          }
+        });
+
+        // Global keyboard shortcut: Ctrl+1-4 to switch tabs
+        document.addEventListener('keydown', function(e) {
+          if (e.ctrlKey && e.key >= '1' && e.key <= '4') {
+            e.preventDefault();
+            switchTab(parseInt(e.key) - 1);
           }
         });
 
