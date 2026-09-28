@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>03 · Formulario y envío — Ejercicios Web07</title>
+    <title>03 · Formularios Unificados — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 03 de Web07: Formulario y envío."
+      content="Ejercicio 03 de Web07: Demostración unificada de formularios - envío básico, validación, tipos de campo y saludo JS."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,39 +25,790 @@
     <link rel="stylesheet" href="css/styles.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+      /* Estilos específicos para ej03 - Formularios Unificados */
+      .forms-showcase {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+      }
+      .forms-card {
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.4);
+      }
+      .forms-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .forms-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 36v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 6V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        animation: float 30s linear infinite;
+      }
+      @keyframes float {
+        from { transform: translate(0, 0); }
+        to { transform: translate(60px, 60px); }
+      }
+      .forms-header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 1;
+      }
+      .forms-header .subtitle {
+        opacity: 0.9;
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 1;
+      }
+      .demo-tabs {
+        background: #f7fafc;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 0 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .demo-tabs .nav-link {
+        color: #4a5568 !important;
+        font-weight: 500;
+        padding: 1rem 1.5rem !important;
+        border-radius: 0;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+        margin-bottom: -1px;
+      }
+      .demo-tabs .nav-link:hover {
+        color: #2a5298 !important;
+        background: #edf2f7;
+      }
+      .demo-tabs .nav-link.active {
+        color: #2a5298 !important;
+        border-bottom-color: #2a5298;
+        background: white;
+      }
+      .demo-tabs .nav-link i {
+        margin-right: 0.5rem;
+      }
+      .tab-content-area {
+        padding: 2.5rem;
+      }
+      .demo-panel {
+        display: none;
+        animation: fadeIn 0.4s ease;
+      }
+      .demo-panel.active {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .demo-panel h3 {
+        color: #1e3c72;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .demo-panel h3 span {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        padding: 0.2rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .demo-panel .lead {
+        color: #4a5568;
+        margin-bottom: 2rem;
+      }
+      .form-group-enhanced {
+        margin-bottom: 1.5rem;
+      }
+      .form-group-enhanced label {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .form-group-enhanced label .required {
+        color: #e53e3e;
+      }
+      .form-control-enhanced {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+      .form-control-enhanced:focus {
+        border-color: #2a5298;
+        box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.15);
+        outline: none;
+      }
+      .form-control-enhanced.is-invalid {
+        border-color: #e53e3e;
+      }
+      .form-control-enhanced.is-valid {
+        border-color: #38a169;
+      }
+      .invalid-feedback {
+        display: block;
+        color: #e53e3e;
+        font-size: 0.85rem;
+        margin-top: 0.4rem;
+      }
+      .valid-feedback {
+        display: block;
+        color: #38a169;
+        font-size: 0.85rem;
+        margin-top: 0.4rem;
+      }
+      .input-group-enhanced .input-group-prepend .input-group-text {
+        background: #edf2f7;
+        border: 2px solid #e2e8f0;
+        border-right: none;
+        border-radius: 10px 0 0 10px;
+        color: #4a5568;
+      }
+      .input-group-enhanced .form-control {
+        border-left: none;
+        border-radius: 0 10px 10px 0;
+      }
+      .input-group-enhanced .input-group-append .input-group-text {
+        background: #edf2f7;
+        border: 2px solid #e2e8f0;
+        border-left: none;
+        border-radius: 0 10px 10px 0;
+        cursor: pointer;
+      }
+      .btn-demo {
+        padding: 0.875rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        border: none;
+      }
+      .btn-demo:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      }
+      .btn-primary-demo {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+      }
+      .btn-success-demo {
+        background: linear-gradient(135deg, #38a169, #2f855a);
+      }
+      .btn-secondary-demo {
+        background: linear-gradient(135deg, #718096, #4a5568);
+      }
+      .btn-warning-demo {
+        background: linear-gradient(135deg, #dd6b20, #c05621);
+        color: white;
+      }
+      .code-block-demo {
+        background: #1a202c;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        overflow-x: auto;
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+      .code-block-demo pre {
+        margin: 0;
+        color: #e2e8f0;
+      }
+      .code-block-demo .keyword { color: #c678dd; }
+      .code-block-demo .string { color: #98c379; }
+      .code-block-demo .comment { color: #5c6370; font-style: italic; }
+      .code-block-demo .function { color: #61afef; }
+      .code-block-demo .variable { color: #e06c75; }
+      .feature-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: linear-gradient(135deg, #2a5298, #1e3c72);
+        color: white;
+        padding: 0.35rem 0.85rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin: 0.25rem;
+      }
+      .form-row-demo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .form-row-demo .form-group-enhanced {
+        flex: 1;
+        min-width: 200px;
+        margin-bottom: 0;
+      }
+      .result-display {
+        background: #f7fafc;
+        border: 2px dashed #cbd5e0;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        min-height: 100px;
+        transition: all 0.3s ease;
+      }
+      .result-display.has-data {
+        border-color: #2a5298;
+        background: #ebf4ff;
+      }
+      .result-display pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.9rem;
+      }
+      .color-preview {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+        display: inline-block;
+        margin-left: 0.5rem;
+        vertical-align: middle;
+      }
+      .image-preview {
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+        margin-top: 1rem;
+        display: none;
+      }
+      .greeting-output {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        display: none;
+        animation: slideUp 0.4s ease;
+      }
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .info-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      .info-card h5 {
+        color: #1e3c72;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .info-card ul {
+        margin: 0;
+        padding-left: 1.25rem;
+      }
+      .info-card li {
+        color: #4a5568;
+        margin-bottom: 0.35rem;
+      }
+      .demo-section-divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+        margin: 2rem 0;
+        border-radius: 1px;
+      }
+    </style>
+</head>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        function cargar() {
-          var _valor = document.getElementById("txtDato").value;
-          Swal.fire("Mensaje", "Hola " + _valor, "info");
-        }
-
-        // Puedes llamar a la función cargar() cuando sea necesario
-        document
-          .getElementById("btnEnviar")
-          .addEventListener("click", function () {
-            cargar();
-          });
-      });
-        </script>
-  </head>
-
-  <body class="legacy ejercicio" data-ejercicio="03">
+<body class="legacy ejercicio" data-ejercicio="03">
     <header class="ej-head">
       <a href="ejercicios.html#ej03" class="ej-back">← Ejercicios</a>
       <span class="ej-num">03</span>
-      <span class="ej-name">Formulario y envío</span>
+      <span class="ej-name">Formularios Unificados</span>
     </header>
 
-    <div id="principal" class="row grow w-100">
-      <input
-        type="text"
-        id="txtDato"
-        class="form-control mb-3"
-        placeholder="Ingrese su dato"
-      />
-      <button id="btnEnviar" class="btn btn-primary">Enviar</button>
+    <div class="forms-showcase">
+      <div class="container">
+        <div class="forms-card">
+          <!-- HEADER -->
+          <header class="forms-header">
+            <h1>📋 Formularios Unificados</h1>
+            <p class="subtitle">Demostración completa: envío básico · validación · tipos de campo · saludo JS</p>
+          </header>
+
+          <!-- TABS NAVEGACIÓN -->
+          <ul class="nav demo-tabs" id="formsTabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="tab-basico-tab" data-toggle="tab" href="#tab-basico" role="tab" aria-controls="tab-basico" aria-selected="true">
+                <i>📤</i> Envío Básico (ej03)
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-validado-tab" data-toggle="tab" href="#tab-validado" role="tab" aria-controls="tab-validado" aria-selected="false">
+                <i>✅</i> Validado (ej05)
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-tipos-tab" data-toggle="tab" href="#tab-tipos" role="tab" aria-controls="tab-tipos" aria-selected="false">
+                <i>🎨</i> Tipos de Campo (ej06)
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-saludo-tab" data-toggle="tab" href="#tab-saludo" role="tab" aria-controls="tab-saludo" aria-selected="false">
+                <i>👋</i> Primer JS (ej08)
+              </a>
+            </li>
+          </ul>
+
+          <!-- CONTENIDO TABS -->
+          <div class="tab-content-area" id="formsTabContent">
+            
+            <!-- TAB 1: ENVÍO BÁSICO (ej03) -->
+            <div class="tab-pane fade show active demo-panel" id="tab-basico" role="tabpanel" aria-labelledby="tab-basico-tab">
+              <h3>Envío Básico <span>ej03</span></h3>
+              <p class="lead">Formulario simple con un campo de texto y botón de envío. Muestra el valor ingresado mediante SweetAlert2.</p>
+
+              <form id="formBasico" novalidate>
+                <div class="form-group-enhanced">
+                  <label for="txtDato">Dato a enviar <span class="required">*</span></label>
+                  <input type="text" class="form-control form-control-enhanced" id="txtDato" placeholder="Escribe algo aquí..." required autocomplete="off" />
+                  <div class="invalid-feedback">Por favor ingresa un dato</div>
+                </div>
+                <button type="submit" class="btn btn-demo btn-primary-demo">📤 Enviar Dato</button>
+              </form>
+
+              <div class="result-display" id="resultBasico" aria-live="polite">
+                <small class="text-muted">El resultado aparecerá aquí tras enviar...</small>
+              </div>
+
+              <div class="code-block-demo">
+<pre><span class="keyword">function</span> <span class="function">cargar</span>() {
+  <span class="keyword">var</span> _valor = <span class="function">document.getElementById</span>(<span class="string">"txtDato"</span>).value;
+  <span class="function">Swal.fire</span>(<span class="string">"Mensaje"</span>, <span class="string">"Hola "</span> + _valor, <span class="string">"info"</span>);
+}
+
+<span class="function">document.getElementById</span>(<span class="string">"btnEnviar"</span>)
+  .addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span>() { cargar(); });</pre>
+              </div>
+            </div>
+
+            <!-- TAB 2: FORMULARIO VALIDADO (ej05) -->
+            <div class="tab-pane fade demo-panel" id="tab-validado" role="tabpanel" aria-labelledby="tab-validado-tab">
+              <h3>Formulario Validado <span>ej05</span></h3>
+              <p class="lead">Validación en tiempo real: nombre solo letras/espacios, fecha requerida, botones Enviar y Cancelar.</p>
+
+              <form id="formValidado" novalidate>
+                <div class="form-row-demo">
+                  <div class="form-group-enhanced">
+                    <label for="nombre">Nombre <span class="required">*</span></label>
+                    <input type="text" class="form-control form-control-enhanced" id="nombre" placeholder="Solo letras y espacios" required autocomplete="off" />
+                    <div class="invalid-feedback">Solo se permiten letras y espacios</div>
+                    <div class="valid-feedback">Nombre válido</div>
+                  </div>
+                  <div class="form-group-enhanced">
+                    <label for="fecha">Fecha Nacimiento <span class="required">*</span></label>
+                    <input type="date" class="form-control form-control-enhanced" id="fecha" required />
+                    <div class="invalid-feedback">Selecciona una fecha</div>
+                    <div class="valid-feedback">Fecha válida</div>
+                  </div>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button type="submit" class="btn btn-demo btn-success-demo">✅ Enviar</button>
+                  <button type="button" id="btnCancelar" class="btn btn-demo btn-secondary-demo">❌ Cancelar</button>
+                </div>
+              </form>
+
+              <div class="result-display" id="resultValidado" aria-live="polite">
+                <small class="text-muted">Los datos válidos se mostrarán aquí...</small>
+              </div>
+
+              <div class="code-block-demo">
+<pre><span class="comment">// Validación en tiempo real: solo letras y espacios</span>
+<span class="function">document.getElementById</span>(<span class="string">"nombre"</span>)
+  .addEventListener(<span class="string">"input"</span>, <span class="keyword">function</span>() {
+    <span class="keyword">var</span> regex = <span class="string">/^[a-zA-Z\s]*$/</span>;
+    <span class="keyword">if</span> (!regex.test(<span class="keyword">this</span>.value)) {
+      <span class="keyword">this</span>.value = <span class="keyword">this</span>.value.replace(/[^a-zA-Z\s]/g, <span class="string">""</span>);
+    }
+  });
+
+<span class="comment">// Envío y cancelación</span>
+<span class="keyword">function</span> <span class="function">enviar</span>() { <span class="comment">/* ... */</span> }
+<span class="keyword">function</span> <span class="function">cancelar</span>() { <span class="comment">/* limpia campos */</span> }</pre>
+              </div>
+            </div>
+
+            <!-- TAB 3: TIPOS DE CAMPO (ej06) -->
+            <div class="tab-pane fade demo-panel" id="tab-tipos" role="tabpanel" aria-labelledby="tab-tipos-tab">
+              <h3>Tipos de Campo HTML5 <span>ej06</span></h3>
+              <p class="lead">Demostración de input types modernos: color, file, email, time, image. Con vista previa y limpieza.</p>
+
+              <form id="formTipos" novalidate>
+                <div class="form-row-demo">
+                  <div class="form-group-enhanced">
+                    <label for="nombre2">Nombre</label>
+                    <input type="text" class="form-control form-control-enhanced" id="nombre2" placeholder="Tu nombre" autocomplete="off" />
+                  </div>
+                  <div class="form-group-enhanced">
+                    <label for="fecha2">Fecha Nac.</label>
+                    <input type="date" class="form-control form-control-enhanced" id="fecha2" />
+                  </div>
+                </div>
+                <div class="form-row-demo">
+                  <div class="form-group-enhanced">
+                    <label for="color">Color Favorito</label>
+                    <div class="input-group input-group-enhanced">
+                      <input type="color" class="form-control form-control-enhanced" id="color" value="#2a5298" style="height: 48px;" />
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="colorPreview" style="background: #2a5298; border-radius: 0 8px 8px 0;"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group-enhanced">
+                    <label for="hora">Hora</label>
+                    <input type="time" class="form-control form-control-enhanced" id="hora" />
+                  </div>
+                </div>
+                <div class="form-row-demo">
+                  <div class="form-group-enhanced">
+                    <label for="correo">Email</label>
+                    <input type="email" class="form-control form-control-enhanced" id="correo" placeholder="usuario@ejemplo.com" />
+                  </div>
+                  <div class="form-group-enhanced">
+                    <label for="archivo">Archivo / Imagen</label>
+                    <input type="file" class="form-control form-control-enhanced" id="archivo" accept="image/*" />
+                  </div>
+                </div>
+                <div class="form-group-enhanced">
+                  <label for="imagen">Imagen (input type=image)</label>
+                  <input type="image" id="imagen" class="image-preview" alt="Vista previa" />
+                  <small class="form-text text-muted">Selecciona una imagen arriba para ver la vista previa aquí</small>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button type="button" id="btnEnviarTipos" class="btn btn-demo btn-primary-demo">📊 Mostrar Datos</button>
+                  <button type="button" id="btnLimpiarTipos" class="btn btn-demo btn-warning-demo">🧹 Limpiar Todo</button>
+                </div>
+              </form>
+
+              <div class="result-display" id="resultTipos" aria-live="polite">
+                <small class="text-muted">Información del formulario aparecerá aquí...</small>
+              </div>
+
+              <div class="code-block-demo">
+<pre><span class="comment">// Vista previa de imagen al seleccionar archivo</span>
+<span class="function">document.getElementById</span>(<span class="string">"archivo"</span>)
+  .addEventListener(<span class="string">"change"</span>, <span class="keyword">function</span>(event) {
+    <span class="keyword">var</span> file = event.target.files[<span class="number">0</span>];
+    <span class="keyword">if</span> (file) {
+      <span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="function">FileReader</span>();
+      reader.onload = <span class="keyword">function</span>(e) {
+        <span class="keyword">var</span> img = <span class="function">document.getElementById</span>(<span class="string">"imagen"</span>);
+        img.setAttribute(<span class="string">"src"</span>, e.target.result);
+        img.style.display = <span class="string">"inline-block"</span>;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+<span class="comment">// Input color - actualizar preview</span>
+<span class="function">document.getElementById</span>(<span class="string">"color"</span>)
+  .addEventListener(<span class="string">"input"</span>, <span class="keyword">function</span>() {
+    <span class="function">document.getElementById</span>(<span class="string">"colorPreview"</span>).style.background = <span class="keyword">this</span>.value;
+  });</pre>
+              </div>
+            </div>
+
+            <!-- TAB 4: PRIMER JS SALUDO (ej08) -->
+            <div class="tab-pane fade demo-panel" id="tab-saludo" role="tabpanel" aria-labelledby="tab-saludo-tab">
+              <h3>Primer JavaScript: Saludo <span>ej08</span></h3>
+              <p class="lead">Ejercicio introductorio: crea un <h1> dinámicamente al cargar y saluda al hacer clic.</p>
+
+              <form id="formSaludo" novalidate>
+                <div class="form-group-enhanced">
+                  <label for="txtPersona">Tu nombre <span class="required">*</span></label>
+                  <input type="text" class="form-control form-control-enhanced" id="txtPersona" placeholder="Escribe tu nombre" required autocomplete="off" autofocus />
+                  <div class="invalid-feedback">Ingresa tu nombre para saludar</div>
+                  <div class="valid-feedback">Listo para saludar</div>
+                </div>
+                <button type="button" id="btnSaludo" class="btn btn-demo btn-primary-demo">👋 Saludar</button>
+              </form>
+
+              <div class="greeting-output" id="saludoOutput" aria-live="polite"></div>
+
+              <div class="demo-section-divider"></div>
+
+              <div class="info-card">
+                <h5>💡 Qué hace este ejercicio</h5>
+                <ul>
+                  <li>Al cargar la página, crea dinámicamente un <code><h1></code> con <code>document.createElement</code> y lo inserta con <code>prepend()</code></li>
+                  <li>Al hacer clic en "Saludar", muestra un SweetAlert2 con el nombre ingresado</li>
+                  <li>Demuestra manipulación básica del DOM y eventos</li>
+                </ul>
+              </div>
+
+              <div class="code-block-demo">
+<pre><span class="comment">// Al cargar: crear h1 dinámico</span>
+<span class="keyword">var</span> encabezado = <span class="function">document.createElement</span>(<span class="string">"h1"</span>);
+encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
+<span class="function">document.body.prepend</span>(encabezado);
+
+<span class="comment">// Evento click para saludar</span>
+<span class="function">document.getElementById</span>(<span class="string">"btnSaludo"</span>)
+  .addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span>() {
+    <span class="function">Swal.fire</span>(<span class="string">"Mensaje"</span>, 
+      <span class="function">document.getElementById</span>(<span class="string">"txtPersona"</span>).value, <span class="string">"info"</span>);
+  });</pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
-  </body>
+
+    <script>
+      (function() {
+        'use strict';
+
+        // === TAB SWITCHING ===
+        const tabs = document.querySelectorAll('#formsTabs .nav-link');
+        const panels = document.querySelectorAll('.demo-panel');
+        
+        tabs.forEach(tab => {
+          tab.addEventListener('click', function(e) {
+            e.preventDefault();
+            tabs.forEach(t => t.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+            const target = this.getAttribute('href');
+            document.querySelector(target).classList.add('active');
+          });
+        });
+
+        // === TAB 1: ENVÍO BÁSICO (ej03) ===
+        const formBasico = document.getElementById('formBasico');
+        const resultBasico = document.getElementById('resultBasico');
+        
+        formBasico.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const valor = document.getElementById('txtDato').value.trim();
+          if (!valor) {
+            Swal.fire('Atención', 'Por favor ingresa un dato', 'warning');
+            return;
+          }
+          resultBasico.innerHTML = '<pre>Dato enviado: <strong>' + valor.replace(/</g, '<').replace(/>/g, '>') + '</strong></pre>';
+          resultBasico.classList.add('has-data');
+          Swal.fire('¡Enviado!', 'Dato: ' + valor, 'success');
+        });
+
+        // === TAB 2: FORMULARIO VALIDADO (ej05) ===
+        const formValidado = document.getElementById('formValidado');
+        const nombreInput = document.getElementById('nombre');
+        const fechaInput = document.getElementById('fecha');
+        const resultValidado = document.getElementById('resultValidado');
+        const btnCancelar = document.getElementById('btnCancelar');
+
+        // Validación en tiempo real: solo letras y espacios
+        nombreInput.addEventListener('input', function() {
+          const regex = /^[a-zA-Z\s]*$/;
+          if (!regex.test(this.value)) {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+            this.classList.add('is-invalid');
+            this.classList.remove('is-valid');
+          } else if (this.value.trim()) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+          } else {
+            this.classList.remove('is-invalid', 'is-valid');
+          }
+        });
+
+        fechaInput.addEventListener('change', function() {
+          if (this.value) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+          } else {
+            this.classList.remove('is-valid', 'is-invalid');
+          }
+        });
+
+        formValidado.addEventListener('submit', function(e) {
+          e.preventDefault();
+          let valido = true;
+          
+          if (!nombreInput.value.trim()) {
+            nombreInput.classList.add('is-invalid');
+            valido = false;
+          }
+          if (!fechaInput.value) {
+            fechaInput.classList.add('is-invalid');
+            valido = false;
+          }
+          
+          if (!valido) {
+            Swal.fire('Error', 'Completa todos los campos correctamente', 'error');
+            return;
+          }
+          
+          const texto = 'Nombre: ' + nombreInput.value + '\nFecha: ' + fechaInput.value;
+          resultValidado.innerHTML = '<pre>' + texto.replace(/</g, '<').replace(/>/g, '>') + '</pre>';
+          resultValidado.classList.add('has-data');
+          Swal.fire('¡Enviado!', texto, 'success');
+        });
+
+        btnCancelar.addEventListener('click', function() {
+          nombreInput.value = '';
+          fechaInput.value = '';
+          nombreInput.classList.remove('is-valid', 'is-invalid');
+          fechaInput.classList.remove('is-valid', 'is-invalid');
+          resultValidado.innerHTML = '<small class="text-muted">Formulario limpiado</small>';
+          resultValidado.classList.remove('has-data');
+          Swal.fire('Cancelado', 'Campos limpiados', 'info');
+        });
+
+        // === TAB 3: TIPOS DE CAMPO (ej06) ===
+        const colorInput = document.getElementById('color');
+        const colorPreview = document.getElementById('colorPreview');
+        const archivoInput = document.getElementById('archivo');
+        const imagenPreview = document.getElementById('imagen');
+        const btnEnviarTipos = document.getElementById('btnEnviarTipos');
+        const btnLimpiarTipos = document.getElementById('btnLimpiarTipos');
+        const resultTipos = document.getElementById('resultTipos');
+
+        // Color preview
+        colorInput.addEventListener('input', function() {
+          colorPreview.style.background = this.value;
+        });
+
+        // File preview
+        archivoInput.addEventListener('change', function(event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              imagenPreview.setAttribute('src', e.target.result);
+              imagenPreview.style.display = 'inline-block';
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+        btnEnviarTipos.addEventListener('click', function() {
+          const data = {
+            nombre: document.getElementById('nombre2').value || '(vacío)',
+            fecha: document.getElementById('fecha2').value || '(vacío)',
+            color: colorInput.value,
+            hora: document.getElementById('hora').value || '(vacío)',
+            correo: document.getElementById('correo').value || '(vacío)',
+            archivo: archivoInput.files[0] ? archivoInput.files[0].name : '(ninguno)',
+            timestamp: new Date().toLocaleString()
+          };
+          
+          let output = '';
+          for (const [key, value] of Object.entries(data)) {
+            output += key.charAt(0).toUpperCase() + key.slice(1) + ': ' + value + '\n';
+          }
+          
+          resultTipos.innerHTML = '<pre>' + output.replace(/</g, '<').replace(/>/g, '>') + '</pre>';
+          resultTipos.classList.add('has-data');
+          
+          Swal.fire({
+            title: 'Datos del Formulario',
+            html: '<pre style="text-align:left; margin:0;">' + output.replace(/</g, '<').replace(/>/g, '>') + '</pre>',
+            icon: 'info',
+            width: '500px'
+          });
+        });
+
+        btnLimpiarTipos.addEventListener('click', function() {
+          document.getElementById('nombre2').value = '';
+          document.getElementById('fecha2').value = '';
+          colorInput.value = '#2a5298';
+          colorPreview.style.background = '#2a5298';
+          document.getElementById('hora').value = '';
+          document.getElementById('correo').value = '';
+          archivoInput.value = '';
+          imagenPreview.style.display = 'none';
+          imagenPreview.removeAttribute('src');
+          resultTipos.innerHTML = '<small class="text-muted">Formulario limpiado</small>';
+          resultTipos.classList.remove('has-data');
+          Swal.fire('Limpiado', 'Todos los campos restablecidos', 'info');
+        });
+
+        // === TAB 4: PRIMER JS SALUDO (ej08) ===
+        const formSaludo = document.getElementById('formSaludo');
+        const txtPersona = document.getElementById('txtPersona');
+        const btnSaludo = document.getElementById('btnSaludo');
+        const saludoOutput = document.getElementById('saludoOutput');
+
+        // Crear h1 dinámico al cargar (como en el ejercicio original)
+        const h1Dinamico = document.createElement('h1');
+        h1Dinamico.textContent = 'Bienvenido a JavaScript';
+        h1Dinamico.style.cssText = 'text-align:center; color:#1e3c72; margin-bottom:1.5rem; animation:fadeIn 0.6s ease;';
+        document.querySelector('.tab-content-area').prepend(h1Dinamico);
+
+        txtPersona.addEventListener('input', function() {
+          if (this.value.trim()) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+          } else {
+            this.classList.remove('is-valid', 'is-invalid');
+          }
+        });
+
+        btnSaludo.addEventListener('click', function() {
+          const nombre = txtPersona.value.trim();
+          if (!nombre) {
+            txtPersona.classList.add('is-invalid');
+            Swal.fire('Atención', 'Ingresa tu nombre para saludar', 'warning');
+            return;
+          }
+          
+          txtPersona.classList.remove('is-invalid');
+          txtPersona.classList.add('is-valid');
+          
+          saludoOutput.innerHTML = '👋 <strong>¡Hola, ' + nombre.replace(/</g, '<').replace(/>/g, '>') + '!</strong><br><small>Bienvenido a tu primer script JavaScript</small>';
+          saludoOutput.style.display = 'block';
+          
+          Swal.fire('Saludo', '¡Hola, ' + nombre + '!', 'success');
+        });
+
+        // Enter key en txtPersona
+        txtPersona.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            btnSaludo.click();
+          }
+        });
+
+      })();
+    </script>
+</body>
 </html>

@@ -5,7 +5,7 @@ Colección de ejercicios y demos de **HTML, CSS, Bootstrap y JavaScript
 abre `index.html` y funciona.
 
 ```
-34 HTML · 11 CSS · 25 JS
+34 HTML · 11 CSS · 22 JS
 ```
 
 ## Cómo abrirlo
@@ -26,14 +26,14 @@ conexión la primera vez que se cargan.
 ```
 web07/
 ├── index.html              portada
-├── ejercicios.html         visor de los 25 ejercicios → ej01…ej25
+├── ejercicios.html         visor de los 22 ejercicios → ej01…ej22
 ├── showcase.html          Showcase: 7 bloques de demo reutilizables
 │
 ├── calculadora.html · auth.html · demojson.html
 ├── pokeclient.html · swalconbs.html · seminario.html
 ├── flexbox.html           página autónoma de flexbox
 │
-├── ej01.html … ej25.html   los 25 ejercicios, uno por archivo
+├── ej01.html … ej22.html   los 22 ejercicios, uno por archivo
 │
 ├── css/                   estilos (ver css/README.md)
 │   ├── styles.css          centralizador: @import de las 6 capas base
@@ -42,7 +42,7 @@ web07/
 │   ├── animations.css      3 · @keyframes
 │   ├── layout.css          4 · navbar, footer, estructuras
 │   ├── components.css      5 · componentes y overrides de Bootstrap
-│   ├── legacy.css          6 · <body class="legacy"> (los 25 ejercicios)
+│   ├── legacy.css          6 · <body class="legacy"> (los 22 ejercicios)
 │   ├── showcase.css · calculadora.css · pokeclient.css   capas de página
 │   └── flexbox.css          página autónoma, no usa styles.css
 │
@@ -57,10 +57,10 @@ web07/
 └── README.md
 ```
 
-## los 25 ejercicios
+## los 22 ejercicios
 
 `ejercicios.html` es el único visor: sidebar agrupado por tema, contador
-`NN / 25`, botones *Anterior* / *Siguiente*, navegación con las flechas
+`NN / 22`, botones *Anterior* / *Siguiente*, navegación con las flechas
 del teclado y enlace directo por hash.
 
 ```
@@ -76,38 +76,35 @@ mandar una URL concreta sin perder el hilo.
 | `ej01` | Mi HTML5 | `pagina1` |
 | **JavaScript básico** | | |
 | `ej02` | Párrafos y selectores | `pagina2`+`pagina3`+`pagina4` |
-| `ej03` | Formulario y envío | `pagina5` |
+| `ej03` | **Formularios Unificados** (ej03+ej05+ej06+ej08) | `pagina5`+`pagina9`+`pagina10`+`prueba` |
 | `ej04` | Suma con diálogos | `pagina6`+`pagina7`+`pagina8` |
-| `ej05` | Formulario validado | `pagina9` |
-| `ej06` | Tipos de campo | `pagina10` |
-| `ej07` | Matriz 3x3 | `pagina11` |
-| `ej08` | Primer JS: saludo | `prueba` |
+| `ej05` | Matriz 3x3 | `pagina11` |
 | **Intro al DOM** | | |
-| `ej09` | Párrafos: agregar, modificar y quitar | `prueba1`+`prueba3`+`prueba4` |
-| `ej10` | Insertar aleatorios | `prueba2` |
+| `ej06` | Párrafos: agregar, modificar y quitar | `prueba1`+`prueba3`+`prueba4` |
+| `ej07` | Insertar aleatorios | `prueba2` |
 | **Operaciones** | | |
-| `ej11` | Operaciones con radio | `prueba5` |
-| `ej12` | Operaciones validadas | `prueba6` |
+| `ej08` | Operaciones con radio | `prueba5` |
+| `ej09` | Operaciones validadas | `prueba6` |
 | **Controles** | | |
-| `ej13` | Radio con doble clic | `prueba7` |
-| `ej14` | Editar campos | `prueba8` |
-| `ej15` | Formularios dinámicos | `prueba9` |
-| `ej16` | Universidades | `prueba10` |
-| `ej17` | Opciones JS | `prueba11` |
+| `ej10` | Radio con doble clic | `prueba7` |
+| `ej11` | Editar campos | `prueba8` |
+| `ej12` | Formularios dinámicos | `prueba9` |
+| `ej13` | Universidades | `prueba10` |
+| `ej14` | Opciones JS | `prueba11` |
 | **Selects dinámicos** | | |
-| `ej18` | Tours de Bolivia | `prueba12` |
+| `ej15` | Tours de Bolivia | `prueba12` |
 | **Checks y radios** | | |
-| `ej19` | Checks: resumen, limpiar y radios | `prueba13`+`prueba14`+`prueba15` |
+| `ej16` | Checks: resumen, limpiar y radios | `prueba13`+`prueba14`+`prueba15` |
 | **Tablas dinámicas** | | |
-| `ej20` | Sumas de tabla | `prueba16` |
-| `ej21` | Tabla con colspan | `prueba17` |
-| `ej22` | Menú de opciones | `prueba18` |
-| `ej23` | Tabla dinámica | `prueba19` |
-| `ej24` | Matriz dinámica | `prueba20` |
+| `ej17` | Sumas de tabla | `prueba16` |
+| `ej18` | Tabla con colspan | `prueba17` |
+| `ej19` | Menú de opciones | `prueba18` |
+| `ej20` | Tabla dinámica | `prueba19` |
+| `ej21` | Matriz dinámica | `prueba20` |
 | **Proyecto final** | | |
-| `ej25` | Encuesta JS | `prueba21` |
+| `ej22` | Encuesta JS | `prueba21` |
 
-Los 25 comparten la misma cabecera: `<!doctype html>`, `lang="es"`,
+Los 22 comparten la misma cabecera: `<!doctype html>`, `lang="es"`,
 charset, viewport, fuentes, Bootstrap antes de `styles.css` y
 `<body class="legacy ejercicio" data-ejercicio="NN">` con una barra de
 contexto (`.ej-head`) que da el número, el título y el vuelta al visor.
@@ -121,8 +118,8 @@ contexto (`.ej-head`) que da el número, el título y el vuelta al visor.
 ### Qué cambió y qué no
 
 - **El cuerpo de cada ejercicio es idéntico al original**, byte a byte
-  salvo la indentación. Se comprobó automáticamente en los 25 (salvo los
-  cuatro unificados: `ej02`, `ej04`, `ej09` y `ej19` concentran ahora cada
+  salvo la indentación. Se comprobó automáticamente en los 22 (salvo los
+  cinco unificados: `ej02`, `ej03`, `ej04`, `ej09` y `ej16` concentran ahora cada
   grupo).
 - Los scripts de `<head>` y `<body>` se conservan en el mismo orden;
   SweetAlert2 se añade sólo donde ya se usaba.
@@ -132,6 +129,7 @@ contexto (`.ej-head`) que da el número, el título y el vuelta al visor.
   `js/app.js`: su módulo `js/pages/pagina4.js` hacía exactamente lo mismo
   que el script del ejercicio y se ejecutaba dos veces. Se borró el módulo
   y hoy su código vive dentro de `ej02`.
+- **Ejercicios fusionados en `ej03` (Formularios Unificados):** `ej03` (Formulario y envío), `ej05` (Formulario validado), `ej06` (Tipos de campo) y `ej08` (Primer JS: saludo) ahora forman una sola página demostrativa con pestañas.
 - Los visores `paginas.html` y `pruebas.html` se sustituyeron por
   `ejercicios.html`.
 

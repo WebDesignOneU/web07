@@ -136,10 +136,12 @@ que uno puede depender de las APIs de otro que esté antes.
 
 ## Páginas que todavía llevan `<script>` inline
 
-los 25 ejercicios (`ej01.html` … `ej25.html`), más `flexbox.html`
+los 22 ejercicios (`ej01.html` … `ej22.html`), más `flexbox.html`
 **no** usan
 `app.js`: son ejercicios de clase con su JS incrustado y así se
 entregaron. Migrarlos es opcional y no afecta al resto.
+
+> **Nota:** `ej03.html` (Formularios Unificados) incluye su lógica JS inline combinando los antiguos `ej03`, `ej05`, `ej06` y `ej08`.
 
 Los ejercicios son la excepción consciente a la arquitectura de este
 README: su código *es* la lección, así que cada uno se basta solo. Por eso
