@@ -85,11 +85,11 @@
   padding: 2.5rem;
 }
 .demo-panel {
-  display: none;
+  display: none !important;
   animation: fadeIn 0.4s ease;
 }
 .demo-panel.active {
-  display: block;
+  display: block !important;
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
