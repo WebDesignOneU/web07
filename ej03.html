@@ -24,6 +24,14 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/ej03-forms.css" />
+    <style>
+      .dynamic-js-title {
+        text-align: center;
+        color: #1e3c72;
+        margin-bottom: 1.5rem;
+        animation: fadeIn 0.6s ease;
+      }
+    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -45,7 +53,7 @@
           </header>
 
           <!-- TABS NAVEGACIÓN -->
-          <ul class="nav demo-tabs" id="formsTabs" role="tablist">
+          <ul class="nav demo-tabs" id="formsTabs" role="tablist" aria-label="Demostraciones de formularios">
             <li class="nav-item">
               <a class="nav-link active" id="tab-basico-tab" data-toggle="tab" href="#tab-basico" role="tab" aria-controls="tab-basico" aria-selected="true">
                 <i>📤</i> Envío Básico
@@ -180,7 +188,7 @@
                 <div class="form-row-demo">
                   <div class="form-group-enhanced">
                     <label for="correo">Email</label>
-                    <input type="email" class="form-control form-control-enhanced" id="correo" placeholder="usuario@ejemplo.com" />
+                    <input type="email" class="form-control form-control-enhanced" id="correo" placeholder="usuario@ejemplo.com" autocomplete="email" />
                   </div>
                   <div class="form-group-enhanced">
                     <label for="archivo">Archivo / Imagen</label>
@@ -189,8 +197,21 @@
                 </div>
                 <div class="form-group-enhanced">
                   <label for="imagen">Imagen (input type=image)</label>
-                  <input type="image" id="imagen" class="image-preview" alt="Vista previa" />
-                  <small class="form-text text-muted">Selecciona una imagen arriba para ver la vista previa aquí</small>
+                  <div class="image-drop-zone" id="imageDropZone" role="button" tabindex="0" aria-label="Suelta una imagen aquí o haz clic para seleccionar">
+                    <img id="imagen" class="image-preview" alt="Vista previa de la imagen seleccionada" hidden />
+                    <div class="drop-zone-placeholder" id="dropPlaceholder">
+                      <span class="drop-icon">📷</span>
+                      <span>Arrastra una imagen aquí o haz clic</span>
+                      <small>Formatos: JPG, PNG, GIF, WebP (máx. 5 MB)</small>
+                    </div>
+                    <div class="image-info" id="imageInfo" hidden>
+                      <div class="info-row"><strong>Archivo:</strong> <span id="infoName">-</span></div>
+                      <div class="info-row"><strong>Tamaño:</strong> <span id="infoSize">-</span></div>
+                      <div class="info-row"><strong>Dimensiones:</strong> <span id="infoDimensions">-</span></div>
+                    </div>
+                    <button type="button" class="btn-clear-image" id="btnClearImage" aria-label="Eliminar imagen" hidden>✕</button>
+                  </div>
+                  <small class="form-text text-muted">Selecciona una imagen en el campo de archivo, arrastra aquí o usa el botón para limpiar.</small>
                 </div>
                 <div class="d-flex gap-2 flex-wrap">
                   <button type="button" id="btnEnviarTipos" class="btn btn-demo btn-primary-demo">📊 Mostrar Datos</button>
@@ -229,7 +250,7 @@
             <!-- TAB 4: PRIMER JS SALUDO -->
             <div class="tab-pane fade demo-panel" id="tab-saludo" role="tabpanel" aria-labelledby="tab-saludo-tab">
               <h3>Primer JavaScript: Saludo</h3>
-              <p class="lead">Ejercicio introductorio: crea un <h1> dinámicamente al cargar y saluda al hacer clic.</p>
+              <p class="lead">Ejercicio introductorio: crea un dinámicamente al cargar y saluda al hacer clic.</p>
 
               <form id="formSaludo" novalidate>
                 <div class="form-group-enhanced">
@@ -238,17 +259,25 @@
                   <div class="invalid-feedback">Ingresa tu nombre para saludar</div>
                   <div class="valid-feedback">Listo para saludar</div>
                 </div>
-                <button type="button" id="btnSaludo" class="btn btn-demo btn-primary-demo">👋 Saludar</button>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button type="button" id="btnSaludo" class="btn btn-demo btn-primary-demo">👋 Saludar</button>
+                  <button type="button" id="btnSaludoHistorial" class="btn btn-demo btn-secondary-demo">📋 Ver Historial</button>
+                </div>
               </form>
 
               <div class="greeting-output" id="saludoOutput" aria-live="polite"></div>
+                <div class="greeting-history" id="saludoHistorial" hidden>
+                  <h5>Historial de saludos</h5>
+                  <ul class="list-unstyled mb-0" id="listaSaludos"></ul>
+                  <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="btnLimpiarHistorial">Limpiar historial</button>
+                </div>
 
               <div class="demo-section-divider"></div>
 
               <div class="info-card">
                 <h5>💡 Qué hace este ejercicio</h5>
                 <ul>
-                  <li>Al cargar la página, crea dinámicamente un <code><h1></code> con <code>document.createElement</code> y lo inserta con <code>prepend()</code></li>
+                  <li>Al cargar la página, crea dinámicamente un formulario con <code>document.createElement</code> y lo inserta con <code>prepend()</code></li>
                   <li>Al hacer clic en "Saludar", muestra un SweetAlert2 con el nombre ingresado</li>
                   <li>Demuestra manipulación básica del DOM y eventos</li>
                 </ul>
@@ -275,304 +304,603 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
     </div>
 
     <script>
-      (function() {
+      (() => {
         'use strict';
 
-        // === TAB SWITCHING ===
-        const tabs = document.querySelectorAll('#formsTabs .nav-link');
-        const panels = document.querySelectorAll('.demo-panel');
-        const tabList = document.getElementById('formsTabs');
+        // ============================================================
+        // UTILIDADES
+        // ============================================================
+
+        const $ = (selector, parent = document) => parent.querySelector(selector);
+        const $$ = (selector, parent = document) =>
+          [...parent.querySelectorAll(selector)];
+
+        const escapeHTML = (value = '') =>
+          String(value).replace(/[&<>"']/g, character => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+          }[character]));
+
+        const showResult = (element, content) => {
+          element.innerHTML = content;
+          element.classList.add('has-data');
+        };
+
+        const clearResult = (element, message = 'Formulario limpiado') => {
+          element.innerHTML = `<small class="text-muted">${message}</small>`;
+          element.classList.remove('has-data');
+        };
+
+        const setFieldState = (field, state = '') => {
+          field.classList.remove('is-valid', 'is-invalid');
+
+          if (state) {
+            field.classList.add(`is-${state}`);
+          }
+        };
+
+        // ============================================================
+        // TABS
+        // ============================================================
+
+        const tabs = $$('#formsTabs .nav-link');
+        const panels = $$('.demo-panel');
         let currentTabIndex = 0;
 
-        function switchTab(index, pushState = true) {
-          const clampedIndex = Math.max(0, Math.min(index, tabs.length - 1));
-          if (clampedIndex === currentTabIndex) return;
+        function switchTab(index, updateHash = true) {
+          if (!tabs.length) return;
 
-          tabs.forEach(t => t.classList.remove('active'));
-          panels.forEach(p => p.classList.remove('active'));
+          const nextIndex = Math.max(0, Math.min(index, tabs.length - 1));
 
-          tabs[clampedIndex].classList.add('active');
-          panels[clampedIndex].classList.add('active');
+          tabs.forEach((tab, i) => {
+            const active = i === nextIndex;
+            tab.classList.toggle('active', active);
+            tab.setAttribute('aria-selected', String(active));
+            tab.setAttribute('tabindex', active ? '0' : '-1');
+          });
 
-          // Focus management for accessibility
-          tabs[clampedIndex].focus();
+          panels.forEach((panel, i) => {
+            const active = i === nextIndex;
+            panel.classList.toggle('active', active);
+            panel.classList.toggle('show', active);
+            panel.hidden = !active;
+          });
 
-          currentTabIndex = clampedIndex;
+          currentTabIndex = nextIndex;
 
-          if (pushState) {
-            const hash = tabs[clampedIndex].getAttribute('href');
-            history.replaceState(null, '', hash);
+          if (updateHash) {
+            history.replaceState(
+              null,
+              '',
+              tabs[nextIndex].getAttribute('href')
+            );
           }
+        }
+
+        function initTabsFromHash() {
+          const hash = window.location.hash;
+          const index = tabs.findIndex(
+            tab => tab.getAttribute('href') === hash
+          );
+
+          switchTab(index >= 0 ? index : 0, false);
         }
 
         tabs.forEach((tab, index) => {
-          tab.addEventListener('click', function(e) {
-            e.preventDefault();
+          tab.addEventListener('click', event => {
+            event.preventDefault();
             switchTab(index);
           });
 
-          // Keyboard navigation within tab list
-          tab.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight') {
-              e.preventDefault();
-              switchTab((index + 1) % tabs.length);
-            } else if (e.key === 'ArrowLeft') {
-              e.preventDefault();
-              switchTab((index - 1 + tabs.length) % tabs.length);
-            } else if (e.key === 'Home') {
-              e.preventDefault();
-              switchTab(0);
-            } else if (e.key === 'End') {
-              e.preventDefault();
-              switchTab(tabs.length - 1);
+          tab.addEventListener('keydown', event => {
+            let nextIndex = null;
+
+            switch (event.key) {
+              case 'ArrowRight':
+                nextIndex = (index + 1) % tabs.length;
+                break;
+              case 'ArrowLeft':
+                nextIndex = (index - 1 + tabs.length) % tabs.length;
+                break;
+              case 'Home':
+                nextIndex = 0;
+                break;
+              case 'End':
+                nextIndex = tabs.length - 1;
+                break;
+              default:
+                return;
             }
+
+            event.preventDefault();
+            switchTab(nextIndex);
+            tabs[nextIndex].focus();
           });
         });
 
-        // Initialize from URL hash
-        function initFromHash() {
-          const hash = location.hash;
-          if (hash) {
-            const targetTab = document.querySelector(`#formsTabs .nav-link[href="${hash}"]`);
-            if (targetTab) {
-              const index = Array.from(tabs).indexOf(targetTab);
-              if (index !== -1) {
-                switchTab(index, false);
-                return;
-              }
-            }
-          }
-          // Default to first tab
-          switchTab(0, false);
-        }
+        window.addEventListener('hashchange', initTabsFromHash);
 
-        initFromHash();
+        // ============================================================
+        // TAB 1 - ENVÍO BÁSICO
+        // ============================================================
 
-        // Handle browser back/forward
-        window.addEventListener('hashchange', () => {
-          initFromHash();
-        });
+        const formBasico = $('#formBasico');
+        const txtDato = $('#txtDato');
+        const resultBasico = $('#resultBasico');
 
-        // === TAB 1: ENVÍO BÁSICO ===
-        const formBasico = document.getElementById('formBasico');
-        const resultBasico = document.getElementById('resultBasico');
-        const txtDato = document.getElementById('txtDato');
-        
-        formBasico.addEventListener('submit', function(e) {
-          e.preventDefault();
+        formBasico.addEventListener('submit', event => {
+          event.preventDefault();
+
           const valor = txtDato.value.trim();
+
           if (!valor) {
+            setFieldState(txtDato, 'invalid');
             Swal.fire('Atención', 'Por favor ingresa un dato', 'warning');
             txtDato.focus();
             return;
           }
-          resultBasico.innerHTML = '<pre>Dato enviado: <strong>' + valor.replace(/</g, '<').replace(/>/g, '>') + '</strong></pre>';
-          resultBasico.classList.add('has-data');
-          Swal.fire('¡Enviado!', 'Dato: ' + valor, 'success');
-        });
 
-        // Enter to submit
-        txtDato.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            formBasico.dispatchEvent(new Event('submit'));
-          }
-        });
+          setFieldState(txtDato, 'valid');
 
-        // === TAB 2: FORMULARIO VALIDADO ===
-        const formValidado = document.getElementById('formValidado');
-        const nombreInput = document.getElementById('nombre');
-        const fechaInput = document.getElementById('fecha');
-        const resultValidado = document.getElementById('resultValidado');
-        const btnCancelar = document.getElementById('btnCancelar');
+          showResult(
+            resultBasico,
+            `<pre>Dato enviado: <strong>${escapeHTML(valor)}</strong></pre>`
+          );
 
-        // Validación en tiempo real: solo letras y espacios
-        nombreInput.addEventListener('input', function() {
-          const regex = /^[a-zA-Z\s]*$/;
-          if (!regex.test(this.value)) {
-            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
-            this.classList.add('is-invalid');
-            this.classList.remove('is-valid');
-          } else if (this.value.trim()) {
-            this.classList.remove('is-invalid');
-            this.classList.add('is-valid');
-          } else {
-            this.classList.remove('is-invalid', 'is-valid');
-          }
-        });
-
-        fechaInput.addEventListener('change', function() {
-          if (this.value) {
-            this.classList.remove('is-invalid');
-            this.classList.add('is-valid');
-          } else {
-            this.classList.remove('is-valid', 'is-invalid');
-          }
-        });
-
-        formValidado.addEventListener('submit', function(e) {
-          e.preventDefault();
-          let valido = true;
-          
-          if (!nombreInput.value.trim()) {
-            nombreInput.classList.add('is-invalid');
-            valido = false;
-          }
-          if (!fechaInput.value) {
-            fechaInput.classList.add('is-invalid');
-            valido = false;
-          }
-          
-          if (!valido) {
-            Swal.fire('Error', 'Completa todos los campos correctamente', 'error');
-            // Focus first invalid
-            const firstInvalid = formValidado.querySelector('.is-invalid');
-            if (firstInvalid) firstInvalid.focus();
-            return;
-          }
-          
-          const texto = 'Nombre: ' + nombreInput.value + '\nFecha: ' + fechaInput.value;
-          resultValidado.innerHTML = '<pre>' + texto.replace(/</g, '<').replace(/>/g, '>') + '</pre>';
-          resultValidado.classList.add('has-data');
-          Swal.fire('¡Enviado!', texto, 'success');
-        });
-
-        btnCancelar.addEventListener('click', function() {
-          nombreInput.value = '';
-          fechaInput.value = '';
-          nombreInput.classList.remove('is-valid', 'is-invalid');
-          fechaInput.classList.remove('is-valid', 'is-invalid');
-          resultValidado.innerHTML = '<small class="text-muted">Formulario limpiado</small>';
-          resultValidado.classList.remove('has-data');
-          Swal.fire('Cancelado', 'Campos limpiados', 'info');
-          nombreInput.focus();
-        });
-
-        // === TAB 3: TIPOS DE CAMPO ===
-        const colorInput = document.getElementById('color');
-        const colorPreview = document.getElementById('colorPreview');
-        const archivoInput = document.getElementById('archivo');
-        const imagenPreview = document.getElementById('imagen');
-        const btnEnviarTipos = document.getElementById('btnEnviarTipos');
-        const btnLimpiarTipos = document.getElementById('btnLimpiarTipos');
-        const resultTipos = document.getElementById('resultTipos');
-
-        // Color preview
-        colorInput.addEventListener('input', function() {
-          colorPreview.style.background = this.value;
-        });
-
-        // File preview
-        archivoInput.addEventListener('change', function(event) {
-          const file = event.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-              imagenPreview.setAttribute('src', e.target.result);
-              imagenPreview.style.display = 'inline-block';
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-
-        btnEnviarTipos.addEventListener('click', function() {
-          const data = {
-            nombre: document.getElementById('nombre2').value || '(vacío)',
-            fecha: document.getElementById('fecha2').value || '(vacío)',
-            color: colorInput.value,
-            hora: document.getElementById('hora').value || '(vacío)',
-            correo: document.getElementById('correo').value || '(vacío)',
-            archivo: archivoInput.files[0] ? archivoInput.files[0].name : '(ninguno)',
-            timestamp: new Date().toLocaleString()
-          };
-          
-          let output = '';
-          for (const [key, value] of Object.entries(data)) {
-            output += key.charAt(0).toUpperCase() + key.slice(1) + ': ' + value + '\n';
-          }
-          
-          resultTipos.innerHTML = '<pre>' + output.replace(/</g, '<').replace(/>/g, '>') + '</pre>';
-          resultTipos.classList.add('has-data');
-          
           Swal.fire({
-            title: 'Datos del Formulario',
-            html: '<pre style="text-align:left; margin:0;">' + output.replace(/</g, '<').replace(/>/g, '>') + '</pre>',
-            icon: 'info',
-            width: '500px'
+            title: '¡Enviado!',
+            text: `Dato: ${valor}`,
+            icon: 'success'
           });
         });
 
-        btnLimpiarTipos.addEventListener('click', function() {
-          document.getElementById('nombre2').value = '';
-          document.getElementById('fecha2').value = '';
-          colorInput.value = '#2a5298';
-          colorPreview.style.background = '#2a5298';
-          document.getElementById('hora').value = '';
-          document.getElementById('correo').value = '';
-          archivoInput.value = '';
-          imagenPreview.style.display = 'none';
-          imagenPreview.removeAttribute('src');
-          resultTipos.innerHTML = '<small class="text-muted">Formulario limpiado</small>';
-          resultTipos.classList.remove('has-data');
-          Swal.fire('Limpiado', 'Todos los campos restablecidos', 'info');
-          document.getElementById('nombre2').focus();
-        });
-
-        // === TAB 4: PRIMER JS SALUDO ===
-        const formSaludo = document.getElementById('formSaludo');
-        const txtPersona = document.getElementById('txtPersona');
-        const btnSaludo = document.getElementById('btnSaludo');
-        const saludoOutput = document.getElementById('saludoOutput');
-
-        // Crear h1 dinámico al cargar (como en el ejercicio original)
-        const h1Dinamico = document.createElement('h1');
-        h1Dinamico.textContent = 'Bienvenido a JavaScript';
-        h1Dinamico.style.cssText = 'text-align:center; color:#1e3c72; margin-bottom:1.5rem; animation:fadeIn 0.6s ease;';
-        document.querySelector('.tab-content-area').prepend(h1Dinamico);
-
-        txtPersona.addEventListener('input', function() {
-          if (this.value.trim()) {
-            this.classList.remove('is-invalid');
-            this.classList.add('is-valid');
+        txtDato.addEventListener('input', () => {
+          if (txtDato.value.trim()) {
+            setFieldState(txtDato, 'valid');
           } else {
-            this.classList.remove('is-valid', 'is-invalid');
+            setFieldState(txtDato);
           }
         });
 
-        btnSaludo.addEventListener('click', function() {
+        // ============================================================
+        // TAB 2 - FORMULARIO VALIDADO
+        // ============================================================
+
+        const formValidado = $('#formValidado');
+        const nombreInput = $('#nombre');
+        const fechaInput = $('#fecha');
+        const resultValidado = $('#resultValidado');
+        const btnCancelar = $('#btnCancelar');
+
+        // Soporta letras españolas: á, é, í, ó, ú, ü y ñ.
+        const nombreRegex = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]*$/;
+
+        function validarNombre() {
+          const valor = nombreInput.value.trim();
+
+          if (!valor) {
+            setFieldState(nombreInput);
+            return false;
+          }
+
+          if (!nombreRegex.test(nombreInput.value)) {
+            setFieldState(nombreInput, 'invalid');
+            return false;
+          }
+
+          setFieldState(nombreInput, 'valid');
+          return true;
+        }
+
+        function validarFecha() {
+          if (!fechaInput.value) {
+            setFieldState(fechaInput);
+            return false;
+          }
+
+          setFieldState(fechaInput, 'valid');
+          return true;
+        }
+
+        nombreInput.addEventListener('input', () => {
+          // Conserva únicamente letras, espacios y caracteres españoles.
+          nombreInput.value = nombreInput.value.replace(
+            /[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]/g,
+            ''
+          );
+          validarNombre();
+        });
+
+        fechaInput.addEventListener('change', validarFecha);
+
+        formValidado.addEventListener('submit', event => {
+          event.preventDefault();
+
+          const nombreValido = validarNombre();
+          const fechaValida = validarFecha();
+
+          if (!nombreValido || !fechaValida) {
+            Swal.fire(
+              'Error',
+              'Completa todos los campos correctamente',
+              'error'
+            );
+
+            const firstInvalid =
+              formValidado.querySelector('.is-invalid');
+
+            if (firstInvalid) firstInvalid.focus();
+            return;
+          }
+
+          const texto =
+            `Nombre: ${nombreInput.value.trim()}\n` +
+            `Fecha: ${fechaInput.value}`;
+
+          showResult(
+            resultValidado,
+            `<pre>${escapeHTML(texto)}</pre>`
+          );
+
+          Swal.fire({
+            title: '¡Enviado!',
+            text: texto,
+            icon: 'success'
+          });
+        });
+
+        btnCancelar.addEventListener('click', () => {
+          formValidado.reset();
+          setFieldState(nombreInput);
+          setFieldState(fechaInput);
+          clearResult(resultValidado);
+          nombreInput.focus();
+
+          Swal.fire(
+            'Cancelado',
+            'Campos limpiados',
+            'info'
+          );
+        });
+
+        // ============================================================
+        // TAB 3 - TIPOS DE CAMPO
+        // ============================================================
+
+        const formTipos = $('#formTipos');
+        const colorInput = $('#color');
+        const colorPreview = $('#colorPreview');
+        const archivoInput = $('#archivo');
+        const imagenPreview = $('#imagen');
+        const btnEnviarTipos = $('#btnEnviarTipos');
+        const btnLimpiarTipos = $('#btnLimpiarTipos');
+        const resultTipos = $('#resultTipos');
+
+        function updateColorPreview() {
+          colorPreview.style.backgroundColor = colorInput.value;
+          colorPreview.setAttribute(
+            'aria-label',
+            `Color seleccionado: ${colorInput.value}`
+          );
+        }
+
+        colorInput.addEventListener('input', updateColorPreview);
+
+        archivoInput.addEventListener('change', event => {
+          const file = event.target.files?.[0];
+
+          if (!file) {
+            resetImagePreview();
+            return;
+          }
+
+          if (!file.type.startsWith('image/')) {
+            archivoInput.value = '';
+            resetImagePreview();
+
+            Swal.fire(
+              'Archivo no válido',
+              'Selecciona una imagen válida.',
+              'warning'
+            );
+            return;
+          }
+
+          if (file.size > 5 * 1024 * 1024) {
+            archivoInput.value = '';
+            resetImagePreview();
+
+            Swal.fire(
+              'Archivo muy grande',
+              'El archivo no debe superar 5 MB.',
+              'warning'
+            );
+            return;
+          }
+
+          const dropZone = $('#imageDropZone');
+          dropZone.classList.add('loading');
+
+          const reader = new FileReader();
+
+          reader.addEventListener('load', event => {
+            imagenPreview.src = event.target.result;
+            imagenPreview.hidden = false;
+            dropZone.classList.add('has-image');
+            showImageInfo(file);
+            dropZone.classList.remove('loading');
+          });
+
+          reader.addEventListener('error', () => {
+            resetImagePreview();
+            dropZone.classList.remove('loading');
+            Swal.fire('Error', 'No se pudo leer el archivo.', 'error');
+          });
+
+          reader.readAsDataURL(file);
+        });
+
+        // Drag & drop support
+        const dropZone = $('#imageDropZone');
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+          dropZone.addEventListener(eventName, event => {
+            event.preventDefault();
+            event.stopPropagation();
+            dropZone.classList.add('drag-over');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+          dropZone.addEventListener(eventName, event => {
+            event.preventDefault();
+            event.stopPropagation();
+            dropZone.classList.remove('drag-over');
+          });
+        });
+
+        dropZone.addEventListener('drop', event => {
+          const file = event.dataTransfer.files?.[0];
+          if (file && file.type.startsWith('image/')) {
+            archivoInput.files = event.dataTransfer.files;
+            const changeEvent = new Event('change', { bubbles: true });
+            archivoInput.dispatchEvent(changeEvent);
+          }
+        });
+
+        dropZone.addEventListener('click', () => archivoInput.click());
+        dropZone.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            archivoInput.click();
+          }
+        });
+
+        $('#btnClearImage').addEventListener('click', event => {
+          event.stopPropagation();
+          resetImagePreview();
+          archivoInput.value = '';
+        });
+
+        function resetImagePreview() {
+          const dropZone = $('#imageDropZone');
+          imagenPreview.hidden = true;
+          imagenPreview.removeAttribute('src');
+          dropZone.classList.remove('has-image', 'drag-over', 'loading');
+          hideImageInfo();
+        }
+
+        function showImageInfo(file) {
+          $('#infoName').textContent = file.name;
+          $('#infoSize').textContent = formatFileSize(file.size);
+
+          // Obtener dimensiones de la imagen
+          const img = new Image();
+          img.onload = () => {
+            $('#infoDimensions').textContent = `${img.width} × ${img.height} px`;
+          };
+          img.src = imagenPreview.src;
+
+          $('#imageInfo').hidden = false;
+        }
+
+        function hideImageInfo() {
+          $('#imageInfo').hidden = true;
+          $('#infoName').textContent = '-';
+          $('#infoSize').textContent = '-';
+          $('#infoDimensions').textContent = '-';
+        }
+
+        function formatFileSize(bytes) {
+          if (bytes === 0) return '0 Bytes';
+          const k = 1024;
+          const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+          const i = Math.floor(Math.log(bytes) / Math.log(k));
+          return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function getFormTypesData() {
+          const file = archivoInput.files?.[0];
+
+          return {
+            nombre: $('#nombre2').value.trim() || '(vacío)',
+            fecha: $('#fecha2').value || '(vacío)',
+            color: colorInput.value,
+            hora: $('#hora').value || '(vacío)',
+            correo: $('#correo').value.trim() || '(vacío)',
+            archivo: file?.name || '(ninguno)',
+            timestamp: new Date().toLocaleString('es-BO')
+          };
+        }
+
+        function formatFormData(data) {
+          return Object.entries(data)
+            .map(([key, value]) => {
+              const label =
+                key.charAt(0).toUpperCase() + key.slice(1);
+
+              return `${label}: ${value}`;
+            })
+            .join('\n');
+        }
+
+        btnEnviarTipos.addEventListener('click', () => {
+          const data = getFormTypesData();
+          const output = formatFormData(data);
+          const safeOutput = escapeHTML(output);
+
+          showResult(
+            resultTipos,
+            `<pre>${safeOutput}</pre>`
+          );
+
+          Swal.fire({
+            title: 'Datos del Formulario',
+            html: `<pre style="text-align:left;margin:0;">${safeOutput}</pre>`,
+            icon: 'info',
+            width: 500
+          });
+        });
+
+        btnLimpiarTipos.addEventListener('click', () => {
+          formTipos.reset();
+
+          resetImagePreview();
+
+          updateColorPreview();
+          clearResult(resultTipos);
+
+          $('#nombre2').focus();
+
+          Swal.fire(
+            'Limpiado',
+            'Todos los campos fueron restablecidos',
+            'info'
+          );
+        });
+
+        // ============================================================
+        // TAB 4 - PRIMER JAVASCRIPT
+        // ============================================================
+
+        const formSaludo = $('#formSaludo');
+        const txtPersona = $('#txtPersona');
+        const saludoOutput = $('#saludoOutput');
+        const saludoHistorial = $('#saludoHistorial');
+        const listaSaludos = $('#listaSaludos');
+        const btnSaludoHistorial = $('#btnSaludoHistorial');
+        const btnLimpiarHistorial = $('#btnLimpiarHistorial');
+
+        let saludos = [];
+
+        // Crear h1 dinámicamente, manteniendo el objetivo del ejercicio.
+        const h1Dinamico = document.createElement('h1');
+        h1Dinamico.textContent = 'Bienvenido a JavaScript';
+        h1Dinamico.className = 'dynamic-js-title';
+        $('.tab-content-area').prepend(h1Dinamico);
+
+        function saludar() {
           const nombre = txtPersona.value.trim();
+
           if (!nombre) {
-            txtPersona.classList.add('is-invalid');
-            Swal.fire('Atención', 'Ingresa tu nombre para saludar', 'warning');
+            setFieldState(txtPersona, 'invalid');
+
+            Swal.fire(
+              'Atención',
+              'Ingresa tu nombre para saludar',
+              'warning'
+            );
+
             txtPersona.focus();
             return;
           }
-          
-          txtPersona.classList.remove('is-invalid');
-          txtPersona.classList.add('is-valid');
-          
-          saludoOutput.innerHTML = '👋 <strong>¡Hola, ' + nombre.replace(/</g, '<').replace(/>/g, '>') + '!</strong><br><small>Bienvenido a tu primer script JavaScript</small>';
+
+          setFieldState(txtPersona, 'valid');
+
+          saludoOutput.innerHTML =
+            `👋 <strong>¡Hola, ${escapeHTML(nombre)}!</strong>` +
+            `<br><small>Bienvenido a tu primer script JavaScript</small>`;
+
           saludoOutput.style.display = 'block';
+
+          // Agregar al historial
+          agregarAlHistorial(nombre);
+
+          Swal.fire(
+            'Saludo',
+            `¡Hola, ${nombre}!`,
+            'success'
+          );
+        }
+
+        function agregarAlHistorial(nombre) {
+          const ahora = new Date();
+          const hora = ahora.toLocaleTimeString('es-BO', { hour: '2-digit', minute: '2-digit' });
           
-          Swal.fire('Saludo', '¡Hola, ' + nombre + '!', 'success');
+          saludos.unshift({ nombre, hora });
+          
+          // Actualizar UI
+          listaSaludos.innerHTML = saludos.map(s => 
+            `<li>
+              <span class="saludo-time">${escapeHTML(s.hora)}</span>
+              <span class="saludo-name">¡Hola, ${escapeHTML(s.nombre)}!</span>
+            </li>`
+          ).join('');
+          
+          saludoHistorial.hidden = false;
+        }
+
+        btnSaludoHistorial.addEventListener('click', () => {
+          saludoHistorial.hidden = !saludoHistorial.hidden;
+          btnSaludoHistorial.textContent = saludoHistorial.hidden ? '📋 Ver Historial' : '📋 Ocultar Historial';
         });
 
-        // Enter key en txtPersona
-        txtPersona.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            btnSaludo.click();
+        btnLimpiarHistorial.addEventListener('click', () => {
+          saludos = [];
+          listaSaludos.innerHTML = '';
+          saludoHistorial.hidden = true;
+          btnSaludoHistorial.textContent = '📋 Ver Historial';
+          Swal.fire('Historial', 'Se ha limpiado el historial de saludos', 'info');
+        });
+
+        txtPersona.addEventListener('input', () => {
+          if (txtPersona.value.trim()) {
+            setFieldState(txtPersona, 'valid');
+          } else {
+            setFieldState(txtPersona);
           }
         });
 
-        // Global keyboard shortcut: Ctrl+1-4 to switch tabs
-        document.addEventListener('keydown', function(e) {
-          if (e.ctrlKey && e.key >= '1' && e.key <= '4') {
-            e.preventDefault();
-            switchTab(parseInt(e.key) - 1);
+        formSaludo.addEventListener('submit', event => {
+          event.preventDefault();
+          saludar();
+        });
+
+        // ============================================================
+        // ATAJOS DE TECLADO
+        // Ctrl + 1 ... Ctrl + 4 cambia de pestaña.
+        // ============================================================
+
+        document.addEventListener('keydown', event => {
+          if (
+            event.ctrlKey &&
+            /^[1-4]$/.test(event.key)
+          ) {
+            event.preventDefault();
+            switchTab(Number(event.key) - 1);
+            tabs[Number(event.key) - 1].focus();
           }
         });
 
+        // ============================================================
+        // INICIALIZACIÓN
+        // ============================================================
+
+        updateColorPreview();
+        initTabsFromHash();
       })();
     </script>
 </body>
