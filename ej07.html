@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>07 · Matriz 3x3 — Ejercicios Web07</title>
+    <title>07 · Insertar aleatorios — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 07 de Web07: Matriz 3x3."
+      content="Ejercicio 07 de Web07: Insertar aleatorios."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,35 +28,16 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function cargar() {
-          var matriz = new Array(3); // vector - columnas
-          let cont = 0;
-          for (let i = 0; i < 3; i++) matriz[i] = new Array(3); // vector - filas
-
-          for (let i = 0; i < 3; i++) {
-            // cargo la matriz
-            for (let j = 0; j < 3; j++) {
-              matriz[i][j] = ++cont; // pre incremento
-            }
-          }
-
-          var table = document.createElement("table");
-          table.className = "table table-bordered";
-          for (let i = 0; i < 3; i++) {
-            // imprimo la matriz en una tabla
-            var row = document.createElement("tr");
-            for (let j = 0; j < 3; j++) {
-              var cell = document.createElement("td");
-              cell.textContent = matriz[i][j];
-              row.appendChild(cell);
-            }
-            table.appendChild(row);
-          }
-          document.body.appendChild(table);
+        function insertTexto() {
+          document.querySelectorAll("p").forEach(function (parrafo) {
+            var texto = (Math.random() * 1000).toFixed() + ") ";
+            parrafo.textContent = texto + parrafo.textContent;
+          });
         }
 
-        // Llamar a la función cargar() al ingresar a la página
-        cargar();
+        document.getElementById("btnInsertar").addEventListener("click", function () {
+          insertTexto();
+        });
       });
         </script>
   </head>
@@ -65,9 +46,13 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej07" class="ej-back">← Ejercicios</a>
       <span class="ej-num">07</span>
-      <span class="ej-name">Matriz 3x3</span>
+      <span class="ej-name">Insertar aleatorios</span>
     </header>
 
-    <p>Matrices</p>
+    <button id="btnInsertar" class="btn btn-primary">Insertar textos</button>
+    <p>Este es el parrafo uno</p>
+    <p>Este es le parrafo dos</p>
+    <p>Este es el parrafo tres</p>
+    <p>Este es el parrafo cuatro</p>
   </body>
 </html>

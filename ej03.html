@@ -27,7 +27,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
-      /* Estilos específicos para ej03 - Formularios Unificados */
+      /* Estilos específicos - Formularios Unificados */
       .forms-showcase {
         background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
         min-height: 100vh;
@@ -368,22 +368,22 @@
           <ul class="nav demo-tabs" id="formsTabs" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="tab-basico-tab" data-toggle="tab" href="#tab-basico" role="tab" aria-controls="tab-basico" aria-selected="true">
-                <i>📤</i> Envío Básico (ej03)
+                <i>📤</i> Envío Básico
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="tab-validado-tab" data-toggle="tab" href="#tab-validado" role="tab" aria-controls="tab-validado" aria-selected="false">
-                <i>✅</i> Validado (ej05)
+                <i>✅</i> Validado
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="tab-tipos-tab" data-toggle="tab" href="#tab-tipos" role="tab" aria-controls="tab-tipos" aria-selected="false">
-                <i>🎨</i> Tipos de Campo (ej06)
+                <i>🎨</i> Tipos de Campo
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="tab-saludo-tab" data-toggle="tab" href="#tab-saludo" role="tab" aria-controls="tab-saludo" aria-selected="false">
-                <i>👋</i> Primer JS (ej08)
+                <i>👋</i> Primer JS
               </a>
             </li>
           </ul>
@@ -391,9 +391,9 @@
           <!-- CONTENIDO TABS -->
           <div class="tab-content-area" id="formsTabContent">
             
-            <!-- TAB 1: ENVÍO BÁSICO (ej03) -->
+            <!-- TAB 1: ENVÍO BÁSICO -->
             <div class="tab-pane fade show active demo-panel" id="tab-basico" role="tabpanel" aria-labelledby="tab-basico-tab">
-              <h3>Envío Básico <span>ej03</span></h3>
+              <h3>Envío Básico</h3>
               <p class="lead">Formulario simple con un campo de texto y botón de envío. Muestra el valor ingresado mediante SweetAlert2.</p>
 
               <form id="formBasico" novalidate>
@@ -420,9 +420,9 @@
               </div>
             </div>
 
-            <!-- TAB 2: FORMULARIO VALIDADO (ej05) -->
+            <!-- TAB 2: FORMULARIO VALIDADO -->
             <div class="tab-pane fade demo-panel" id="tab-validado" role="tabpanel" aria-labelledby="tab-validado-tab">
-              <h3>Formulario Validado <span>ej05</span></h3>
+              <h3>Formulario Validado</h3>
               <p class="lead">Validación en tiempo real: nombre solo letras/espacios, fecha requerida, botones Enviar y Cancelar.</p>
 
               <form id="formValidado" novalidate>
@@ -466,9 +466,9 @@
               </div>
             </div>
 
-            <!-- TAB 3: TIPOS DE CAMPO (ej06) -->
+            <!-- TAB 3: TIPOS DE CAMPO -->
             <div class="tab-pane fade demo-panel" id="tab-tipos" role="tabpanel" aria-labelledby="tab-tipos-tab">
-              <h3>Tipos de Campo HTML5 <span>ej06</span></h3>
+              <h3>Tipos de Campo HTML5</h3>
               <p class="lead">Demostración de input types modernos: color, file, email, time, image. Con vista previa y limpieza.</p>
 
               <form id="formTipos" novalidate>
@@ -546,9 +546,9 @@
               </div>
             </div>
 
-            <!-- TAB 4: PRIMER JS SALUDO (ej08) -->
+            <!-- TAB 4: PRIMER JS SALUDO -->
             <div class="tab-pane fade demo-panel" id="tab-saludo" role="tabpanel" aria-labelledby="tab-saludo-tab">
-              <h3>Primer JavaScript: Saludo <span>ej08</span></h3>
+              <h3>Primer JavaScript: Saludo</h3>
               <p class="lead">Ejercicio introductorio: crea un <h1> dinámicamente al cargar y saluda al hacer clic.</p>
 
               <form id="formSaludo" novalidate>
@@ -613,7 +613,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           });
         });
 
-        // === TAB 1: ENVÍO BÁSICO (ej03) ===
+        // === TAB 1: ENVÍO BÁSICO ===
         const formBasico = document.getElementById('formBasico');
         const resultBasico = document.getElementById('resultBasico');
         
@@ -629,7 +629,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           Swal.fire('¡Enviado!', 'Dato: ' + valor, 'success');
         });
 
-        // === TAB 2: FORMULARIO VALIDADO (ej05) ===
+        // === TAB 2: FORMULARIO VALIDADO ===
         const formValidado = document.getElementById('formValidado');
         const nombreInput = document.getElementById('nombre');
         const fechaInput = document.getElementById('fecha');
@@ -694,7 +694,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           Swal.fire('Cancelado', 'Campos limpiados', 'info');
         });
 
-        // === TAB 3: TIPOS DE CAMPO (ej06) ===
+        // === TAB 3: TIPOS DE CAMPO ===
         const colorInput = document.getElementById('color');
         const colorPreview = document.getElementById('colorPreview');
         const archivoInput = document.getElementById('archivo');
@@ -763,7 +763,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           Swal.fire('Limpiado', 'Todos los campos restablecidos', 'info');
         });
 
-        // === TAB 4: PRIMER JS SALUDO (ej08) ===
+        // === TAB 4: PRIMER JS SALUDO ===
         const formSaludo = document.getElementById('formSaludo');
         const txtPersona = document.getElementById('txtPersona');
         const btnSaludo = document.getElementById('btnSaludo');

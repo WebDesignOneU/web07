@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>14 · Editar campos — Ejercicios Web07</title>
+    <title>14 · Opciones JS — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 14 de Web07: Editar campos."
+      content="Ejercicio 14 de Web07: Opciones JS."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,18 +28,29 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function eliminaPrimerCampo() {
-          var campos = document.querySelectorAll('form[name="formUno"] input');
-          if (campos.length > 0) {
-            campos[0].remove();
+        function eliminaOption() {
+          var objetoSelect = document.querySelectorAll("option");
+          if (objetoSelect.length > 1) {
+            objetoSelect.forEach(function (option, index) {
+              if (index > 0 && option.selected) {
+                Swal.fire("Mensaje", "Eligió el valor " + option.value, "info");
+                option.remove();
+              }
+            });
           } else {
-            Swal.fire("Mensaje", "¡No existen más campos!", "error");
+            Swal.fire(
+              "Mensaje",
+              "¡No hay más opciones para eliminar!",
+              "error"
+            );
           }
         }
 
-        document.getElementById("btnEliminar").addEventListener("click", function () {
-          eliminaPrimerCampo();
-        });
+        document
+          .querySelector("input[name='eliminaOpcion']")
+          .addEventListener("click", function () {
+            eliminaOption();
+          });
       });
         </script>
   </head>
@@ -48,20 +59,19 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej14" class="ej-back">← Ejercicios</a>
       <span class="ej-num">14</span>
-      <span class="ej-name">Editar campos</span>
+      <span class="ej-name">Opciones JS</span>
     </header>
 
-    <button id="btnEliminar" class="btn btn-primary">
-      Eliminar primer campo
-    </button>
-    <br />
-    <form name="formUno" action="">
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 1" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 2" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 3" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 4" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 5" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 6" /><br />
-    </form>
+    <input type="button" name="eliminaOpcion" class="btn btn-primary" value="Eliminar opción" />
+    <br /><br />
+    <select id="idComponentes" name="componentes" class="form-control" size="1">
+      <option value="0">Elija</option>
+      <option value="2">Discos duros</option>
+      <option value="3">Tarjetas madre</option>
+      <option value="4">Memorias RAM</option>
+      <option value="5">Tarjetas de video</option>
+      <option value="1">Lectores de DVD</option>
+      <option value="6">Teclados</option>
+    </select>
   </body>
 </html>

@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>21 · Tabla con colspan — Ejercicios Web07</title>
+    <title>21 · Matriz dinámica — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 21 de Web07: Tabla con colspan."
+      content="Ejercicio 21 de Web07: Matriz dinámica."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +16,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
     <link
@@ -25,75 +24,99 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script>
-      function verEstructuraDeTabla() {
-        var tabla = document.getElementById("tablaMaestra");
-        Swal.fire("Estructura Tabla", tabla.innerHTML, "info");
+    <script type="text/javascript">
+      var num_fila_nueva=0;
+      function load() {
+          document.forms["formEntrada"].numeroImpar.value="";
+          document.forms["formEntrada"].cmdNuevo.disabled=true;
+          document.forms["formEntrada"].cmdNuevo.disabled = true;
+          document.forms["formEntrada"].numeroImpar.focus();
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        function agregarNuevaFila() {
-          var tabla = document.getElementById("tablaMaestra");
-          var fila = document.createElement("tr");
-          var numColumnas = 1 + Math.floor(Math.random() * 5);
-          var ubiColspan = Math.floor(Math.random() * numColumnas);
-          for (var i = 0; i <= numColumnas; i++) {
-            var celda = document.createElement("td");
-            var datoDeCelda = Math.floor(Math.random() * 1000);
-            var nColspan = 7 - numColumnas;
-            if (i == ubiColspan) celda.setAttribute("colspan", nColspan);
-            celda.textContent = datoDeCelda;
-            fila.appendChild(celda);
+      function valida() {
+          nImp = document.forms["formEntrada"].numeroImpar.value;
+          if ((isNaN(nImp)) || ( nImp % 2 == 0) )
+          return false;
+          else
+          return true;
+      }
+
+      function generarCuadradoMagico() {
+          if (valida()) {
+              nImpar=document.forms["formEntrada"].numeroImpar.value;
+              num_fila_nueva = 0;
+              tabla = document.getElementById("id_miTabla");
+              nFilas = document.getElementById('id_miTabla').rows.length;
+              for(f=0;f<nImpar;f++) {
+                  // creamos una nueva fila en la tabla
+                  fila = tabla.insertRow(num_fila_nueva++);
+                  for(c=0;c<nImpar;c++) {
+                      dato = "0";
+                      celda = fila.insertCell(c);
+                      currenttext = document.createTextNode(dato);
+                      celda.appendChild(currenttext);
+                      fila.appendChild(celda);
+                  }
+              }
+              document.forms["formEntrada"].cmdNuevo.disabled = false;
+              document.forms["formEntrada"].numeroImpar.disabled = true;
+              // generamos el cuadrado magico
+              fila = 0;
+              columna = Math.floor(nImpar/2);
+              elemento = 1;
+              while(elemento<=nImpar*nImpar) {
+                  document.getElementById('id_miTabla').rows[fila].cells[columna].innerHTML = elemento++;
+                  ftempo = (eval(fila)+eval(nImpar)-1) % eval(nImpar);
+                  ctempo = (eval(columna)+1) % eval(nImpar);
+                  if (document.getElementById('id_miTabla').rows[ftempo].cells[ctempo].innerHTML=="0") {
+                      fila=ftempo;
+                      columna=ctempo;
+                  } else {
+                      fila++;
+                  }
+              }
           }
-          tabla.appendChild(fila);
-        }
+          else
+          {
+              alert("Debe ingresar un numero impar!");
+              load();
+          }
+      }
 
-        document
-          .getElementById("btnAgregar")
-          .addEventListener("click", function () {
-            agregarNuevaFila();
-          });
-
-        document
-          .getElementById("btnEstructurar")
-          .addEventListener("click", function () {
-            verEstructuraDeTabla();
-          });
-      });
-    </script>
+      function eliminaTabla() {
+          //nImpar=document.forms["formEntrada"].numeroImpar.value;
+          document.forms["formEntrada"].numeroImpar.disabled = false;
+          document.forms["formEntrada"].numeroImpar.value = "";
+          document.forms["formEntrada"].numeroImpar.focus();
+          // eliminamos la tabla
+          nFilas=document.getElementById('id_miTabla').rows.length;
+          nFilas--;
+          for (i=nFilas;i>=0;i--) {
+              p= document.getElementById('id_miTabla').rows[i];
+              p.parentNode.removeChild(p);
+          }
+          load();
+      }
+        </script>
   </head>
 
-  <body
-    class="legacy ejercicio"
-    data-ejercicio="21"
-    onLoad="verEstructuraDeTabla()"
-  >
+  <body class="legacy ejercicio" data-ejercicio="21" onload="load()">
     <header class="ej-head">
       <a href="ejercicios.html#ej21" class="ej-back">← Ejercicios</a>
       <span class="ej-num">21</span>
-      <span class="ej-name">Tabla con colspan</span>
+      <span class="ej-name">Matriz dinámica</span>
     </header>
 
-    <button id="btnAgregar" class="btn btn-primary">
-      Agregar fila de datos
-    </button>
-    <button id="btnEstructurar" class="btn btn-primary">
-      Ver estructura de la tabla
-    </button>
-    <table id="tablaMaestra" class="table table-striped table-bordered">
-      <tr>
-        <td>La Paz</td>
-        <td>Oruro</td>
-        <td>Tarija</td>
-        <td>Pando</td>
-        <td colspan="2">Beni</td>
-        <td>Potosi</td>
-      </tr>
-      <tr>
-        <td>Pando</td>
-        <td colspan="5">Beni</td>
-        <td>Chuquisaca</td>
-      </tr>
-    </table>
+    <form id="formEntrada" action="">
+        Ingrese un numero impar:
+        <input type="text" id="numeroImpar" value="" maxlength="3" size="3" class="form-control" />
+        <input type="button" id="cmdNuevo" class="btn btn-primary" value="Nuevo" onclick="eliminaTabla();" />
+    </form>
+    <form id="formResultado" action="">
+        <input type="button" id="cmdBajarDatos" class="btn btn-primary"
+        value="Generar" onclick="generarCuadradoMagico();" />
+        <table class="table table-bordered" id="id_miTabla" />
+        </table>
+    </form>
   </body>
 </html>

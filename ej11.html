@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>11 · Operaciones con radio — Ejercicios Web07</title>
+    <title>11 · Editar campos — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 11 de Web07: Operaciones con radio."
+      content="Ejercicio 11 de Web07: Editar campos."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,37 +28,18 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function operar(opcion) {
-          var dato1 = document.getElementById("campo1").value;
-          var dato2 = document.getElementById("campo2").value;
-          var resultado;
-          switch (opcion) {
-            case "1":
-              resultado = "La suma es = " + (Number(dato1) + Number(dato2));
-              break;
-            case "2":
-              resultado = "La resta es = " + (Number(dato1) - Number(dato2));
-              break;
-            case "3":
-              resultado =
-                "La multiplicación es = " + Number(dato1) * Number(dato2);
-              break;
-            case "4":
-              if (dato2 != 0)
-                resultado = "La división es = " + Number(dato1) / Number(dato2);
-              else resultado = "Indefinido";
-              break;
+        function eliminaPrimerCampo() {
+          var campos = document.querySelectorAll('form[name="formUno"] input');
+          if (campos.length > 0) {
+            campos[0].remove();
+          } else {
+            Swal.fire("Mensaje", "¡No existen más campos!", "error");
           }
-          Swal.fire("Mensaje", resultado.toString(), "success");
         }
 
-        document
-          .querySelectorAll('input[name="grupo"]')
-          .forEach(function (radio) {
-            radio.addEventListener("click", function () {
-              operar(this.value);
-            });
-          });
+        document.getElementById("btnEliminar").addEventListener("click", function () {
+          eliminaPrimerCampo();
+        });
       });
         </script>
   </head>
@@ -67,28 +48,20 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej11" class="ej-back">← Ejercicios</a>
       <span class="ej-num">11</span>
-      <span class="ej-name">Operaciones con radio</span>
+      <span class="ej-name">Editar campos</span>
     </header>
 
-    <div class="form-group">
-      <p>Ingrese un número: <input type="text" value="" id="campo1" class="form-control" /></p>
-      <p>Ingrese otro número: <input type="text" value="" id="campo2" class="form-control" /></p>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="grupo" value="1" id="grupo1" />
-        <label class="form-check-label" for="grupo1">Suma</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="grupo" value="2" id="grupo2" />
-        <label class="form-check-label" for="grupo2">Resta</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="grupo" value="3" id="grupo3" />
-        <label class="form-check-label" for="grupo3">Multiplicacion</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="grupo" value="4" id="grupo4" />
-        <label class="form-check-label" for="grupo4">Division</label>
-      </div>
-    </div>
+    <button id="btnEliminar" class="btn btn-primary">
+      Eliminar primer campo
+    </button>
+    <br />
+    <form name="formUno" action="">
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 1" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 2" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 3" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 4" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 5" /><br />
+      <input type="text" id="campo1" class="form-control" value="campo de edicion 6" /><br />
+    </form>
   </body>
 </html>

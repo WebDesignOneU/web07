@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>19 · Checks: resumen, limpiar y radios — Ejercicios Web07</title>
+    <title>19 · Menú de opciones — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 19 de Web07: checkboxes y radios generados con el DOM."
+      content="Ejercicio 19 de Web07: Menú de opciones."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,114 +24,86 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function (){
+          var flagArc = 0;
+          var flagGes = 0;
+          var flagRep = 0;
 
-    <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", function () {
-        var value1 = 0;
-        var radioNum = 1;
-
-        function agregarCheckBox() {
-          var objetoCheck = document.getElementById("idCheck");
-          var objetoCheckItem = document.createElement("input");
-          objetoCheckItem.type = "checkbox";
-          objetoCheckItem.className = "form-check-input";
-          objetoCheckItem.name = "Check" + value1;
-          objetoCheckItem.value = value1;
-          var objetoTextNodo = document.createElement("span");
-          objetoTextNodo.textContent = "Check " + value1++;
-          var objetoLabel = document.createElement("label");
-          objetoLabel.className = "form-check";
-          objetoLabel.appendChild(objetoCheckItem);
-          objetoLabel.appendChild(objetoTextNodo);
-          objetoCheck.appendChild(objetoLabel);
-        }
-
-        function quitarCheckBox() {
-          var cbx = document.querySelectorAll("form[name='formCheck'] input");
-          if (cbx.length > 0) {
-            var primero = cbx[0];
-            var etiqueta = primero.closest("label");
-            if (etiqueta) {
-              etiqueta.remove();
-            } else {
-              primero.remove();
-            }
-          } else {
-            Swal.fire("Mensaje", "No existe más opciones", "error");
+          function archivo() {
+              if (flagArc == 0) {
+                  flagArc = 1;
+                  var arrayArchivo = ["Productos", "Proveedores", "Clientes", "Empleados"];
+                  var itemNuevo = document.getElementById("idArc");
+                  for (var i = 0; i < arrayArchivo.length; i++) {
+                  var nuevoLi = document.createElement("li");
+                  nuevoLi.textContent = arrayArchivo[i];
+                  itemNuevo.appendChild(nuevoLi);
+                  }
+              } else {
+                  flagArc = 0;
+                  var ulArc = document.querySelectorAll("ul")[1];
+                  while (ulArc.querySelectorAll("li").length > 0) {
+                  ulArc.querySelector("li").remove();
+                  }
+              }
           }
-        }
 
-        function contarChequeados() {
-          var cbx = document.querySelectorAll("form[name='formCheck'] input");
-          var sumaCbx = 0;
-          cbx.forEach(function (input) {
-            if (input.checked) sumaCbx++;
+          function gestion() {
+              if (flagGes == 0) {
+                  flagGes = 1;
+                  var arrayGestion = ["Compras", "Ventas", "Devoluciones"];
+                  var itemNuevo = document.getElementById("idGes");
+                  for (var i = 0; i < arrayGestion.length; i++) {
+                  var parrafo = document.createElement("li");
+                  parrafo.textContent = arrayGestion[i];
+                  itemNuevo.appendChild(parrafo);
+                  }
+              } else {
+                  flagGes = 0;
+                  var ulArc = document.querySelectorAll("ul")[2];
+                  while (ulArc.querySelectorAll("li").length > 0) {
+                  ulArc.querySelector("li").remove();
+                  }
+              }
+          }
+
+          function reportes() {
+              if (flagRep == 0) {
+                  flagRep = 1;
+                  var arrayReportes = [
+                  "Ventas consolidadas",
+                  "Ventas al crédito",
+                  "Compras al crédito",
+                  "Clientes morosos",
+                  "Balance mensual"
+                  ];
+                  var itemNuevo = document.getElementById("idRep");
+                  for (var i = 0; i < arrayReportes.length; i++) {
+                  var parrafo = document.createElement("li");
+                  parrafo.textContent = arrayReportes[i];
+                  itemNuevo.appendChild(parrafo);
+                  }
+              } else {
+                  flagRep = 0;
+                  var ulRep = document.querySelectorAll("ul")[3];
+                  while (ulRep.querySelectorAll("li").length > 0) {
+                  ulRep.querySelector("li").remove();
+                  }
+              }
+          }
+
+          document.getElementById("btnArchivo").addEventListener("click", function (){
+              archivo();
           });
 
-          var elegido = "ninguno";
-          document
-            .querySelectorAll("form[name='fRadios'] input")
-            .forEach(function (radio) {
-              if (radio.checked) elegido = radio.value;
-            });
-
-          Swal.fire(
-            "Mensaje",
-            "Elegidos = " +
-              sumaCbx +
-              "\r" +
-              "No elegidos = " +
-              (cbx.length - sumaCbx) +
-              "\r" +
-              "Radio elegido = " +
-              elegido,
-            "info",
-          );
-        }
-
-        function hizoClick(idOrden) {
-          var radios = document.querySelectorAll("form[name='fRadios'] input");
-          radios.forEach(function (radio) {
-            radio.checked = radio.value == idOrden;
+          document.getElementById("btnGestion").addEventListener("click", function (){
+              gestion();
           });
-        }
 
-        function agregarRadio() {
-          var dvr = document.getElementById("divRadiolist");
-          var radio = document.createElement("input");
-          radio.type = "radio";
-          radio.className = "form-check-input";
-          radio.name = "radios";
-          radio.value = radioNum;
-          radio.addEventListener("click", function () {
-            hizoClick(this.value);
+          document.getElementById("btnReportes").addEventListener("click", function (){
+              reportes();
           });
-          var objetoTextNodo = document.createElement("span");
-          objetoTextNodo.textContent = "Mensaje radio " + radioNum;
-          var objetoLabel = document.createElement("label");
-          objetoLabel.className = "form-check";
-          objetoLabel.appendChild(radio);
-          objetoLabel.appendChild(objetoTextNodo);
-          dvr.appendChild(objetoLabel);
-          radioNum++;
-        }
-
-        document.getElementById("cmdAgregar").addEventListener("click", function () {
-          agregarCheckBox();
-        });
-
-        document.getElementById("cmdQuitar").addEventListener("click", function () {
-          quitarCheckBox();
-        });
-
-        document.getElementById("cmdContarElegidos").addEventListener("click", function () {
-          contarChequeados();
-        });
-
-        document.getElementById("btnAddRadio").addEventListener("click", function () {
-          agregarRadio();
-        });
       });
         </script>
   </head>
@@ -140,59 +112,20 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej19" class="ej-back">← Ejercicios</a>
       <span class="ej-num">19</span>
-      <span class="ej-name">Checks: resumen, limpiar y radios</span>
+      <span class="ej-name">Menú de opciones</span>
     </header>
 
-    <button id="cmdAgregar" class="btn btn-primary">Agregar CheckBox</button>
-    <button id="cmdContarElegidos" class="btn btn-primary">
-      Contar elegidos
-    </button>
-    <button id="cmdQuitar" class="btn btn-primary">
-      Quitar primer Check Box
-    </button>
-    <button id="btnAddRadio" class="btn btn-primary">Agregar radio</button>
-    <form name="formCheck">
-      <div id="idCheck" class="form-group">
-        <label class="form-check">
-          <input type="checkbox" name="lp" value="0" class="form-check-input" />
-          La Paz
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="or" value="1" class="form-check-input" />
-          Oruro
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="pt" value="2" class="form-check-input" />
-          Potosi
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="cb" value="3" class="form-check-input" />
-          Cochabamba
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="bn" value="4" class="form-check-input" />
-          Beni
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="pn" value="5" class="form-check-input" />
-          Pando
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="sc" value="6" class="form-check-input" />
-          Santa Cruz
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="tr" value="7" class="form-check-input" />
-          Tarija
-        </label>
-        <label class="form-check">
-          <input type="checkbox" name="ch" value="8" class="form-check-input" />
-          Chuquisaca
-        </label>
-      </div>
-    </form>
-    <form name="fRadios" action="">
-      <div id="divRadiolist" class="form-group"></div>
-    </form>
+    <button id="btnArchivo" class="btn btn-primary">Archivo</button>
+    <button id="btnGestion" class="btn btn-primary">Gestion</button>
+    <button id="btnReportes" class="btn btn-primary">Reportes</button>
+    <ul>
+        <li>Archivo</li>
+        <ul id="idArc"></ul>
+        <li>Gestion</li>
+        <ul id="idGes"></ul>
+        <li>Reportes</li>
+        <ul id="idRep"></ul>
+        <li>Salir</li>
+    <ul>
   </body>
 </html>

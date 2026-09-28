@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>09 · Párrafos: agregar, modificar y quitar — Ejercicios Web07</title>
+    <title>09 · Operaciones validadas — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 09 de Web07: agregar, modificar y quitar párrafos con el DOM."
+      content="Ejercicio 09 de Web07: Operaciones validadas."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,47 +28,78 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var veces = 1;
+        function recuperarContenido() {
+          var dato1 = document.getElementById("campo1").value;
+          var dato2 = document.getElementById("campo2").value;
+          var operacion = -1;
+          var tipoInputs = document.querySelectorAll('input[name="grupo"]');
+          tipoInputs.forEach(function (input) {
+            if (input.checked) {
+              operacion = input.value;
+            }
+          });
 
-        function agregarParrafo() {
-          var texto = "Párrafo agregado " + veces++;
-          var parrafo = document.createElement("p");
-          parrafo.textContent = texto;
-          document.body.appendChild(parrafo);
-        }
-
-        function modificarParrafo() {
-          var anteriorParrafo = document.querySelector("p");
-          if (!anteriorParrafo) {
-            Swal.fire("Mensaje", "No existen párrafos para modificar", "error");
-            return;
+          var resultado;
+          switch (operacion) {
+            case "1":
+              resultado = Number(dato1) + Number(dato2);
+              Swal.fire("Mensaje", "La suma es = " + resultado, "success");
+              break;
+            case "2":
+              resultado = Number(dato1) - Number(dato2);
+              Swal.fire("Mensaje", "La resta es = " + resultado, "success");
+              break;
+            case "3":
+              resultado = Number(dato1) * Number(dato2);
+              Swal.fire("Mensaje", "El producto es = " + resultado, "success");
+              break;
+            case "4":
+              if (dato2 != 0) {
+                resultado = Number(dato1) / Number(dato2);
+              } else {
+                resultado = "Indefinido";
+              }
+              Swal.fire("Mensaje", "La división es = " + resultado, "success");
+              break;
+            default:
+              Swal.fire("Mensaje", "Elija una operación", "error");
           }
-          var nuevoParrafo = document.createElement("p");
-          nuevoParrafo.textContent =
-            "Este párrafo es nuevo. Es el cambio # " + veces++;
-          anteriorParrafo.replaceWith(nuevoParrafo);
         }
 
-        function eliminarUltimoParrafo() {
-          var parrafos = document.querySelectorAll("p");
-          var ultimoParrafo = parrafos.length - 1;
-          if (ultimoParrafo >= 0) {
-            parrafos[ultimoParrafo].remove();
-          } else {
-            Swal.fire("Mensaje", "No existen más párrafos", "error");
-          }
+        function nuevaOperacion() {
+          document.getElementById("campo1").value = "";
+          document.getElementById("campo2").value = "";
+          document.querySelectorAll('input[name="grupo"]').forEach(function (radio) {
+            radio.checked = false;
+          });
+          document.getElementById("campo1").focus();
         }
 
-        document.getElementById("btnAgregar").addEventListener("click", function () {
-          agregarParrafo();
+        // Validar que solo se acepten números de hasta tres dígitos
+        document.querySelectorAll("#campo1, #campo2").forEach(function (campo) {
+          campo.addEventListener("input", function () {
+            if (!/^\d{0,3}$/.test(this.value)) {
+              this.value = this.value.slice(0, 3);
+            }
+          });
         });
 
-        document.getElementById("btnModificar").addEventListener("click", function () {
-          modificarParrafo();
+        // Evitar que se ingresen letras u otros símbolos por teclado
+        document.querySelectorAll("#campo1, #campo2").forEach(function (campo) {
+          campo.addEventListener("keypress", function (event) {
+            var keyCode = event.which ? event.which : event.keyCode;
+            if (keyCode < 48 || keyCode > 57) {
+              event.preventDefault();
+            }
+          });
         });
 
-        document.getElementById("btnEliminar").addEventListener("click", function () {
-          eliminarUltimoParrafo();
+        document.getElementById("btnOperar").addEventListener("click", function () {
+          recuperarContenido();
+        });
+
+        document.getElementById("btnNuevo").addEventListener("click", function () {
+          nuevaOperacion();
         });
       });
         </script>
@@ -78,18 +109,38 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej09" class="ej-back">← Ejercicios</a>
       <span class="ej-num">09</span>
-      <span class="ej-name">Párrafos: agregar, modificar y quitar</span>
+      <span class="ej-name">Operaciones validadas</span>
     </header>
 
-    <div id="principal" class="form-group">
-      <button id="btnAgregar" class="btn btn-primary">Agregar parrafo</button>
-      <button id="btnModificar" class="btn btn-primary">Modificar parrafo</button>
-      <button id="btnEliminar" class="btn btn-primary">
-        Elimina el ultimo parrafo
-      </button>
+    <div class="form-group">
+      <p>
+        Ingrese un número:
+        <input type="text" value="" id="campo1" class="form-control" />
+      </p>
+      <p>
+        Ingrese otro número:
+        <input type="text" value="" id="campo2" class="form-control" />
+      </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="1" id="grupo1" />
+        <label class="form-check-label" for="grupo1">Suma</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="2" id="grupo2" />
+        <label class="form-check-label" for="grupo2">Resta</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="3" id="grupo3" />
+        <label class="form-check-label" for="grupo3">Multiplicacion</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="grupo" value="4" id="grupo4" />
+        <label class="form-check-label" for="grupo4">Division</label>
+      </div>
+      <p>
+        <button id="btnOperar" class="btn btn-primary">Operar</button> &nbsp;
+        <button id="btnNuevo" class="btn btn-primary">Nuevo</button>
+      </p>
     </div>
-    <p>Parrafo uno</p>
-    <p>Parrafo dos</p>
-    <p>Parrafo tres</p>
   </body>
 </html>

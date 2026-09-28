@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <link rel="icon" href="favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>06 · Párrafos: agregar, modificar y quitar — Ejercicios Web07</title>
+    <meta
+      name="description"
+      content="Ejercicio 06 de Web07: agregar, modificar y quitar párrafos con el DOM."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var veces = 1;
+
+        function agregarParrafo() {
+          var texto = "Párrafo agregado " + veces++;
+          var parrafo = document.createElement("p");
+          parrafo.textContent = texto;
+          document.body.appendChild(parrafo);
+        }
+
+        function modificarParrafo() {
+          var anteriorParrafo = document.querySelector("p");
+          if (!anteriorParrafo) {
+            Swal.fire("Mensaje", "No existen párrafos para modificar", "error");
+            return;
+          }
+          var nuevoParrafo = document.createElement("p");
+          nuevoParrafo.textContent =
+            "Este párrafo es nuevo. Es el cambio # " + veces++;
+          anteriorParrafo.replaceWith(nuevoParrafo);
+        }
+
+        function eliminarUltimoParrafo() {
+          var parrafos = document.querySelectorAll("p");
+          var ultimoParrafo = parrafos.length - 1;
+          if (ultimoParrafo >= 0) {
+            parrafos[ultimoParrafo].remove();
+          } else {
+            Swal.fire("Mensaje", "No existen más párrafos", "error");
+          }
+        }
+
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregarParrafo();
+        });
+
+        document.getElementById("btnModificar").addEventListener("click", function () {
+          modificarParrafo();
+        });
+
+        document.getElementById("btnEliminar").addEventListener("click", function () {
+          eliminarUltimoParrafo();
+        });
+      });
+        </script>
+  </head>
+
+  <body class="legacy ejercicio" data-ejercicio="06">
+    <header class="ej-head">
+      <a href="ejercicios.html#ej06" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">06</span>
+      <span class="ej-name">Párrafos: agregar, modificar y quitar</span>
+    </header>
+
+    <div id="principal" class="form-group">
+      <button id="btnAgregar" class="btn btn-primary">Agregar parrafo</button>
+      <button id="btnModificar" class="btn btn-primary">Modificar parrafo</button>
+      <button id="btnEliminar" class="btn btn-primary">
+        Elimina el ultimo parrafo
+      </button>
+    </div>
+    <p>Parrafo uno</p>
+    <p>Parrafo dos</p>
+    <p>Parrafo tres</p>
+  </body>
+</html>

@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>15 · Formularios dinámicos — Ejercicios Web07</title>
+    <title>15 · Tours de Bolivia — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 15 de Web07: Formularios dinámicos."
+      content="Ejercicio 15 de Web07: Tours de Bolivia."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,19 +28,65 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var numCampo = 0;
+        var valueNuevo = 4;
 
-        function agregarCampos() {
-          var objetoTexto = document.getElementById("idCampos");
-          var objetoItem = document.createElement("input");
-          objetoItem.type = "text";
-          objetoItem.id = "Campo_" + numCampo;
-          objetoItem.value = "campo " + numCampo++;
-          objetoTexto.appendChild(objetoItem);
+        function opcionElegida(opcion) {
+          var arrayDataLaPaz = [
+            ["0", "Elija lugar"],
+            ["1", "Yungas"],
+            ["2", "Copacabana"],
+            ["3", "Tiahuanaco"],
+            ["4", "El Lago sagrado"],
+            ["5", "San BuenaVentura"],
+          ];
+          var arrayDataPotosi = [
+            ["0", "Elija lugar"],
+            ["1", "Salar de Uyuni"],
+            ["2", "La casa de la Moneda"],
+            ["3", "Cerro Rico"],
+            ["4", "Lagunas Colorada"],
+          ];
+          var arrayDataSantaCruz = [
+            ["0", "Elija lugar"],
+            ["1", "Misiones Jesuitas"],
+            ["2", "El pantanal"],
+            ["3", "Samaipata"],
+            ["4", "Puerto Busch"],
+            ["5", "El Mutun"],
+          ];
+
+          var opciones = document.querySelectorAll('form[name="formLugar"] option');
+          opciones.forEach(function (op) {
+            op.remove();
+          });
+
+          var dataArray;
+          switch (opcion) {
+            case "1":
+              dataArray = arrayDataLaPaz;
+              break;
+            case "2":
+              dataArray = arrayDataPotosi;
+              break;
+            case "3":
+              dataArray = arrayDataSantaCruz;
+              break;
+          }
+
+          if (dataArray) {
+            dataArray.forEach(function (value) {
+              var objetoOption = document.createElement("option");
+              objetoOption.value = value[0];
+              objetoOption.text = value[1];
+              document.getElementById("idLugar").appendChild(objetoOption);
+            });
+          }
         }
 
-        document.getElementById("btnAgregar").addEventListener("click", function () {
-          agregarCampos();
+        // Ejemplo de cómo llamar a la función opcionElegida
+        document.getElementById("idDepto").addEventListener("change", function () {
+          var opcion = this.value;
+          opcionElegida(opcion);
         });
       });
         </script>
@@ -50,10 +96,19 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej15" class="ej-back">← Ejercicios</a>
       <span class="ej-num">15</span>
-      <span class="ej-name">Formularios dinámicos</span>
+      <span class="ej-name">Tours de Bolivia</span>
     </header>
 
-    <button id="btnAgregar" class="btn btn-primary">Agregar nuevo campo</button>
-    <div id="idCampos"></div>
+    <p>Visite BOLIVIA:</p>
+    <select id="idDepto" class="form-control" size="1">
+      <option value="0">Elija departamento</option>
+      <option value="1">La Paz</option>
+      <option value="2">Potosi</option>
+      <option value="3">Santa Cruz</option>
+    </select>
+    <br />
+    <form name="formLugar" action="">
+      <select id="idLugar" class="form-control" size="1"></select>
+    </form>
   </body>
 </html>

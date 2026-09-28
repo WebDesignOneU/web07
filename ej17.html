@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>17 · Opciones JS — Ejercicios Web07</title>
+    <title>17 · Sumas de tabla — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 17 de Web07: Opciones JS."
+      content="Ejercicio 17 de Web07: Sumas de tabla."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,33 +24,51 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function eliminaOption() {
-          var objetoSelect = document.querySelectorAll("option");
-          if (objetoSelect.length > 1) {
-            objetoSelect.forEach(function (option, index) {
-              if (index > 0 && option.selected) {
-                Swal.fire("Mensaje", "Eligió el valor " + option.value, "info");
-                option.remove();
-              }
+        function sumaTabla() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celdas = fila.querySelectorAll("td");
+            celdas.forEach(function (celda) {
+              suma += eval(celda.textContent);
             });
-          } else {
-            Swal.fire(
-              "Mensaje",
-              "¡No hay más opciones para eliminar!",
-              "error"
-            );
-          }
+          });
+          alert("Suma de la tabla es = " + suma);
         }
 
-        document
-          .querySelector("input[name='eliminaOpcion']")
-          .addEventListener("click", function () {
-            eliminaOption();
+        function sumaColumnaDos() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celda = fila.querySelectorAll("td")[2];
+            suma += eval(celda.textContent);
           });
+          alert("Suma de la columna dos es = " + suma);
+        }
+
+        function sumaFilaUno() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          var celdas = filas[1].querySelectorAll("td");
+          celdas.forEach(function (celda) {
+            suma += eval(celda.textContent);
+          });
+          alert("Suma de la fila uno es = " + suma);
+        }
+
+        document.getElementById("btnSumar").addEventListener("click", function () {
+          sumaTabla();
+        });
+
+        document.getElementById("btnColumnaDos").addEventListener("click", function () {
+          sumaColumnaDos();
+        });
+
+        document.getElementById("btnFilaUno").addEventListener("click", function () {
+          sumaFilaUno();
+        });
       });
         </script>
   </head>
@@ -59,19 +77,33 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej17" class="ej-back">← Ejercicios</a>
       <span class="ej-num">17</span>
-      <span class="ej-name">Opciones JS</span>
+      <span class="ej-name">Sumas de tabla</span>
     </header>
 
-    <input type="button" name="eliminaOpcion" class="btn btn-primary" value="Eliminar opción" />
+    <button id="btnSumar" class="btn btn-primary">Suma la tabla</button>
+    <button id="btnColumnaDos" class="btn btn-primary">Suma la columa 2</button>
+    <button id="btnFilaUno" class="btn btn-primary">Suma la fila 1</button>
     <br /><br />
-    <select id="idComponentes" name="componentes" class="form-control" size="1">
-      <option value="0">Elija</option>
-      <option value="2">Discos duros</option>
-      <option value="3">Tarjetas madre</option>
-      <option value="4">Memorias RAM</option>
-      <option value="5">Tarjetas de video</option>
-      <option value="1">Lectores de DVD</option>
-      <option value="6">Teclados</option>
-    </select>
+    <table id="tablaDatos" class="table">
+      <tr>
+        <td rowspan="2">10</td>
+        <td>20</td>
+        <td>30</td>
+        <td>40</td>
+        <td>50</td>
+        <td>60</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td colspan="2">10</td>
+        <td>15</td>
+        <td colspan="2">20</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td colspan="3">2</td>
+        <td colspan="3">3</td>
+      </tr>
+    </table>
   </body>
 </html>

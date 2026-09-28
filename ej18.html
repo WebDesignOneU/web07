@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-  <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>18 · Tours de Bolivia — Ejercicios Web07</title>
+    <title>18 · Tabla con colspan — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 18 de Web07: Tours de Bolivia."
+      content="Ejercicio 18 de Web07: Tabla con colspan."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,6 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
     <link
@@ -24,91 +25,75 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
+      function verEstructuraDeTabla() {
+        var tabla = document.getElementById("tablaMaestra");
+        Swal.fire("Estructura Tabla", tabla.innerHTML, "info");
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
-        var valueNuevo = 4;
-
-        function opcionElegida(opcion) {
-          var arrayDataLaPaz = [
-            ["0", "Elija lugar"],
-            ["1", "Yungas"],
-            ["2", "Copacabana"],
-            ["3", "Tiahuanaco"],
-            ["4", "El Lago sagrado"],
-            ["5", "San BuenaVentura"],
-          ];
-          var arrayDataPotosi = [
-            ["0", "Elija lugar"],
-            ["1", "Salar de Uyuni"],
-            ["2", "La casa de la Moneda"],
-            ["3", "Cerro Rico"],
-            ["4", "Lagunas Colorada"],
-          ];
-          var arrayDataSantaCruz = [
-            ["0", "Elija lugar"],
-            ["1", "Misiones Jesuitas"],
-            ["2", "El pantanal"],
-            ["3", "Samaipata"],
-            ["4", "Puerto Busch"],
-            ["5", "El Mutun"],
-          ];
-
-          var opciones = document.querySelectorAll('form[name="formLugar"] option');
-          opciones.forEach(function (op) {
-            op.remove();
-          });
-
-          var dataArray;
-          switch (opcion) {
-            case "1":
-              dataArray = arrayDataLaPaz;
-              break;
-            case "2":
-              dataArray = arrayDataPotosi;
-              break;
-            case "3":
-              dataArray = arrayDataSantaCruz;
-              break;
+        function agregarNuevaFila() {
+          var tabla = document.getElementById("tablaMaestra");
+          var fila = document.createElement("tr");
+          var numColumnas = 1 + Math.floor(Math.random() * 5);
+          var ubiColspan = Math.floor(Math.random() * numColumnas);
+          for (var i = 0; i <= numColumnas; i++) {
+            var celda = document.createElement("td");
+            var datoDeCelda = Math.floor(Math.random() * 1000);
+            var nColspan = 7 - numColumnas;
+            if (i == ubiColspan) celda.setAttribute("colspan", nColspan);
+            celda.textContent = datoDeCelda;
+            fila.appendChild(celda);
           }
-
-          if (dataArray) {
-            dataArray.forEach(function (value) {
-              var objetoOption = document.createElement("option");
-              objetoOption.value = value[0];
-              objetoOption.text = value[1];
-              document.getElementById("idLugar").appendChild(objetoOption);
-            });
-          }
+          tabla.appendChild(fila);
         }
 
-        // Ejemplo de cómo llamar a la función opcionElegida
-        document.getElementById("idDepto").addEventListener("change", function () {
-          var opcion = this.value;
-          opcionElegida(opcion);
-        });
+        document
+          .getElementById("btnAgregar")
+          .addEventListener("click", function () {
+            agregarNuevaFila();
+          });
+
+        document
+          .getElementById("btnEstructurar")
+          .addEventListener("click", function () {
+            verEstructuraDeTabla();
+          });
       });
-        </script>
+    </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="18">
+  <body
+    class="legacy ejercicio"
+    data-ejercicio="18"
+    onLoad="verEstructuraDeTabla()"
+  >
     <header class="ej-head">
       <a href="ejercicios.html#ej18" class="ej-back">← Ejercicios</a>
       <span class="ej-num">18</span>
-      <span class="ej-name">Tours de Bolivia</span>
+      <span class="ej-name">Tabla con colspan</span>
     </header>
 
-    <p>Visite BOLIVIA:</p>
-    <select id="idDepto" class="form-control" size="1">
-      <option value="0">Elija departamento</option>
-      <option value="1">La Paz</option>
-      <option value="2">Potosi</option>
-      <option value="3">Santa Cruz</option>
-    </select>
-    <br />
-    <form name="formLugar" action="">
-      <select id="idLugar" class="form-control" size="1"></select>
-    </form>
+    <button id="btnAgregar" class="btn btn-primary">
+      Agregar fila de datos
+    </button>
+    <button id="btnEstructurar" class="btn btn-primary">
+      Ver estructura de la tabla
+    </button>
+    <table id="tablaMaestra" class="table table-striped table-bordered">
+      <tr>
+        <td>La Paz</td>
+        <td>Oruro</td>
+        <td>Tarija</td>
+        <td>Pando</td>
+        <td colspan="2">Beni</td>
+        <td>Potosi</td>
+      </tr>
+      <tr>
+        <td>Pando</td>
+        <td colspan="5">Beni</td>
+        <td>Chuquisaca</td>
+      </tr>
+    </table>
   </body>
 </html>
