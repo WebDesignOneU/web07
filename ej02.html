@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-  <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>02 · Párrafo clic — Ejercicios Web07</title>
+    <title>02 · Párrafos y selectores — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 02 de Web07: Párrafo clic."
+      content="Ejercicio 02 de Web07: clic en párrafos con getElementById, querySelector y querySelectorAll."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,15 +28,27 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function mensaje() {
-          Swal.fire("Mensaje", "¡Eligió aquí!", "info");
+        // Declaro la función mensaje
+        function mensaje(selector) {
+          Swal.fire("Mensaje", "¡Eligió aquí con " + selector + "!", "info");
         }
 
-        document
-          .getElementById("parrafo")
-          .addEventListener("click", function () {
-            mensaje();
+        // 1. por etiqueta: querySelector devuelve sólo el primer <p>
+        document.querySelector("p").addEventListener("click", function () {
+          mensaje("querySelector");
+        });
+
+        // 2. por id: el párrafo que tenga id="parrafo"
+        document.getElementById("parrafo").addEventListener("click", function () {
+          mensaje("getElementById");
+        });
+
+        // 3. por clase: NodeList con todos los <p> que tengan .parrafo
+        document.querySelectorAll("p.parrafo").forEach(function (parrafo) {
+          parrafo.addEventListener("click", function () {
+            mensaje("querySelectorAll");
           });
+        });
       });
         </script>
   </head>
@@ -45,12 +57,23 @@
     <header class="ej-head">
       <a href="ejercicios.html#ej02" class="ej-back">← Ejercicios</a>
       <span class="ej-num">02</span>
-      <span class="ej-name">Párrafo clic</span>
+      <span class="ej-name">Párrafos y selectores</span>
     </header>
 
     <div id="principal" class="row grow w-100">
-      <p id="parrafo" class="mb-5 vh-50 bg-info">Hacer clic.</p>
-      <p class="mb-5 vh-50 bg-warning">No puede hacer clic.</p>
+      <div class="col">
+        <div class="mb-1"><strong>querySelector("p")</strong></div>
+        <p class="mb-3 bg-info">Hacer clic.</p>
+      </div>
+      <div class="col">
+        <div class="mb-1"><strong>getElementById("parrafo")</strong></div>
+        <p id="parrafo" class="mb-3 bg-info">Hacer clic.</p>
+      </div>
+      <div class="col">
+        <div class="mb-1"><strong>querySelectorAll("p.parrafo")</strong></div>
+        <p class="parrafo mb-3">Hacer clic.</p>
+        <p class="parrafonoclic">No puede hacer clic.</p>
+      </div>
     </div>
   </body>
 </html>

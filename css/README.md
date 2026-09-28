@@ -1,4 +1,4 @@
-# css/ · Hojas de estilo de Web07
+﻿# css/ · Hojas de estilo de Web07
 
 Esta carpeta ya no tiene un archivo gigante: `styles.css` es el **punto de
 entrada único** y el resto son capas que él importa en orden.
@@ -11,7 +11,7 @@ css/
 ├── animations.css    capa 3 · @keyframes y reglas `animation`
 ├── layout.css        capa 4 · navbar, footer y estructuras
 ├── components.css    capa 5 · Bootstrap y componentes propios
-├── legacy.css        capa 6 · <body class="legacy"> (los 27 ejercicios)
+├── legacy.css        capa 6 · <body class="legacy"> (los 25 ejercicios)
 │
 ├── showcase.css        ─┐
 ├── calculadora.css     │ capas de página: se enlazan aparte
@@ -47,7 +47,7 @@ resuelve de arriba abajo: es lo que permite que `showcase.css` ajuste un
 3. `animations.css` — todo lo que sólo anima.
 4. `layout.css` — estructura: navbar, footer, cajas de página.
 5. `components.css` — reescrituras de Bootstrap y componentes.
-6. `legacy.css` — estilos de los 27 ejercicios (`ej01`…`ej27`), que
+6. `legacy.css` — estilos de los 25 ejercicios (`ej01`…`ej25`), que
    declaran `<body class="legacy ejercicio">`.
 
 Si dos reglas del mismo peso colisionan, gana la última. Por eso las
@@ -78,14 +78,14 @@ scopea con su clase de body en lugar de crear un archivo nuevo.** Sólo
 reciben capa propia las páginas que son un caso abierto y van a crecer
 (`showcase`, `calculadora`, `pokeclient`).
 
-## Los 27 ejercicios: `body.ejercicio`
+## los 25 ejercicios: `body.ejercicio`
 
 Los ejercicios comparten una barra de contexto (`.ej-head`: número,
 título y vuelta al visor) definida en `components.css` bajo
 `body.ejercicio`, junto con los bordes de tabla que antes eran
 `prueba16.css`…`prueba21.css`.
 
-Vive en la capa compartida y no en una capa de página porque las 27
+Vive en la capa compartida y no en una capa de página porque las 25
 páginas lo consumen — igual que `legacy.css`.
 
 > **Restricción:** esa barra no puede contener `<p>`, `<ul>`, `<form>` ni

@@ -1,4 +1,4 @@
-/* ──────────────────────────────────────────────────────────────────────────
+﻿/* ──────────────────────────────────────────────────────────────────────────
    styles.css  ·  Web07 (Tecnologías Web I)
    ═══════════════════════════════════════════════════════════════
    CENTRALIZADOR DE ESTILOS · punto de entrada único
@@ -14,11 +14,11 @@
      3  animations.css   @keyframes + animation
      4  layout.css       navbar + footer + estructuras
      5  components.css   componentes y overrides de Bootstrap
-      6  legacy.css       <body class="legacy">   (los 27 ejercicios)
+      6  legacy.css       <body class="legacy">   (los 25 ejercicios)
 
    La portada (body.inicio) y el visor de ejercicios (body.lab) ya no
    tienen archivo propio: sus reglas viven en las capas 2–5 con ese
-   scope. Los 27 ejercicios comparten además una barra de contexto
+   scope. los 25 ejercicios comparten además una barra de contexto
    (.ej-head) definida en components.css bajo body.ejercicio.
 
    Después, y sólo en la página que lo necesita, se enlaza su
