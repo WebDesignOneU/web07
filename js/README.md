@@ -137,7 +137,7 @@ que uno puede depender de las APIs de otro que esté antes.
 ## Páginas que todavía llevan `<script>` inline
 
 Los 33 ejercicios (`ej01.html` … `ej33.html`), más `flexbox.html`,
-`otros.html`, `demobootstrap.html` y `bootstapemb.html` **no** usan
+`otros.html` y `bootstapemb.html` **no** usan
 `app.js`: son ejercicios de clase con su JS incrustado y así se
 entregaron. Migrarlos es opcional y no afecta al resto.
 

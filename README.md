@@ -32,8 +32,7 @@ web07/
 ├── calculadora.html · formulario.html · demojson.html
 ├── pokeclient.html · swalconbs.html · seminario.html
 ├── flexbox.html           página autónoma de flexbox
-├── demobootstrap.html · bootstapemb.html · otros.html
-├── calculadora2op.html
+├── bootstapemb.html · otros.html
 │
 ├── ej01.html … ej33.html   los 33 ejercicios, uno por archivo
 │
