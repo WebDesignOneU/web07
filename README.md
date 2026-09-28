@@ -188,11 +188,12 @@ que cada uno se basta solo, tal como se entregaron.
 
 ## Notas
 
-- `ej06` y `showcase` emiten un error de recurso en consola por un
-  `src=""` en un `<input type="image">` y en un `<img>`. Es contenido
-  original de los ejercicios, no un fallo del proyecto.
-- `ej21` (antes `prueba17`) abre un `alert` al cargar. Es parte del
-  ejercicio; en pruebas automatizadas hay que interceptarlo.
+- `ej06` y `showcase` antes emitían un error de recurso en consola por un
+  `src=""` en un `<input type="image">` y en un `<img>`. **Corregido:**
+  se eliminó el atributo `src` vacío (el valor se asigna vía JS).
+- `ej21` abre un `alert` al cargar (`onLoad="verEstructuraDeTabla()"`).
+  Es **comportamiento intencional** del ejercicio para mostrar la estructura
+  HTML de la tabla; en pruebas automatizadas hay que interceptar `window.alert`.
 - Antes existían `paginas.html`, `pruebas.html` y los 33 archivos
   `pagina*.html` / `prueba*.html`. Se unificaron en `ejercicios.html` +
   `ej01…ej25`.
