@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>06 · Suma con diálogos — Ejercicios Web07</title>
+    <title>08 · Tipos de campo — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 06 de Web07: suma de campos con alert, confirm y prompt."
+      content="Ejercicio 08 de Web07: Tipos de campo."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,81 +28,92 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function esNumero(texto) {
-          return /^\d{1,2}$/.test(texto);
+        function enviar() {
+          let _vector = [];
+          _vector[0] = document.getElementById("fecha").value;
+          _vector[1] = document.getElementById("nombre").value;
+          _vector[2] = document.getElementById("btnCancelar").value;
+          _vector[3] = document.getElementById("color").value;
+
+          let fechaX = new Date();
+          var fechacad =
+            fechaX.getDate() +
+            "/" +
+            (fechaX.getMonth() + 1) +
+            "/" +
+            fechaX.getFullYear() +
+            " " +
+            fechaX.getHours() +
+            ":" +
+            fechaX.getMinutes() +
+            ":" +
+            fechaX.getSeconds();
+
+          Swal.fire("Mensaje", _vector.length.toString(), "info");
+          Swal.fire("Mensaje", _vector[3].toString(), "info");
+          Swal.fire("Mensaje", fechacad, "info");
         }
 
-        function pedirPorPrompt(mensaje) {
-          var valor = prompt(mensaje, "0");
-          while (valor !== null && !esNumero(valor)) {
-            valor = prompt(
-              "Por favor, ingrese un número válido de máximo dos dígitos",
-              "0",
-            );
-          }
-          return valor;
+        function limpiar() {
+          document.getElementById("nombre").value = "";
+          document.getElementById("fecha").value = "";
+          document.getElementById("color").value = "";
+          document.getElementById("archivo").value = "";
+          document.getElementById("correo").value = "";
+          document.getElementById("hora").value = "";
+          var imagen = document.getElementById("imagen");
+          imagen.setAttribute("src", "");
+          imagen.style.display = "none";
         }
 
-        function sumar() {
-          var metodo = document.getElementById("metodo").value;
+        document
+          .getElementById("archivo")
+          .addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                var imagen = document.getElementById("imagen");
+                imagen.setAttribute("src", e.target.result);
+                imagen.style.display = "inline-block";
+              };
+              reader.readAsDataURL(file);
+            }
+          });
 
-          if (metodo === "prompt") {
-            var ingreso = pedirPorPrompt("Ingrese valor (máximo dos dígitos)");
-            if (ingreso === null) return; // el usuario canceló el prompt
-            document.getElementById("num1").value = ingreso;
-          }
+        document
+          .getElementById("btnEnviar")
+          .addEventListener("click", function () {
+            enviar();
+          });
 
-          var _x = document.getElementById("num1").value;
-          var _y = document.getElementById("num2").value;
-
-          if (!esNumero(_x) || !esNumero(_y)) {
-            Swal.fire("Mensaje", "Ingrese números de máximo dos dígitos", "error");
-            return;
-          }
-
-          var resultado = Number(_x) + Number(_y); // eval(texto)
-
-          if (metodo === "confirm") {
-            if (!confirm("¿Desea continuar?")) return;
-            Swal.fire("Confirmado", resultado.toString(), "info");
-          } else {
-            Swal.fire("Mensaje", resultado.toString(), "info");
-          }
-        }
-
-        document.getElementById("btnSumar").addEventListener("click", function () {
-          sumar();
-        });
+        document
+          .getElementById("btnCancelar")
+          .addEventListener("click", function () {
+            limpiar();
+          });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="06">
+  <body class="legacy ejercicio" data-ejercicio="08">
     <header class="ej-head">
-      <a href="ejercicios.html#ej06" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">06</span>
-      <span class="ej-name">Suma con diálogos</span>
+      <a href="ejercicios.html#ej08" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">08</span>
+      <span class="ej-name">Tipos de campo</span>
     </header>
 
     <div id="principal" class="form-group">
-      <p class="mb-5">
-        NÚMERO 1:
-        <input type="text" id="num1" class="form-control" value="9" maxlength="2" />
-      </p>
-      <p class="mb-5">
-        NÚMERO 2:
-        <input type="text" id="num2" class="form-control" value="8" maxlength="2" />
-      </p>
-      <p class="mb-5">
-        DIÁLOGO:
-        <select id="metodo" class="form-control">
-          <option value="alert">alert · muestra el resultado directo</option>
-          <option value="confirm">confirm · pregunta antes de mostrar</option>
-          <option value="prompt">prompt · pide el número 1</option>
-        </select>
-      </p>
+      <p>NOMBRE: <input type="text" id="nombre" class="form-control" /></p>
+      <p>F. NAC: <input type="date" id="fecha" class="form-control" /></p>
+      <p>COLOR: <input type="color" id="color" class="form-control" /></p>
+      <p>ARCHIVO: <input type="file" id="archivo" class="form-control-file" /></p>
+      <p>CORREO: <input type="email" id="correo" class="form-control" /></p>
+      <p>HORA: <input type="time" id="hora" class="form-control" /></p>
+      <p>IMAGEN: <input type="image" id="imagen" src="" /></p>
       <p>
-        <button id="btnSumar" class="btn btn-primary">Sumar</button>
+        <button id="btnEnviar" class="btn btn-primary">Enviar</button>
+        <button id="btnCancelar" class="btn btn-primary">Cancelar</button>
       </p>
     </div>
   </body>

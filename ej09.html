@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-  <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>09 · Matriz 3x3 — Ejercicios Web07</title>
+    <title>11 · Párrafos: agregar, modificar y quitar — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 09 de Web07: Matriz 3x3."
+      content="Ejercicio 11 de Web07: agregar, modificar y quitar párrafos con el DOM."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,46 +28,68 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function cargar() {
-          var matriz = new Array(3); // vector - columnas
-          let cont = 0;
-          for (let i = 0; i < 3; i++) matriz[i] = new Array(3); // vector - filas
+        var veces = 1;
 
-          for (let i = 0; i < 3; i++) {
-            // cargo la matriz
-            for (let j = 0; j < 3; j++) {
-              matriz[i][j] = ++cont; // pre incremento
-            }
-          }
-
-          var table = document.createElement("table");
-          table.className = "table table-bordered";
-          for (let i = 0; i < 3; i++) {
-            // imprimo la matriz en una tabla
-            var row = document.createElement("tr");
-            for (let j = 0; j < 3; j++) {
-              var cell = document.createElement("td");
-              cell.textContent = matriz[i][j];
-              row.appendChild(cell);
-            }
-            table.appendChild(row);
-          }
-          document.body.appendChild(table);
+        function agregarParrafo() {
+          var texto = "Párrafo agregado " + veces++;
+          var parrafo = document.createElement("p");
+          parrafo.textContent = texto;
+          document.body.appendChild(parrafo);
         }
 
-        // Llamar a la función cargar() al ingresar a la página
-        cargar();
+        function modificarParrafo() {
+          var anteriorParrafo = document.querySelector("p");
+          if (!anteriorParrafo) {
+            Swal.fire("Mensaje", "No existen párrafos para modificar", "error");
+            return;
+          }
+          var nuevoParrafo = document.createElement("p");
+          nuevoParrafo.textContent =
+            "Este párrafo es nuevo. Es el cambio # " + veces++;
+          anteriorParrafo.replaceWith(nuevoParrafo);
+        }
+
+        function eliminarUltimoParrafo() {
+          var parrafos = document.querySelectorAll("p");
+          var ultimoParrafo = parrafos.length - 1;
+          if (ultimoParrafo >= 0) {
+            parrafos[ultimoParrafo].remove();
+          } else {
+            Swal.fire("Mensaje", "No existen más párrafos", "error");
+          }
+        }
+
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregarParrafo();
+        });
+
+        document.getElementById("btnModificar").addEventListener("click", function () {
+          modificarParrafo();
+        });
+
+        document.getElementById("btnEliminar").addEventListener("click", function () {
+          eliminarUltimoParrafo();
+        });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="09">
+  <body class="legacy ejercicio" data-ejercicio="11">
     <header class="ej-head">
-      <a href="ejercicios.html#ej09" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">09</span>
-      <span class="ej-name">Matriz 3x3</span>
+      <a href="ejercicios.html#ej11" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">11</span>
+      <span class="ej-name">Párrafos: agregar, modificar y quitar</span>
     </header>
 
-    <p>Matrices</p>
+    <div id="principal" class="form-group">
+      <button id="btnAgregar" class="btn btn-primary">Agregar parrafo</button>
+      <button id="btnModificar" class="btn btn-primary">Modificar parrafo</button>
+      <button id="btnEliminar" class="btn btn-primary">
+        Elimina el ultimo parrafo
+      </button>
+    </div>
+    <p>Parrafo uno</p>
+    <p>Parrafo dos</p>
+    <p>Parrafo tres</p>
   </body>
 </html>

@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
-  <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>04 · Estilos CSS con JS — Ejercicios Web07</title>
+    <title>06 · Suma con diálogos — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 04 de Web07: Estilos CSS con JS."
+      content="Ejercicio 06 de Web07: suma de campos con alert, confirm y prompt."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,35 +28,82 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Declaro la función mensaje
-        function mensaje() {
-          Swal.fire("Mensaje", "¡Eligió aquí!", "info");
+        function esNumero(texto) {
+          return /^\d{1,2}$/.test(texto);
         }
 
-        function obtenerClic() {
-          document.querySelectorAll("p.parrafo").forEach(function (parrafo) {
-            parrafo.addEventListener("click", function () {
-              mensaje();
-            });
-          });
+        function pedirPorPrompt(mensaje) {
+          var valor = prompt(mensaje, "0");
+          while (valor !== null && !esNumero(valor)) {
+            valor = prompt(
+              "Por favor, ingrese un número válido de máximo dos dígitos",
+              "0",
+            );
+          }
+          return valor;
         }
 
-        obtenerClic();
+        function sumar() {
+          var metodo = document.getElementById("metodo").value;
+
+          if (metodo === "prompt") {
+            var ingreso = pedirPorPrompt("Ingrese valor (máximo dos dígitos)");
+            if (ingreso === null) return; // el usuario canceló el prompt
+            document.getElementById("num1").value = ingreso;
+          }
+
+          var _x = document.getElementById("num1").value;
+          var _y = document.getElementById("num2").value;
+
+          if (!esNumero(_x) || !esNumero(_y)) {
+            Swal.fire("Mensaje", "Ingrese números de máximo dos dígitos", "error");
+            return;
+          }
+
+          var resultado = Number(_x) + Number(_y); // eval(texto)
+
+          if (metodo === "confirm") {
+            if (!confirm("¿Desea continuar?")) return;
+            Swal.fire("Confirmado", resultado.toString(), "info");
+          } else {
+            Swal.fire("Mensaje", resultado.toString(), "info");
+          }
+        }
+
+        document.getElementById("btnSumar").addEventListener("click", function () {
+          sumar();
+        });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="04">
+  <body class="legacy ejercicio" data-ejercicio="06">
     <header class="ej-head">
-      <a href="ejercicios.html#ej04" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">04</span>
-      <span class="ej-name">Estilos CSS con JS</span>
+      <a href="ejercicios.html#ej06" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">06</span>
+      <span class="ej-name">Suma con diálogos</span>
     </header>
 
-    <div id="principal" class="row grow w-100">
-      <p class="parrafo">Hacer clic.</p>
-      <p class="parrafonoclic">No puede hacer clic.</p>
-      <a href="ej02.html" target="_blank">Atrás</a>
+    <div id="principal" class="form-group">
+      <p class="mb-5">
+        NÚMERO 1:
+        <input type="text" id="num1" class="form-control" value="9" maxlength="2" />
+      </p>
+      <p class="mb-5">
+        NÚMERO 2:
+        <input type="text" id="num2" class="form-control" value="8" maxlength="2" />
+      </p>
+      <p class="mb-5">
+        DIÁLOGO:
+        <select id="metodo" class="form-control">
+          <option value="alert">alert · muestra el resultado directo</option>
+          <option value="confirm">confirm · pregunta antes de mostrar</option>
+          <option value="prompt">prompt · pide el número 1</option>
+        </select>
+      </p>
+      <p>
+        <button id="btnSumar" class="btn btn-primary">Sumar</button>
+      </p>
     </div>
   </body>
 </html>

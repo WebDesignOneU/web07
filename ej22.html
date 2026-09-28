@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>22 · Sumas de tabla — Ejercicios Web07</title>
+    <title>24 · Menú de opciones — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 22 de Web07: Sumas de tabla."
+      content="Ejercicio 24 de Web07: Menú de opciones."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,85 +25,107 @@
     <link rel="stylesheet" href="css/styles.css" />
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        function sumaTabla() {
-          var suma = 0;
-          var filas = document.querySelectorAll("#tablaDatos tr");
-          filas.forEach(function (fila) {
-            var celdas = fila.querySelectorAll("td");
-            celdas.forEach(function (celda) {
-              suma += eval(celda.textContent);
-            });
+      document.addEventListener("DOMContentLoaded", function (){
+          var flagArc = 0;
+          var flagGes = 0;
+          var flagRep = 0;
+
+          function archivo() {
+              if (flagArc == 0) {
+                  flagArc = 1;
+                  var arrayArchivo = ["Productos", "Proveedores", "Clientes", "Empleados"];
+                  var itemNuevo = document.getElementById("idArc");
+                  for (var i = 0; i < arrayArchivo.length; i++) {
+                  var nuevoLi = document.createElement("li");
+                  nuevoLi.textContent = arrayArchivo[i];
+                  itemNuevo.appendChild(nuevoLi);
+                  }
+              } else {
+                  flagArc = 0;
+                  var ulArc = document.querySelectorAll("ul")[1];
+                  while (ulArc.querySelectorAll("li").length > 0) {
+                  ulArc.querySelector("li").remove();
+                  }
+              }
+          }
+
+          function gestion() {
+              if (flagGes == 0) {
+                  flagGes = 1;
+                  var arrayGestion = ["Compras", "Ventas", "Devoluciones"];
+                  var itemNuevo = document.getElementById("idGes");
+                  for (var i = 0; i < arrayGestion.length; i++) {
+                  var parrafo = document.createElement("li");
+                  parrafo.textContent = arrayGestion[i];
+                  itemNuevo.appendChild(parrafo);
+                  }
+              } else {
+                  flagGes = 0;
+                  var ulArc = document.querySelectorAll("ul")[2];
+                  while (ulArc.querySelectorAll("li").length > 0) {
+                  ulArc.querySelector("li").remove();
+                  }
+              }
+          }
+
+          function reportes() {
+              if (flagRep == 0) {
+                  flagRep = 1;
+                  var arrayReportes = [
+                  "Ventas consolidadas",
+                  "Ventas al crédito",
+                  "Compras al crédito",
+                  "Clientes morosos",
+                  "Balance mensual"
+                  ];
+                  var itemNuevo = document.getElementById("idRep");
+                  for (var i = 0; i < arrayReportes.length; i++) {
+                  var parrafo = document.createElement("li");
+                  parrafo.textContent = arrayReportes[i];
+                  itemNuevo.appendChild(parrafo);
+                  }
+              } else {
+                  flagRep = 0;
+                  var ulRep = document.querySelectorAll("ul")[3];
+                  while (ulRep.querySelectorAll("li").length > 0) {
+                  ulRep.querySelector("li").remove();
+                  }
+              }
+          }
+
+          document.getElementById("btnArchivo").addEventListener("click", function (){
+              archivo();
           });
-          alert("Suma de la tabla es = " + suma);
-        }
 
-        function sumaColumnaDos() {
-          var suma = 0;
-          var filas = document.querySelectorAll("#tablaDatos tr");
-          filas.forEach(function (fila) {
-            var celda = fila.querySelectorAll("td")[2];
-            suma += eval(celda.textContent);
+          document.getElementById("btnGestion").addEventListener("click", function (){
+              gestion();
           });
-          alert("Suma de la columna dos es = " + suma);
-        }
 
-        function sumaFilaUno() {
-          var suma = 0;
-          var filas = document.querySelectorAll("#tablaDatos tr");
-          var celdas = filas[1].querySelectorAll("td");
-          celdas.forEach(function (celda) {
-            suma += eval(celda.textContent);
+          document.getElementById("btnReportes").addEventListener("click", function (){
+              reportes();
           });
-          alert("Suma de la fila uno es = " + suma);
-        }
-
-        document.getElementById("btnSumar").addEventListener("click", function () {
-          sumaTabla();
-        });
-
-        document.getElementById("btnColumnaDos").addEventListener("click", function () {
-          sumaColumnaDos();
-        });
-
-        document.getElementById("btnFilaUno").addEventListener("click", function () {
-          sumaFilaUno();
-        });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="22">
+  <body class="legacy ejercicio" data-ejercicio="24">
     <header class="ej-head">
-      <a href="ejercicios.html#ej22" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">22</span>
-      <span class="ej-name">Sumas de tabla</span>
+      <a href="ejercicios.html#ej24" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">24</span>
+      <span class="ej-name">Menú de opciones</span>
     </header>
 
-    <button id="btnSumar" class="btn btn-primary">Suma la tabla</button>
-    <button id="btnColumnaDos" class="btn btn-primary">Suma la columa 2</button>
-    <button id="btnFilaUno" class="btn btn-primary">Suma la fila 1</button>
-    <br /><br />
-    <table id="tablaDatos" class="table">
-      <tr>
-        <td rowspan="2">10</td>
-        <td>20</td>
-        <td>30</td>
-        <td>40</td>
-        <td>50</td>
-        <td>60</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td colspan="2">10</td>
-        <td>15</td>
-        <td colspan="2">20</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td colspan="3">2</td>
-        <td colspan="3">3</td>
-      </tr>
-    </table>
+    <button id="btnArchivo" class="btn btn-primary">Archivo</button>
+    <button id="btnGestion" class="btn btn-primary">Gestion</button>
+    <button id="btnReportes" class="btn btn-primary">Reportes</button>
+    <ul>
+        <li>Archivo</li>
+        <ul id="idArc"></ul>
+        <li>Gestion</li>
+        <ul id="idGes"></ul>
+        <li>Reportes</li>
+        <ul id="idRep"></ul>
+        <li>Salir</li>
+    <ul>
   </body>
 </html>

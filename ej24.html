@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>24 · Menú de opciones — Ejercicios Web07</title>
+    <title>26 · Matriz dinámica — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 24 de Web07: Menú de opciones."
+      content="Ejercicio 26 de Web07: Matriz dinámica."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,108 +24,99 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function (){
-          var flagArc = 0;
-          var flagGes = 0;
-          var flagRep = 0;
+    <script type="text/javascript">
+      var num_fila_nueva=0;
+      function load() {
+          document.forms["formEntrada"].numeroImpar.value="";
+          document.forms["formEntrada"].cmdNuevo.disabled=true;
+          document.forms["formEntrada"].cmdNuevo.disabled = true;
+          document.forms["formEntrada"].numeroImpar.focus();
+      }
 
-          function archivo() {
-              if (flagArc == 0) {
-                  flagArc = 1;
-                  var arrayArchivo = ["Productos", "Proveedores", "Clientes", "Empleados"];
-                  var itemNuevo = document.getElementById("idArc");
-                  for (var i = 0; i < arrayArchivo.length; i++) {
-                  var nuevoLi = document.createElement("li");
-                  nuevoLi.textContent = arrayArchivo[i];
-                  itemNuevo.appendChild(nuevoLi);
+      function valida() {
+          nImp = document.forms["formEntrada"].numeroImpar.value;
+          if ((isNaN(nImp)) || ( nImp % 2 == 0) )
+          return false;
+          else
+          return true;
+      }
+
+      function generarCuadradoMagico() {
+          if (valida()) {
+              nImpar=document.forms["formEntrada"].numeroImpar.value;
+              num_fila_nueva = 0;
+              tabla = document.getElementById("id_miTabla");
+              nFilas = document.getElementById('id_miTabla').rows.length;
+              for(f=0;f<nImpar;f++) {
+                  // creamos una nueva fila en la tabla
+                  fila = tabla.insertRow(num_fila_nueva++);
+                  for(c=0;c<nImpar;c++) {
+                      dato = "0";
+                      celda = fila.insertCell(c);
+                      currenttext = document.createTextNode(dato);
+                      celda.appendChild(currenttext);
+                      fila.appendChild(celda);
                   }
-              } else {
-                  flagArc = 0;
-                  var ulArc = document.querySelectorAll("ul")[1];
-                  while (ulArc.querySelectorAll("li").length > 0) {
-                  ulArc.querySelector("li").remove();
+              }
+              document.forms["formEntrada"].cmdNuevo.disabled = false;
+              document.forms["formEntrada"].numeroImpar.disabled = true;
+              // generamos el cuadrado magico
+              fila = 0;
+              columna = Math.floor(nImpar/2);
+              elemento = 1;
+              while(elemento<=nImpar*nImpar) {
+                  document.getElementById('id_miTabla').rows[fila].cells[columna].innerHTML = elemento++;
+                  ftempo = (eval(fila)+eval(nImpar)-1) % eval(nImpar);
+                  ctempo = (eval(columna)+1) % eval(nImpar);
+                  if (document.getElementById('id_miTabla').rows[ftempo].cells[ctempo].innerHTML=="0") {
+                      fila=ftempo;
+                      columna=ctempo;
+                  } else {
+                      fila++;
                   }
               }
           }
-
-          function gestion() {
-              if (flagGes == 0) {
-                  flagGes = 1;
-                  var arrayGestion = ["Compras", "Ventas", "Devoluciones"];
-                  var itemNuevo = document.getElementById("idGes");
-                  for (var i = 0; i < arrayGestion.length; i++) {
-                  var parrafo = document.createElement("li");
-                  parrafo.textContent = arrayGestion[i];
-                  itemNuevo.appendChild(parrafo);
-                  }
-              } else {
-                  flagGes = 0;
-                  var ulArc = document.querySelectorAll("ul")[2];
-                  while (ulArc.querySelectorAll("li").length > 0) {
-                  ulArc.querySelector("li").remove();
-                  }
-              }
+          else
+          {
+              alert("Debe ingresar un numero impar!");
+              load();
           }
+      }
 
-          function reportes() {
-              if (flagRep == 0) {
-                  flagRep = 1;
-                  var arrayReportes = [
-                  "Ventas consolidadas",
-                  "Ventas al crédito",
-                  "Compras al crédito",
-                  "Clientes morosos",
-                  "Balance mensual"
-                  ];
-                  var itemNuevo = document.getElementById("idRep");
-                  for (var i = 0; i < arrayReportes.length; i++) {
-                  var parrafo = document.createElement("li");
-                  parrafo.textContent = arrayReportes[i];
-                  itemNuevo.appendChild(parrafo);
-                  }
-              } else {
-                  flagRep = 0;
-                  var ulRep = document.querySelectorAll("ul")[3];
-                  while (ulRep.querySelectorAll("li").length > 0) {
-                  ulRep.querySelector("li").remove();
-                  }
-              }
+      function eliminaTabla() {
+          //nImpar=document.forms["formEntrada"].numeroImpar.value;
+          document.forms["formEntrada"].numeroImpar.disabled = false;
+          document.forms["formEntrada"].numeroImpar.value = "";
+          document.forms["formEntrada"].numeroImpar.focus();
+          // eliminamos la tabla
+          nFilas=document.getElementById('id_miTabla').rows.length;
+          nFilas--;
+          for (i=nFilas;i>=0;i--) {
+              p= document.getElementById('id_miTabla').rows[i];
+              p.parentNode.removeChild(p);
           }
-
-          document.getElementById("btnArchivo").addEventListener("click", function (){
-              archivo();
-          });
-
-          document.getElementById("btnGestion").addEventListener("click", function (){
-              gestion();
-          });
-
-          document.getElementById("btnReportes").addEventListener("click", function (){
-              reportes();
-          });
-      });
+          load();
+      }
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="24">
+  <body class="legacy ejercicio" data-ejercicio="26" onload="load()">
     <header class="ej-head">
-      <a href="ejercicios.html#ej24" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">24</span>
-      <span class="ej-name">Menú de opciones</span>
+      <a href="ejercicios.html#ej26" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">26</span>
+      <span class="ej-name">Matriz dinámica</span>
     </header>
 
-    <button id="btnArchivo" class="btn btn-primary">Archivo</button>
-    <button id="btnGestion" class="btn btn-primary">Gestion</button>
-    <button id="btnReportes" class="btn btn-primary">Reportes</button>
-    <ul>
-        <li>Archivo</li>
-        <ul id="idArc"></ul>
-        <li>Gestion</li>
-        <ul id="idGes"></ul>
-        <li>Reportes</li>
-        <ul id="idRep"></ul>
-        <li>Salir</li>
-    <ul>
+    <form id="formEntrada" action="">
+        Ingrese un numero impar:
+        <input type="text" id="numeroImpar" value="" maxlength="3" size="3" class="form-control" />
+        <input type="button" id="cmdNuevo" class="btn btn-primary" value="Nuevo" onclick="eliminaTabla();" />
+    </form>
+    <form id="formResultado" action="">
+        <input type="button" id="cmdBajarDatos" class="btn btn-primary"
+        value="Generar" onclick="generarCuadradoMagico();" />
+        <table class="table table-bordered" id="id_miTabla" />
+        </table>
+    </form>
   </body>
 </html>

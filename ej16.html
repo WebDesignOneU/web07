@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>16 · Editar campos — Ejercicios Web07</title>
+    <title>18 · Universidades — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 16 de Web07: Editar campos."
+      content="Ejercicio 18 de Web07: Universidades."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,40 +28,50 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function eliminaPrimerCampo() {
-          var campos = document.querySelectorAll('form[name="formUno"] input');
-          if (campos.length > 0) {
-            campos[0].remove();
-          } else {
-            Swal.fire("Mensaje", "¡No existen más campos!", "error");
-          }
+        var valueNuevo = document.querySelectorAll("#idUniv option").length;
+
+        function agregaOption() {
+          var objetoSelect = document.getElementById("idUniv");
+          var objetoOption = document.createElement("option");
+          objetoOption.value = valueNuevo;
+          objetoOption.text = "Universidad " + valueNuevo;
+          objetoSelect.appendChild(objetoOption);
+          Swal.fire("Mensaje", "Se agregó la opción: " + valueNuevo++, "info");
         }
 
-        document.getElementById("btnEliminar").addEventListener("click", function () {
-          eliminaPrimerCampo();
+        function opcionElegida(valor) {
+          Swal.fire("Mensaje", "Valor asignado=" + valor, "info");
+        }
+
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregaOption();
+        });
+
+        // Ejemplo de cómo llamar a opcionElegida() con un valor
+        document.getElementById("idUniv").addEventListener("change", function () {
+          opcionElegida(this.value);
         });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="16">
+  <body class="legacy ejercicio" data-ejercicio="18">
     <header class="ej-head">
-      <a href="ejercicios.html#ej16" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">16</span>
-      <span class="ej-name">Editar campos</span>
+      <a href="ejercicios.html#ej18" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">18</span>
+      <span class="ej-name">Universidades</span>
     </header>
 
-    <button id="btnEliminar" class="btn btn-primary">
-      Eliminar primer campo
-    </button>
+    <button id="btnAgregar" class="btn btn-primary">Agregar opcion</button>
     <br />
-    <form name="formUno" action="">
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 1" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 2" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 3" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 4" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 5" /><br />
-      <input type="text" id="campo1" class="form-control" value="campo de edicion 6" /><br />
-    </form>
+    <br />
+    <select id="idUniv" class="form-control" size="1">
+      <option value="0">Elija</option>
+      <option value="1">UMSA</option>
+      <option value="2">UCB</option>
+      <option value="3">EMI</option>
+      <option value="4">UNIVALLE</option>
+      <option value="5">UDABOL</option>
+    </select>
   </body>
 </html>

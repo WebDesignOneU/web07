@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>15 · Radio con doble clic — Ejercicios Web07</title>
+    <title>17 · Formularios dinámicos — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 15 de Web07: Radio con doble clic."
+      content="Ejercicio 17 de Web07: Formularios dinámicos."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,38 +28,32 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
-          radio.addEventListener("dblclick", function () {
-            this.checked = false;
-          });
+        var numCampo = 0;
+
+        function agregarCampos() {
+          var objetoTexto = document.getElementById("idCampos");
+          var objetoItem = document.createElement("input");
+          objetoItem.type = "text";
+          objetoItem.id = "Campo_" + numCampo;
+          objetoItem.value = "campo " + numCampo++;
+          objetoTexto.appendChild(objetoItem);
+        }
+
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+          agregarCampos();
         });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="15">
+  <body class="legacy ejercicio" data-ejercicio="17">
     <header class="ej-head">
-      <a href="ejercicios.html#ej15" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">15</span>
-      <span class="ej-name">Radio con doble clic</span>
+      <a href="ejercicios.html#ej17" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">17</span>
+      <span class="ej-name">Formularios dinámicos</span>
     </header>
 
-    <p>Elija la carrera de su preferencia (doble click=ninguno)</p>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="grupo" value="1" id="grupo1" />
-      <label class="form-check-label" for="grupo1">Sistemas</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="grupo" value="2" id="grupo2" />
-      <label class="form-check-label" for="grupo2">Industrial</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="grupo" value="3" id="grupo3" />
-      <label class="form-check-label" for="grupo3">Civil</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="grupo" value="4" id="grupo4" />
-      <label class="form-check-label" for="grupo4">Biomedica</label>
-    </div>
+    <button id="btnAgregar" class="btn btn-primary">Agregar nuevo campo</button>
+    <div id="idCampos"></div>
   </body>
 </html>

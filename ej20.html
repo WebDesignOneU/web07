@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>20 · Tours de Bolivia — Ejercicios Web07</title>
+    <title>22 · Sumas de tabla — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 20 de Web07: Tours de Bolivia."
+      content="Ejercicio 22 de Web07: Sumas de tabla."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,91 +24,86 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var valueNuevo = 4;
-
-        function opcionElegida(opcion) {
-          var arrayDataLaPaz = [
-            ["0", "Elija lugar"],
-            ["1", "Yungas"],
-            ["2", "Copacabana"],
-            ["3", "Tiahuanaco"],
-            ["4", "El Lago sagrado"],
-            ["5", "San BuenaVentura"],
-          ];
-          var arrayDataPotosi = [
-            ["0", "Elija lugar"],
-            ["1", "Salar de Uyuni"],
-            ["2", "La casa de la Moneda"],
-            ["3", "Cerro Rico"],
-            ["4", "Lagunas Colorada"],
-          ];
-          var arrayDataSantaCruz = [
-            ["0", "Elija lugar"],
-            ["1", "Misiones Jesuitas"],
-            ["2", "El pantanal"],
-            ["3", "Samaipata"],
-            ["4", "Puerto Busch"],
-            ["5", "El Mutun"],
-          ];
-
-          var opciones = document.querySelectorAll('form[name="formLugar"] option');
-          opciones.forEach(function (op) {
-            op.remove();
-          });
-
-          var dataArray;
-          switch (opcion) {
-            case "1":
-              dataArray = arrayDataLaPaz;
-              break;
-            case "2":
-              dataArray = arrayDataPotosi;
-              break;
-            case "3":
-              dataArray = arrayDataSantaCruz;
-              break;
-          }
-
-          if (dataArray) {
-            dataArray.forEach(function (value) {
-              var objetoOption = document.createElement("option");
-              objetoOption.value = value[0];
-              objetoOption.text = value[1];
-              document.getElementById("idLugar").appendChild(objetoOption);
+        function sumaTabla() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celdas = fila.querySelectorAll("td");
+            celdas.forEach(function (celda) {
+              suma += eval(celda.textContent);
             });
-          }
+          });
+          alert("Suma de la tabla es = " + suma);
         }
 
-        // Ejemplo de cómo llamar a la función opcionElegida
-        document.getElementById("idDepto").addEventListener("change", function () {
-          var opcion = this.value;
-          opcionElegida(opcion);
+        function sumaColumnaDos() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          filas.forEach(function (fila) {
+            var celda = fila.querySelectorAll("td")[2];
+            suma += eval(celda.textContent);
+          });
+          alert("Suma de la columna dos es = " + suma);
+        }
+
+        function sumaFilaUno() {
+          var suma = 0;
+          var filas = document.querySelectorAll("#tablaDatos tr");
+          var celdas = filas[1].querySelectorAll("td");
+          celdas.forEach(function (celda) {
+            suma += eval(celda.textContent);
+          });
+          alert("Suma de la fila uno es = " + suma);
+        }
+
+        document.getElementById("btnSumar").addEventListener("click", function () {
+          sumaTabla();
+        });
+
+        document.getElementById("btnColumnaDos").addEventListener("click", function () {
+          sumaColumnaDos();
+        });
+
+        document.getElementById("btnFilaUno").addEventListener("click", function () {
+          sumaFilaUno();
         });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="20">
+  <body class="legacy ejercicio" data-ejercicio="22">
     <header class="ej-head">
-      <a href="ejercicios.html#ej20" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">20</span>
-      <span class="ej-name">Tours de Bolivia</span>
+      <a href="ejercicios.html#ej22" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">22</span>
+      <span class="ej-name">Sumas de tabla</span>
     </header>
 
-    <p>Visite BOLIVIA:</p>
-    <select id="idDepto" class="form-control" size="1">
-      <option value="0">Elija departamento</option>
-      <option value="1">La Paz</option>
-      <option value="2">Potosi</option>
-      <option value="3">Santa Cruz</option>
-    </select>
-    <br />
-    <form name="formLugar" action="">
-      <select id="idLugar" class="form-control" size="1"></select>
-    </form>
+    <button id="btnSumar" class="btn btn-primary">Suma la tabla</button>
+    <button id="btnColumnaDos" class="btn btn-primary">Suma la columa 2</button>
+    <button id="btnFilaUno" class="btn btn-primary">Suma la fila 1</button>
+    <br /><br />
+    <table id="tablaDatos" class="table">
+      <tr>
+        <td rowspan="2">10</td>
+        <td>20</td>
+        <td>30</td>
+        <td>40</td>
+        <td>50</td>
+        <td>60</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td colspan="2">10</td>
+        <td>15</td>
+        <td colspan="2">20</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td colspan="3">2</td>
+        <td colspan="3">3</td>
+      </tr>
+    </table>
   </body>
 </html>

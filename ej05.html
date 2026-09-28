@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>05 · Formulario y envío — Ejercicios Web07</title>
+    <title>07 · Formulario validado — Ejercicios Web07</title>
     <meta
       name="description"
-      content="Ejercicio 05 de Web07: Formulario y envío."
+      content="Ejercicio 07 de Web07: Formulario validado."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,36 +28,64 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        function cargar() {
-          var _valor = document.getElementById("txtDato").value;
-          Swal.fire("Mensaje", "Hola " + _valor, "info");
+        function enviar() {
+          var nombre = document.getElementById("nombre").value;
+          var fecha = document.getElementById("fecha").value;
+          var texto = "Nombre: " + nombre + " \n" + "Fecha: " + fecha;
+          Swal.fire("Mensaje", texto, "info");
         }
 
-        // Puedes llamar a la función cargar() cuando sea necesario
+        function cancelar() {
+          document.getElementById("nombre").value = "";
+          document.getElementById("fecha").value = "";
+        }
+
+        // Validar que el campo #nombre solo acepte letras y espacios
+        document
+          .getElementById("nombre")
+          .addEventListener("input", function () {
+            var regex = /^[a-zA-Z\s]*$/;
+            if (!regex.test(this.value)) {
+              this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
+            }
+          });
+
+        // Puedes llamar a las funciones enviar() y cancelar() cuando sea necesario
         document
           .getElementById("btnEnviar")
           .addEventListener("click", function () {
-            cargar();
+            enviar();
+          });
+
+        document
+          .getElementById("btnCancelar")
+          .addEventListener("click", function () {
+            cancelar();
           });
       });
         </script>
   </head>
 
-  <body class="legacy ejercicio" data-ejercicio="05">
+  <body class="legacy ejercicio" data-ejercicio="07">
     <header class="ej-head">
-      <a href="ejercicios.html#ej05" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">05</span>
-      <span class="ej-name">Formulario y envío</span>
+      <a href="ejercicios.html#ej07" class="ej-back">← Ejercicios</a>
+      <span class="ej-num">07</span>
+      <span class="ej-name">Formulario validado</span>
     </header>
 
-    <div id="principal" class="row grow w-100">
-      <input
-        type="text"
-        id="txtDato"
-        class="form-control mb-3"
-        placeholder="Ingrese su dato"
-      />
-      <button id="btnEnviar" class="btn btn-primary">Enviar</button>
+    <div id="principal" class="form-group">
+      <p class="mb-5">
+        NOMBRE:
+        <input type="text" id="nombre" class="form-control" />
+      </p>
+      <p class="mb-5">
+        F. NAC:
+        <input type="date" id="fecha" class="form-control" />
+      </p>
+      <p>
+        <button id="btnEnviar" class="btn btn-primary">Enviar</button>&nbsp;
+        <button id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+      </p>
     </div>
   </body>
 </html>
