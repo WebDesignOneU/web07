@@ -791,6 +791,7 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
         const saludoOutput = $('#saludoOutput');
         const saludoHistorial = $('#saludoHistorial');
         const listaSaludos = $('#listaSaludos');
+        const btnSaludo = $('#btnSaludo');
         const btnSaludoHistorial = $('#btnSaludoHistorial');
         const btnLimpiarHistorial = $('#btnLimpiarHistorial');
 
@@ -857,6 +858,8 @@ encabezado.textContent = <span class="string">"Bienvenido a JavaScript"</span>;
           saludoHistorial.hidden = !saludoHistorial.hidden;
           btnSaludoHistorial.textContent = saludoHistorial.hidden ? '📋 Ver Historial' : '📋 Ocultar Historial';
         });
+
+        btnSaludo.addEventListener('click', saludar);
 
         btnLimpiarHistorial.addEventListener('click', () => {
           saludos = [];

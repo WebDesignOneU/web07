@@ -23,52 +23,113 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
 
+    <style>
+      #tablaDatos td {
+        transition: background-color 0.2s, outline 0.2s;
+      }
+      #tablaDatos td.highlight {
+        background-color: #fff3cd !important;
+        outline: 2px solid #ffc107;
+        outline-offset: -2px;
+        position: relative;
+        z-index: 1;
+      }
+      #tablaDatos td.highlight-row {
+        background-color: #d1ecf1 !important;
+        outline: 2px solid #17a2b8;
+        outline-offset: -2px;
+      }
+      #tablaDatos td.highlight-col {
+        background-color: #f8d7da !important;
+        outline: 2px solid #dc3545;
+        outline-offset: -2px;
+      }
+      .btn.active-calc {
+        box-shadow: 0 0 0 3px rgba(0,123,255,.4);
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        const tabla = document.getElementById("tablaDatos");
+        const btnSumar = document.getElementById("btnSumar");
+        const btnColumnaDos = document.getElementById("btnColumnaDos");
+        const btnFilaUno = document.getElementById("btnFilaUno");
+
+        function clearHighlights() {
+          tabla.querySelectorAll("td").forEach(td => {
+            td.classList.remove("highlight", "highlight-row", "highlight-col");
+          });
+          [btnSumar, btnColumnaDos, btnFilaUno].forEach(b => b.classList.remove("active-calc"));
+        }
+
         function sumaTabla() {
+          clearHighlights();
           var suma = 0;
-          var filas = document.querySelectorAll("#tablaDatos tr");
+          var filas = tabla.querySelectorAll("tr");
           filas.forEach(function (fila) {
             var celdas = fila.querySelectorAll("td");
             celdas.forEach(function (celda) {
               suma += eval(celda.textContent);
+              celda.classList.add("highlight");
             });
           });
-          alert("Suma de la tabla es = " + suma);
+          btnSumar.classList.add("active-calc");
+          Swal.fire({
+            title: 'Resultado',
+            text: 'Suma de la tabla es = ' + suma,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
         }
 
         function sumaColumnaDos() {
+          clearHighlights();
           var suma = 0;
-          var filas = document.querySelectorAll("#tablaDatos tr");
+          var filas = tabla.querySelectorAll("tr");
           filas.forEach(function (fila) {
-            var celda = fila.querySelectorAll("td")[2];
-            suma += eval(celda.textContent);
+            var celdas = fila.querySelectorAll("td");
+            if (celdas[2]) {
+              var celda = celdas[2];
+              suma += eval(celda.textContent);
+              celda.classList.add("highlight-col");
+            }
           });
-          alert("Suma de la columna dos es = " + suma);
+          btnColumnaDos.classList.add("active-calc");
+          Swal.fire({
+            title: 'Resultado',
+            text: 'Suma de la columna 2 es = ' + suma,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
         }
 
         function sumaFilaUno() {
+          clearHighlights();
           var suma = 0;
-          var filas = document.querySelectorAll("#tablaDatos tr");
-          var celdas = filas[1].querySelectorAll("td");
-          celdas.forEach(function (celda) {
-            suma += eval(celda.textContent);
+          var filas = tabla.querySelectorAll("tr");
+          if (filas[1]) {
+            var celdas = filas[1].querySelectorAll("td");
+            celdas.forEach(function (celda) {
+              suma += eval(celda.textContent);
+              celda.classList.add("highlight-row");
+            });
+          }
+          btnFilaUno.classList.add("active-calc");
+          Swal.fire({
+            title: 'Resultado',
+            text: 'Suma de la fila 1 es = ' + suma,
+            icon: 'success',
+            confirmButtonText: 'OK'
           });
-          alert("Suma de la fila uno es = " + suma);
         }
 
-        document.getElementById("btnSumar").addEventListener("click", function () {
-          sumaTabla();
-        });
-
-        document.getElementById("btnColumnaDos").addEventListener("click", function () {
-          sumaColumnaDos();
-        });
-
-        document.getElementById("btnFilaUno").addEventListener("click", function () {
-          sumaFilaUno();
-        });
+        btnSumar.addEventListener("click", sumaTabla);
+        btnColumnaDos.addEventListener("click", sumaColumnaDos);
+        btnFilaUno.addEventListener("click", sumaFilaUno);
       });
         </script>
   </head>
