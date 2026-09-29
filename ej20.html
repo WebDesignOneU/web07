@@ -61,6 +61,16 @@
                 if (val && !/^-?\d*\.?\d*$/.test(val)) {
                   e.target.value = val.slice(0, -1);
                 }
+                // Quitar clase de error al escribir
+                e.target.classList.remove('is-invalid');
+              });
+              objItem.addEventListener('blur', function(e) {
+                var val = e.target.value.trim();
+                if (val !== '' && (isNaN(parseFloat(val)) || !isFinite(parseFloat(val)))) {
+                  e.target.classList.add('is-invalid');
+                } else {
+                  e.target.classList.remove('is-invalid');
+                }
               });
               var objLabel = document.createElement("label");
               objLabel.appendChild(objItem);
@@ -82,25 +92,33 @@
           ).value;
           var lleno = true;
           var valido = true;
+          var primerInvalido = -1;
 
           for (var i = 0; i < numCampos; i++) {
             var d = document.getElementById("campo_" + i);
-            if (d.value === "") {
+            var valor = d.value.trim();
+            
+            if (valor === "") {
               lleno = false;
-            }
-            // Validar que sea un número válido
-            if (d.value !== "" && isNaN(parseFloat(d.value))) {
-              valido = false;
+              if (primerInvalido === -1) primerInvalido = i;
+            } else {
+              // Validar que sea un número válido y finito
+              var num = parseFloat(valor);
+              if (isNaN(num) || !isFinite(num)) {
+                valido = false;
+                if (primerInvalido === -1) primerInvalido = i;
+              }
             }
           }
 
           if (!lleno) {
             Swal.fire('Atención', 'Todos los campos deben tener datos', 'warning').then(() => {
-              document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+              var idx = primerInvalido >= 0 ? primerInvalido : 0;
+              document.getElementById("campo_" + idx)?.focus();
             });
           } else if (!valido) {
             Swal.fire('Error', 'Todos los campos deben ser números válidos', 'error').then(() => {
-              document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+              document.getElementById("campo_" + primerInvalido)?.focus();
             });
           } else {
             var tabla = document.getElementById("idTabla");
@@ -109,7 +127,9 @@
             for (var i = 0; i < numCampos; i++) {
               var d = document.getElementById("campo_" + i);
               var celda = document.createElement("td");
-              celda.textContent = d.value;
+              // Mostrar el número formateado (eliminar ceros innecesarios)
+              var num = parseFloat(d.value.trim());
+              celda.textContent = Number.isInteger(num) ? num : num.toString();
               fila.appendChild(celda);
             }
 
@@ -120,7 +140,7 @@
               document.getElementById("campo_" + i).value = "";
             }
 
-            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+            document.getElementById("campo_0")?.focus();
           }
         }
 
