@@ -48,10 +48,20 @@
             var objetoTexto = document.getElementById("idTextos");
             for (var i = 0; i < numCampos; i++) {
               var objItem = document.createElement("input");
-              objItem.type = "text";
+              objItem.type = "number";
               objItem.id = "campo_" + i;
               objItem.value = "";
               objItem.className = "form-control";
+              objItem.step = "any";
+              objItem.inputMode = "numeric";
+              // Permitir solo números (incluyendo negativo y decimal)
+              objItem.addEventListener('input', function(e) {
+                var val = e.target.value;
+                // Permitir: dígitos, punto decimal, signo menos al inicio
+                if (val && !/^-?\d*\.?\d*$/.test(val)) {
+                  e.target.value = val.slice(0, -1);
+                }
+              });
               var objLabel = document.createElement("label");
               objLabel.appendChild(objItem);
               objetoTexto.appendChild(objLabel);
@@ -71,14 +81,25 @@
             "form[id='form_uno'] [id='numeroCampos']"
           ).value;
           var lleno = true;
+          var valido = true;
 
           for (var i = 0; i < numCampos; i++) {
             var d = document.getElementById("campo_" + i);
-            if (d.value === "") lleno = false;
+            if (d.value === "") {
+              lleno = false;
+            }
+            // Validar que sea un número válido
+            if (d.value !== "" && isNaN(parseFloat(d.value))) {
+              valido = false;
+            }
           }
 
           if (!lleno) {
             Swal.fire('Atención', 'Todos los campos deben tener datos', 'warning').then(() => {
+              document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
+            });
+          } else if (!valido) {
+            Swal.fire('Error', 'Todos los campos deben ser números válidos', 'error').then(() => {
               document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
             });
           } else {
@@ -148,7 +169,7 @@
     <form id="form_uno" action="" class="form-group">
       <p>
         Ingrese número de campos:
-        <input type="text" id="numeroCampos" value="" maxlength="3" size="3" class="form-control" />
+        <input type="number" id="numeroCampos" value="" min="1" max="20" class="form-control" />
       </p>
       <p>
         <button id="cmdCampos" class="btn btn-primary">
