@@ -24,18 +24,16 @@
       if (!contenedor) return;
 
       librosJSON.forEach((libro) => {
-        const elemento = document.createElement("div");
-        elemento.innerHTML =
-          "<h2>" +
-          libro.titulo +
-          "</h2>" +
-          "<p>Autor: " +
-          libro.autor +
-          "</p>" +
-          "<p>Año: " +
-          libro.anio +
-          "</p>";
-        contenedor.appendChild(elemento);
+        const card = document.createElement("div");
+        card.className = "book-card";
+        card.innerHTML = `
+          <h3 class="book-title">${libro.titulo}</h3>
+          <div class="book-meta">
+            <span><strong>Autor:</strong> ${libro.autor}</span>
+            <span><strong>Año:</strong> ${libro.anio}</span>
+          </div>
+        `;
+        contenedor.appendChild(card);
       });
     },
   });

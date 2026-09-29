@@ -16,6 +16,53 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="css/styles.css" />
+
+    <style>
+      .book-card {
+        background: #fff;
+        border: 1px solid #e1e5e9;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,.05);
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      }
+      .book-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0,0,0,.12);
+        border-color: #0d6efd;
+      }
+      .book-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1a1d21;
+        margin: 0 0 .5rem;
+      }
+      .book-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 0;
+        color: #5a6268;
+        font-size: .9rem;
+      }
+      .book-meta span {
+        display: flex;
+        align-items: center;
+        gap: .35rem;
+      }
+      .book-meta strong {
+        color: #343a40;
+      }
+      .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+      @media (max-width: 576px) {
+        .books-grid { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
   <body>
     <!-- ── HEADER WEB07 ── -->
@@ -32,8 +79,11 @@
     </header>
 
     <div class="container">
-      <h1>Libros</h1>
-      <div id="libros"></div>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">📚 Libros</h1>
+        <span class="badge bg-primary fs-6">3 libros</span>
+      </div>
+      <div id="libros" class="books-grid"></div>
     </div>
     <br />
     <input
