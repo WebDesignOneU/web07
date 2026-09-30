@@ -1,213 +1,203 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>20 · Tabla dinámica — Ejercicios Web07</title>
+
   <link rel="icon" href="favicon.ico" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <title>20 · Tabla dinámica — Ejercicios Web07</title>
-    <meta
-      name="description"
-      content="Ejercicio 20 de Web07: Tabla dinámica."
-    />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Bootstrap 4 va ANTES de styles.css: components.css lo reescribe -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
+      const formUno = document.getElementById("form_uno");
+      const formDos = document.getElementById("form_dos");
+      const formTres = document.getElementById("form_tres");
+
+      const numeroCampos = document.getElementById("numeroCampos");
+      const contenedorInputs = document.getElementById("idTextos");
+      const tabla = document.getElementById("idTabla");
+
+      const btnCrearCampos = document.getElementById("cmdCampos");
+      const btnNuevaTabla = document.getElementById("cmdNuevo");
+      const btnBajarDatos = document.getElementById("cmdBajarDatos");
+
+      let numFilas = 0;
+
       function load() {
-        document.querySelector("form[id='form_uno'] [id='cmdNuevo']").disabled = true;
-        document.querySelector("form[id='form_uno'] [id='numeroCampos']").focus();
-        document.querySelector("form[id='form_tres'] [id='cmdBajarDatos']").disabled = true;
+        btnNuevaTabla.disabled = true;
+        btnBajarDatos.disabled = true;
+        numeroCampos.focus();
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        var num_fila_nueva = 0;
+      load();
 
-        function crearCampos() {
-          var formUno = document.getElementById("form_uno");
-          var numCampos = formUno.querySelector("[id='numeroCampos']").value;
+      // -----------------------------
+      // 🔧 Crear campos dinámicos
+      // -----------------------------
+      btnCrearCampos.addEventListener("click", (e) => {
+        e.preventDefault();
 
-          if (numCampos === "") {
-            Swal.fire('Atención', 'Ingrese número de campos!', 'warning').then(() => load());
-          } else if (isNaN(numCampos)) {
-            Swal.fire('Error', 'Debe ingresar un número', 'error').then(() => load());
-          } else {
-            var objetoTexto = document.getElementById("idTextos");
-            for (var i = 0; i < numCampos; i++) {
-              var objItem = document.createElement("input");
-              objItem.type = "number";
-              objItem.id = "campo_" + i;
-              objItem.value = "";
-              objItem.className = "form-control";
-              objItem.step = "any";
-              objItem.inputMode = "numeric";
-              // Permitir solo números (incluyendo negativo y decimal)
-              objItem.addEventListener('input', function(e) {
-                var val = e.target.value;
-                // Permitir: dígitos, punto decimal, signo menos al inicio
-                if (val && !/^-?\d*\.?\d*$/.test(val)) {
-                  e.target.value = val.slice(0, -1);
-                }
-                // Quitar clase de error al escribir
-                e.target.classList.remove('is-invalid');
-              });
-              objItem.addEventListener('blur', function(e) {
-                var val = e.target.value.trim();
-                if (val !== '' && (isNaN(parseFloat(val)) || !isFinite(parseFloat(val)))) {
-                  e.target.classList.add('is-invalid');
-                } else {
-                  e.target.classList.remove('is-invalid');
-                }
-              });
-              var objLabel = document.createElement("label");
-              objLabel.appendChild(objItem);
-              objetoTexto.appendChild(objLabel);
-            }
-            formUno.querySelector("[id='cmdCampos']").disabled = true;
-            formUno.querySelector("[id='numeroCampos']").disabled = true;
-            formUno.querySelector("[id='cmdNuevo']").disabled = false;
-            document.querySelector(
-              "form[id='form_tres'] [id='cmdBajarDatos']"
-            ).disabled = false;
-            document.querySelector("form[id='form_dos'] [id='campo_0']")?.focus();
-          }
+        const n = numeroCampos.value.trim();
+
+        if (!n) {
+          return Swal.fire("Atención", "Ingrese número de campos", "warning").then(load);
+        }
+        if (isNaN(n)) {
+          return Swal.fire("Error", "Debe ingresar un número", "error").then(load);
         }
 
-        function bajarDatos() {
-          var numCampos = document.querySelector(
-            "form[id='form_uno'] [id='numeroCampos']"
-          ).value;
-          var lleno = true;
-          var valido = true;
-          var primerInvalido = -1;
+        contenedorInputs.innerHTML = "";
 
-          for (var i = 0; i < numCampos; i++) {
-            var d = document.getElementById("campo_" + i);
-            var valor = d.value.trim();
-            
-            if (valor === "") {
-              lleno = false;
-              if (primerInvalido === -1) primerInvalido = i;
-            } else {
-              // Validar que sea un número válido y finito
-              var num = parseFloat(valor);
-              if (isNaN(num) || !isFinite(num)) {
-                valido = false;
-                if (primerInvalido === -1) primerInvalido = i;
-              }
-            }
-          }
+        for (let i = 0; i < n; i++) {
+          const input = document.createElement("input");
+          input.type = "number";
+          input.id = `campo_${i}`;
+          input.className = "form-control mb-2";
+          input.step = "any";
 
-          if (!lleno) {
-            Swal.fire('Atención', 'Todos los campos deben tener datos', 'warning').then(() => {
-              var idx = primerInvalido >= 0 ? primerInvalido : 0;
-              document.getElementById("campo_" + idx)?.focus();
-            });
-          } else if (!valido) {
-            Swal.fire('Error', 'Todos los campos deben ser números válidos', 'error').then(() => {
-              document.getElementById("campo_" + primerInvalido)?.focus();
-            });
-          } else {
-            var tabla = document.getElementById("idTabla");
-            var fila = document.createElement("tr");
-
-            for (var i = 0; i < numCampos; i++) {
-              var d = document.getElementById("campo_" + i);
-              var celda = document.createElement("td");
-              // Mostrar el número formateado (eliminar ceros innecesarios)
-              var num = parseFloat(d.value.trim());
-              celda.textContent = Number.isInteger(num) ? num : num.toString();
-              fila.appendChild(celda);
-            }
-
-            tabla.appendChild(fila);
-            num_fila_nueva++;
-
-            for (var i = 0; i < numCampos; i++) {
-              document.getElementById("campo_" + i).value = "";
-            }
-
-            document.getElementById("campo_0")?.focus();
-          }
+          contenedorInputs.appendChild(input);
         }
 
-        function nuevaTabla() {
-          var formUno = document.getElementById("form_uno");
-          var numeroCampos = formUno.querySelector("[id='numeroCampos']");
-          formUno.querySelector("[id='cmdCampos']").disabled = false;
-          numeroCampos.disabled = false;
-          numeroCampos.value = "";
-          numeroCampos.focus();
-          num_fila_nueva = 0;
+        btnCrearCampos.disabled = true;
+        numeroCampos.disabled = true;
+        btnNuevaTabla.disabled = false;
+        btnBajarDatos.disabled = false;
 
-          // Eliminamos los espacios de texto
-          document.querySelectorAll("form[id='form_dos'] input").forEach(function (input) {
-            input.remove();
-          });
-          // Eliminamos la tabla
-          document.querySelectorAll("#idTabla tr").forEach(function (fila) {
-            fila.remove();
-          });
-          load();
-        }
-
-        document.getElementById("cmdCampos").addEventListener("click", function () {
-          crearCampos();
-        });
-
-        document.getElementById("cmdNuevo").addEventListener("click", function () {
-          nuevaTabla();
-        });
-
-        document.getElementById("cmdBajarDatos").addEventListener("click", function () {
-          bajarDatos();
-        });
+        document.getElementById("campo_0").focus();
       });
-        </script>
-  </head>
 
-  <body class="legacy ejercicio" data-ejercicio="20" onload="load()">
-    <header class="ej-head">
-      <a href="ejercicios.html#ej20" class="ej-back">← Ejercicios</a>
-      <span class="ej-num">20</span>
-      <span class="ej-name">Tabla dinámica</span>
-    </header>
+      // -----------------------------
+      // 🔧 Validación de inputs (delegación)
+      // -----------------------------
+      formDos.addEventListener("input", (e) => {
+        if (!e.target.matches("input[type='number']")) return;
 
-    <form id="form_uno" action="" class="form-group">
-      <p>
-        Ingrese número de campos:
-        <input type="number" id="numeroCampos" value="" min="1" max="20" class="form-control" />
-      </p>
-      <p>
-        <button id="cmdCampos" class="btn btn-primary">
-          Crear espacios de entrada
-        </button>
-        <button id="cmdNuevo" class="btn btn-primary">Nueva tabla</button>
-      </p>
-    </form>
-    <form id="form_dos" action="">
-      <div id="idTextos"></div>
-    </form>
-    <form id="form_tres" action="">
-      <p>
-        <button id="cmdBajarDatos" class="btn btn-primary">
-          Bajar datos a la tabla
-        </button>
-      </p>
-      <table id="idTabla"></table>
-    </form>
-  </body>
+        const val = e.target.value;
+        if (val && !/^-?\d*\.?\d*$/.test(val)) {
+          e.target.value = val.slice(0, -1);
+        }
+        e.target.classList.remove("is-invalid");
+      });
+
+      formDos.addEventListener("blur", (e) => {
+        if (!e.target.matches("input[type='number']")) return;
+
+        const val = e.target.value.trim();
+        const num = parseFloat(val);
+
+        if (val && (isNaN(num) || !isFinite(num))) {
+          e.target.classList.add("is-invalid");
+        }
+      });
+
+      // -----------------------------
+      // 🔧 Bajar datos a la tabla
+      // -----------------------------
+      btnBajarDatos.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const n = parseInt(numeroCampos.value);
+        let primerError = null;
+
+        const valores = [...Array(n)].map((_, i) => {
+          const input = document.getElementById(`campo_${i}`);
+          const val = input.value.trim();
+
+          if (!val) {
+            primerError = primerError ?? input;
+            return null;
+          }
+
+          const num = parseFloat(val);
+          if (isNaN(num) || !isFinite(num)) {
+            primerError = primerError ?? input;
+            return null;
+          }
+
+          return num;
+        });
+
+        if (primerError) {
+          Swal.fire("Atención", "Todos los campos deben ser números válidos", "warning")
+            .then(() => primerError.focus());
+          return;
+        }
+
+        const fila = document.createElement("tr");
+        valores.forEach(num => {
+          const td = document.createElement("td");
+          td.textContent = Number.isInteger(num) ? num : num.toString();
+          fila.appendChild(td);
+        });
+
+        tabla.appendChild(fila);
+        numFilas++;
+
+        // limpiar inputs
+        [...Array(n)].forEach((_, i) => {
+          document.getElementById(`campo_${i}`).value = "";
+        });
+
+        document.getElementById("campo_0").focus();
+      });
+
+      // -----------------------------
+      // 🔧 Nueva tabla
+      // -----------------------------
+      btnNuevaTabla.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        numeroCampos.disabled = false;
+        numeroCampos.value = "";
+        btnCrearCampos.disabled = false;
+
+        contenedorInputs.innerHTML = "";
+        tabla.innerHTML = "";
+
+        numFilas = 0;
+        load();
+      });
+
+    });
+  </script>
+</head>
+
+<body class="legacy ejercicio" data-ejercicio="20">
+  <header class="ej-head">
+    <a href="ejercicios.html#ej20" class="ej-back">← Ejercicios</a>
+    <span class="ej-num">20</span>
+    <span class="ej-name">Tabla dinámica</span>
+  </header>
+
+  <form id="form_uno" class="form-group">
+    <p>
+      Ingrese número de campos:
+      <input type="number" id="numeroCampos" min="1" max="20" class="form-control" />
+    </p>
+    <p>
+      <button id="cmdCampos" class="btn btn-primary">Crear espacios de entrada</button>
+      <button id="cmdNuevo" class="btn btn-primary">Nueva tabla</button>
+    </p>
+  </form>
+
+  <form id="form_dos">
+    <div id="idTextos"></div>
+  </form>
+
+  <form id="form_tres">
+    <p>
+      <button id="cmdBajarDatos" class="btn btn-primary">Bajar datos a la tabla</button>
+    </p>
+    <table id="idTabla" class="table table-bordered"></table>
+  </form>
+</body>
 </html>
